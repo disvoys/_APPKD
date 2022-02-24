@@ -1,0 +1,33 @@
+﻿<Window x:Class="Window_UnitsDraw"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppKD"
+        mc:Ignorable="d"
+        Title="AppKD | Convertir les unités d'un CATDrawing" Height="200" Width="500"
+        MaxHeight="200" MaxWidth="500"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10,20,0,0" Grid.Row="0">
+            <TextBlock Text="Choix de la conversion : "/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="10">
+            <RadioButton Name="Cmm" Content="inch => mm" IsChecked="True"/>
+            <RadioButton Name="Cinch" Content="mm => inch"/>
+            <RadioButton Name="C_all" Content="Afficher les 2"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="260,0,0,0" Orientation="Horizontal">
+            <Button Name="OKButton" Click="OKButton_Click" Content="OK" Width="100"/>
+            <Button Name="CancelButton" Click="CancelButton_Click" Content="Annuler" Margin="10,0,0,0" Width="100"/>
+        </StackPanel>
+    </Grid>
+
+</Window>

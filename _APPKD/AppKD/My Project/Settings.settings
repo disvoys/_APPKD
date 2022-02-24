@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="Shutdown" Type="System.DateTime" Scope="Application">
+      <Value Profile="(Default)">2022-03-01</Value>
+    </Setting>
+    <Setting Name="Client" Type="System.String" Scope="User">
+      <Value Profile="(Default)">[DASSAULT AVIATION]</Value>
+    </Setting>
+    <Setting Name="PLANT" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SAINT-NAZAIRE</Value>
+    </Setting>
+    <Setting Name="DRN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EXCENT</Value>
+    </Setting>
+    <Setting Name="TITLE1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">OUTILLAGE DE FORMAGE</Value>
+    </Setting>
+    <Setting Name="TITLE2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*</Value>
+    </Setting>
+    <Setting Name="PROGRAM" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A320</Value>
+    </Setting>
+    <Setting Name="CAGECODE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

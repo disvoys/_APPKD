@@ -1,0 +1,7 @@
+Test	1
+fred	5
+BZ15200Z00-AZBSDQ	1
+MA58400Z01-ABCDEFsfdgsdfg_000001	1
+Part1	1
+Part2	1
+Part3	1

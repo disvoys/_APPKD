@@ -1,0 +1,48 @@
+<html> <head> <title>  Nomenclature : Product1 </title> </head> 
+<dl> 
+Date de calcul : vendredi 18 février 2022 16:53:32 
+<p> 
+<a name="Nomenclature : Product1" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Product1 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td><A HREF="#Nomenclature : Environnement Avion">Environnement Avion</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Outillage">Outillage</A></td><td>1</td><td>Assemblage</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : Environnement Avion" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Environnement Avion </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>Test</td><td>1</td><td>Pièce</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : Outillage" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Outillage </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>fred</td><td>5</td><td>Pièce</td> </tr> 
+  <tr><td>BZ15200Z00-AZBSDQ</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>MA58400Z01-ABCDEFsfdgsdfg_000001</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>Part1</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Product2">Product2</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td>Part3</td><td>1</td><td>Pièce</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : Product2" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Product2 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>Part2</td><td>1</td><td>Pièce</td> </tr> 
+</table> <p> <p> 
+<hr><h1>Récapitulatif sur : Product1 </h1> 
+<b>Pièces différentes : 7  <br> 
+<b>Total des pièces : 11  <br> 
+<table border=3 WIDTH="100%" CELLPADDING=5 > 
+<tr> <th>Référence</th><th>Quantité</th></tr> </tr> 
+  <tr><td>Test</td><td>1</td> </tr> 
+  <tr><td>fred</td><td>5</td> </tr> 
+  <tr><td>BZ15200Z00-AZBSDQ</td><td>1</td> </tr> 
+  <tr><td>MA58400Z01-ABCDEFsfdgsdfg_000001</td><td>1</td> </tr> 
+  <tr><td>Part1</td><td>1</td> </tr> 
+  <tr><td>Part2</td><td>1</td> </tr> 
+  <tr><td>Part3</td><td>1</td> </tr> 
+</table> 
+</html>  </tr> 

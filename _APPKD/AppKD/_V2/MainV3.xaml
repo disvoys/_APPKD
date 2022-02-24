@@ -1,0 +1,1535 @@
+﻿<Window
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppKD"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="MainV3"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="APP|KD"
+        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"  Closed="Window_Closed"
+        Height="700" Width="1200"
+        MouseMove="Window_MouseMove" WindowStyle="None" WindowState="Normal" 
+        MinWidth="1000" MinHeight="600"
+       SizeChanged="Window_SizeChanged"
+         MaxWidth="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}" 
+        MaxHeight="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenHeightKey}}">
+
+    <Grid Background="#F9F9F9" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35" x:Name="GridaDeplacer"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid  Background="#76C2AF" Height="10" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" MouseDown="Grid_MouseDown_1" />
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Grid Margin="0" MouseDown="Grid_MouseDown_1" Background="#F9F9F9">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 5">
+                    <TextBlock Text="AIRBUS"  x:Name="labelClient" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBlock Text="|"  Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBlock Text="V3.0.15" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <Button Width="30" Height="30" Padding="0" Background="{x:Null}" ToolTip="Options" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 0 0" Click="Button_Click_11">
+                        <materialDesign:PackIcon Kind="Settings" />
+                    </Button>
+                    <Button Width="30" Height="30" x:Name="reportBUGbutton" Click="reportBUGbutton_Click" Padding="0" Background="{x:Null}" ToolTip="Rapporter un bug ou une idée d'amélioration" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 30 0">
+                        <materialDesign:PackIcon Kind="EmailAlertOutline" />
+                    </Button>
+                    <Button Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="Gray" x:Name="ButtonMinimize" Click="ButtonMinimize_Click">
+                        <materialDesign:PackIcon Kind="WindowMinimize"/>
+                    </Button>
+                    <Button Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="Gray" x:Name="ButtonMaximize" Click="ButtonMaximize_Click">
+                        <materialDesign:PackIcon Kind="WindowMaximize"/>
+                    </Button>
+                    <Button Width="30" Height="30" Padding="0" Background="#76C2AF" BorderBrush="{x:Null}"   Foreground="White" x:Name="ButtonClose" Click="ButtonClose_Click">
+                        <materialDesign:PackIcon Kind="WindowClose"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 0">
+                    <TextBlock Text="appKD"   VerticalAlignment="Center" />
+                    <TextBlock Text=" | "   VerticalAlignment="Center" Foreground="#76C2AF"/>
+                    <TextBlock Text="Automatisation de la CAO sous CATIA V5" VerticalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <Grid x:Name="LeftPanel" Width="180" HorizontalAlignment="Left" Background="#0E1D31" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="Logo" IsEnabled="True" Source="/Icons/AppKD.ico" Cursor="Hand" MouseDown="Logo_MouseUp"  Grid.Row="0" Grid.Column="0" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5 10" />
+                <Button Grid.Row="0" Grid.Column="1" Width="20" Height="20" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="#F9F9F9" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 10 10 10" x:Name="MenuButton" Click="MenuButton_Click">
+                    <materialDesign:PackIcon Kind="Menu"  />
+                </Button>
+
+
+
+                <Grid  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <materialDesign:TransitioningContent x:Name="TransitioningContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
+                        <Grid x:Name="GridTOMove" Margin="0 0 0 0" Background="#76C2AF" Width="3" VerticalAlignment="top" HorizontalAlignment="Left" Height="32" />
+                    </materialDesign:TransitioningContent>
+                    <ListView  Foreground="#F9F9F9" x:Name="MaListView"  SelectionChanged="MaListView_SelectionChanged" >
+                        <ListViewItem  ToolTip="Gestion du CATIA ouvert">
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Blur" VerticalAlignment="Center"/>
+                                <TextBlock Text="Utilitaire CATIA" VerticalAlignment="Center" Margin="20 0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem ToolTip="Macros" IsEnabled="False">
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Code" VerticalAlignment="Center"/>
+                                <TextBlock Text="Macros" VerticalAlignment="Center" Margin="20 0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem ToolTip="Bibliothèque de CAO" IsEnabled="false">
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Library" VerticalAlignment="Center"/>
+                                <TextBlock Text="Bibliothèque" VerticalAlignment="Center" Margin="20 0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <Separator Height="11" />
+                        <ListViewItem ToolTip="Fusionne ou fractionne un ensemble de PDF">
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="FilePdf" VerticalAlignment="Center"/>
+                                <TextBlock Text="Outil PDF" VerticalAlignment="Center" Margin="20 0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem ToolTip="Convertir des fichiers CATIA en STEP et inversement" IsEnabled="True">
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="FileSwap" VerticalAlignment="Center"/>
+                                <TextBlock Text="Convertir STEP" VerticalAlignment="Center" Margin="20 0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <Separator Height="11" />
+                        <ListViewItem ToolTip="Options">
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Tools" VerticalAlignment="Center"/>
+                                <TextBlock Text="Options" VerticalAlignment="Center" Margin="20 0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem ToolTip="À propos">
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AboutVariant" VerticalAlignment="Center"/>
+                                <TextBlock Text="À propos" VerticalAlignment="Center" Margin="20 0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem ToolTip="Paramètres Admin" Name="listAdmin" IsEnabled="False">
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ShieldAccountOutline" VerticalAlignment="Center"/>
+                                <TextBlock Text="Admin" VerticalAlignment="Center" Margin="20 0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="2" Margin="10 0 10 0" x:Name="GridLoaded"  Visibility="Hidden">
+         
+                <Grid>
+                    <StackPanel HorizontalAlignment="center" VerticalAlignment="Top"  Margin="0,150,0,0" >
+                        <Label x:Name="LabelNameCatiaProduct" VerticalAlignment="center" HorizontalAlignment="center" Content="Designation Product CATIA ouvert" FontSize="20" Foreground="#0E1D31" FontFamily="Segoe UI Light"/>
+                        <Button x:Name="ButtonCatiaTest" Visibility="Visible" Content="GO"   Background="#76C2AF" BorderThickness="0" Click="ButtonCatiaTest_Click"  Width="120" Margin="0,20,0,0" Foreground="#F9F9F9"/>
+                        <Image x:Name="LoadProgressBar" Margin="0,30,0,00"  Width="80" Height="80" gif:ImageBehavior.AnimatedSource="/icons/_loader-.gif" Visibility="Hidden"/>
+                        <Label x:Name="LabelLoad" Margin="0,30,0,00" HorizontalAlignment="Center" Content=""/>
+                    </StackPanel>
+                    <Ellipse Fill="#76C2AF" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="1028" Stroke="Transparent" Width="1470" Margin="0,0,-774,-668"/>
+                </Grid>
+        
+        </Grid>
+
+        <ScrollViewer Grid.Column="1" Grid.Row="2"  HorizontalScrollBarVisibility="Auto" x:Name="GridMacros"  Visibility="Collapsed">
+            <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.1}">
+                <StackPanel  HorizontalAlignment="center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" x:Name="StackButtonA">
+                        <Button x:Name="ButtonGrille" Click="ButtonGrille_Click"  Width="150" Height="90" Cursor="Hand" ToolTip="Outil d'aide pour génération de perçages 3D">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#6B5B95"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="/icons/DrillBlanc.png" Height="30" Margin="0,0,0,0"/>
+                                <TextBlock Grid.Column="1" Text="Perçages" Foreground="white" VerticalAlignment="center"  FontSize="12" Margin="15,0,0,00"/>
+                            </Grid>
+                        </Button>
+                        <Button Background="#755139" Click="ButtonLink_Click"  x:Name="ButtonLink" Margin="10,0,0,0" Width="150" Height="90" Cursor="Hand" ToolTip="Supprimer les liens d'un Drawing pour remettre ceux suhaités">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="/icons/Relink.png" Height="30" Margin="0,0,0,0"/>
+                                <TextBlock Grid.Column="1" Text="Relink Draw" Foreground="white" VerticalAlignment="center"  FontSize="12" Margin="15,0,0,00"/>
+                            </Grid>
+
+                        </Button>
+                        <Button Background="#9B1B30" x:Name="ButtonPDF2D" Click="ButtonPDF2D_Click"  Margin="10,0,0,0" Width="150" Height="90" Cursor="Hand" ToolTip="Outil de génération PDF / DXF / DWG">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="/icons/PDF_Tile.png" Height="30" Margin="0,0,0,0"/>
+                                <TextBlock Grid.Column="1" Text="PDF / 2D" Foreground="white" VerticalAlignment="center"  FontSize="12" Margin="15,0,0,00"/>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                        <Button Background="#E08119" Width="150" Height="90" Cursor="Hand"  ToolTip="Une bibliothèque de standard">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="/icons/LIBRARY.png" Height="30" Margin="0,0,0,0"/>
+                                <TextBlock Grid.Column="1" Text="Bibliothèque" Foreground="white" VerticalAlignment="center"  FontSize="12" Margin="15,0,0,00"/>
+                            </Grid>
+                        </Button>
+                        <Button Background="#92B558" Margin="10,0,0,0" Width="150" Height="90" Cursor="Hand" x:Name="ButtonUnits" Click="ButtonUnits_Click"  ToolTip="Converti les unités de la cotation d'un CATDrawing">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="/icons/ENGRAVING.png" Height="30" Margin="0,0,0,0"/>
+                                <TextBlock Grid.Column="1" Text="Unités Drawing" Foreground="white" VerticalAlignment="center"  FontSize="12" Margin="15,0,0,00"/>
+                            </Grid>
+                        </Button>
+                       </StackPanel>
+                </StackPanel>
+            </materialDesign:TransitioningContent>
+        </ScrollViewer>
+        
+        <Grid  Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"   x:Name="GridContentCATPART"  Visibility="Visible" >
+
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TreeView Name="TVCatpart" Grid.Column="0" Grid.Row="1"  FontSize="11" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0,0,1,0">
+                    <TreeView.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#0E1D31"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#0E1D31" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="White" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="White" />
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Style.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="8"/>
+                                </Style>
+                            </Style.Resources>
+                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                            <Setter Property="Foreground" Value="Black"/>
+                            <EventSetter Event="UIElement.PreviewMouseRightButtonDown" Handler="TreeViewItem_PreviewMouseRightButtonDown" />
+                            <Setter Property="ContextMenu">
+                                <Setter.Value>
+                                    <ContextMenu  FontSize="11" >
+                                        <MenuItem x:Name="SelCATIA" Header="Chercher dans CATIA">
+                                            <MenuItem.Icon>
+                                                <Image Source="/Icons/SelectCATIA.png" Width="20" Height="20"/>
+                                            </MenuItem.Icon>
+                                            <MenuItem.Style>
+                                                <Style TargetType="{x:Type MenuItem}">
+                                                    <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click"/>
+                                                </Style>
+                                            </MenuItem.Style>
+                                        </MenuItem>
+                                        <MenuItem  Header="Ouvrir">
+                                            <MenuItem.Icon>
+                                                <Image Source="/Icons/Open.png" Width="20" Height="20"/>
+                                            </MenuItem.Icon>
+                                            <MenuItem.Style>
+                                                <Style TargetType="{x:Type MenuItem}">
+                                                    <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_1"/>
+                                                </Style>
+                                            </MenuItem.Style>
+                                        </MenuItem>
+                                        <MenuItem  Header="Créer une copie">
+                                            <MenuItem.Icon>
+                                                <Image Source="/Icons/COPY_.png" Width="20" Height="20"/>
+                                            </MenuItem.Icon>
+                                            <MenuItem.Style>
+                                                <Style TargetType="{x:Type MenuItem}">
+                                                    <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_2"/>
+                                                </Style>
+                                            </MenuItem.Style>
+                                        </MenuItem>
+                                        <Separator/>
+                                        <MenuItem Header="Creer plan">
+                                            <MenuItem.Icon>
+                                                <Image Source="/Icons/CATIADrawing.ico" Width="15" Height="15"/>
+                                            </MenuItem.Icon>
+                                            <MenuItem.Style>
+                                                <Style TargetType="{x:Type MenuItem}">
+                                                    <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_3"/>
+                                                </Style>
+                                            </MenuItem.Style>
+                                        </MenuItem>
+
+                                    </ContextMenu>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+                    </TreeView.Resources>
+                </TreeView>
+                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" Grid.Row="0" Grid.Column="1" MouseDown="Grid_MouseDown_1"  >
+                    <materialDesign:Badged BadgeBackground="#76C2AF" Name="BadgeReloadCATPART" BadgeForeground="White" BadgePlacementMode="Right" Badge="" CornerRadius="5">
+                        <Button Click="Button_Click_12"
+        ToolTip="Recharger"
+        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+        Content="{materialDesign:PackIcon Kind=Reload}" />
+                    </materialDesign:Badged>
+                    <Separator Margin="10 0 0 0"/>
+                    <materialDesign:Badged BadgeBackground="#76C2AF"  BadgeForeground="White" BadgePlacementMode="Right" CornerRadius="5">
+                        <Button Click="Button_Click_9"
+       ToolTip="Calculer la masse"
+        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+        Content="{materialDesign:PackIcon Kind=ScaleBalance}" />
+                    </materialDesign:Badged>
+                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Supprimer les propriétés 3D de l'ensemble des éléments" Click="Button_Click">
+                        <materialDesign:PackIcon Kind="LockReset" Foreground="#0E1D31" />
+                    </Button>
+
+                </ToolBar>
+                <DataGrid Grid.Row="1" HorizontalAlignment="Left" Name="DataGridPropertiesPart" Grid.Column="1" Width="400" FontSize="11" VerticalAlignment="Stretch" 
+                              Background="#F9F9F9"  Focusable="True"  AlternatingRowBackground="#f5f5f5" CanUserAddRows="false" HeadersVisibility="Column" 
+                              CanUserDeleteRows="false" HorizontalScrollBarVisibility="Hidden" CanUserResizeColumns="True" CanUserResizeRows="false" BorderThickness="0.5" BorderBrush="Gray" AutoGenerateColumns="false"
+                        CellEditEnding="DataGridPropertiesPart_CellEditEnding"
+                          GridLinesVisibility="Vertical" VerticalGridLinesBrush="Gray" SelectionMode="Extended"  IsTextSearchCaseSensitive="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Propriétés" IsReadOnly="true" Width="200" Binding="{Binding Properties}"/>
+                        <DataGridTextColumn Header="Valeurs" IsReadOnly="False" Width="200" Binding="{Binding Value}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#76C2AF" />
+                            <Setter Property="Foreground" Value="#F9F9F9"/>
+                            <Setter Property="FontSize" Value="11"/>
+                        </Style>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#0E1D31"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="#F9F9F9"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#0E1D31" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#F9F9F9"/>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <EventSetter Event="UIElement.MouseLeftButtonUp" Handler="EventCellClick"/>
+                            <Setter Property="FontSize" Value="11"/>
+
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+
+           
+            </Grid>
+        </Grid>
+
+
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        <Grid  Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"  x:Name="GridContentBDD"  Visibility="Collapsed" >
+         
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" x:Name="columnTV"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TreeView x:Name="MonTV" Grid.Column="0" Grid.Row="1" SelectedItemChanged="MonTV_SelectedItemChanged"  FontSize="11" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0,0,1,0">
+                        <TreeView.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#0E1D31"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#0E1D31" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="White" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="White" />
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Style.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                    </Style>
+                                </Style.Resources>
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                                <Setter Property="Foreground" Value="Black"/>
+                                <EventSetter Event="UIElement.PreviewMouseRightButtonDown" Handler="TreeViewItem_PreviewMouseRightButtonDown" />
+                                <Setter Property="ContextMenu">
+                                    <Setter.Value>
+                                        <ContextMenu x:Name="ContextTV" FontSize="11" >
+                                            <MenuItem x:Name="SelCATIA" Header="Chercher dans CATIA">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/Icons/SelectCATIA.png" Width="20" Height="20"/>
+                                                </MenuItem.Icon>
+                                                <MenuItem.Style>
+                                                    <Style TargetType="{x:Type MenuItem}">
+                                                        <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click"/>
+                                                    </Style>
+                                                </MenuItem.Style>
+                                            </MenuItem>
+                                            <MenuItem x:Name="ButtonTreeOpen" Header="Ouvrir">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/Icons/Open.png" Width="20" Height="20"/>
+                                                </MenuItem.Icon>
+                                                <MenuItem.Style>
+                                                    <Style TargetType="{x:Type MenuItem}">
+                                                        <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_1"/>
+                                                    </Style>
+                                                </MenuItem.Style>
+                                            </MenuItem>
+                                            <MenuItem x:Name="ButtonCreateFromTree" Header="Créer une copie">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/Icons/COPY_.png" Width="20" Height="20"/>
+                                                </MenuItem.Icon>
+                                                <MenuItem.Style>
+                                                    <Style TargetType="{x:Type MenuItem}">
+                                                        <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_2"/>
+                                                    </Style>
+                                                </MenuItem.Style>
+                                            </MenuItem>
+                                            <Separator/>
+                                            <MenuItem x:Name="BCreerPlan" Header="Creer plan">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/Icons/CATIADrawing.ico" Width="15" Height="15"/>
+                                                </MenuItem.Icon>
+                                                <MenuItem.Style>
+                                                    <Style TargetType="{x:Type MenuItem}">
+                                                        <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_3"/>
+                                                    </Style>
+                                                </MenuItem.Style>
+                                            </MenuItem>
+
+                                        </ContextMenu>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                        </TreeView.Resources>
+                    </TreeView>
+
+
+                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" Grid.Row="0" Grid.Column="1" MouseDown="Grid_MouseDown_1"  >
+                    <materialDesign:Badged BadgeBackground="#76C2AF" Name="BadgeReload" BadgeForeground="White" BadgePlacementMode="Right" Badge="!" CornerRadius="5">
+                        <Button Click="Button_Click_12"
+        ToolTip="Recharger"
+        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+        Content="{materialDesign:PackIcon Kind=Reload}" />
+                    </materialDesign:Badged>
+                    
+                    <Separator Margin="10 0 0 0"/>
+                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Nouvelle arborescence" Click="Button_Click_1">
+                            <materialDesign:PackIcon Kind="FileTree" Foreground="#0E1D31" />
+                        </Button>
+                       
+                    <Separator />
+                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" Click="ExportDrawing_Click" ToolTip="Générer la nomenclature sur un CATDrawing">
+                            <materialDesign:PackIcon Kind="ViewListOutline" Foreground="#0E1D31" />
+                        </Button>
+                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click_15"  ToolTip="Mise à jour du cartouche">
+                        <materialDesign:PackIcon Kind="ViewListOutline" Foreground="#0E1D31" />
+                    </Button>
+                    <Separator/>
+                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Nommenclature" Click="Button_Click_10">
+                            <materialDesign:PackIcon Kind="Edit" Foreground="#0E1D31" />
+                        </Button>
+                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Observations" Click="Button_Click_8">
+                            <materialDesign:PackIcon Kind="Glasses" Foreground="#0E1D31" />
+                        </Button>
+                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Symétrie" Click="Button_Click_6">
+                            <materialDesign:PackIcon Kind="Mirror" Foreground="#0E1D31" />
+                        </Button>
+                        <Separator/>
+                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Fixer les éléments" Click="Button_Click_7">
+                            <materialDesign:PackIcon Kind="AutoFix" Foreground="#0E1D31" />
+                        </Button>
+                    <materialDesign:Badged BadgeBackground="#76C2AF" Name="BadgeReloadMass" BadgeForeground="White" BadgePlacementMode="Right" CornerRadius="5">
+                        <Button Click="Button_Click_9"
+       ToolTip="Calculer la masse"
+        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+        Content="{materialDesign:PackIcon Kind=ScaleBalance}" />
+                    </materialDesign:Badged>
+                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Supprimer les propriétés 3D de l'ensemble des éléments" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="LockReset" Foreground="#0E1D31" />
+                        </Button>
+                        <Separator/>
+                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Renommage des instances" Click="Button_Click_2">
+                            <materialDesign:PackIcon Kind="Rename" Foreground="#0E1D31" />
+                        </Button>
+                        <Separator/>
+
+                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Ouvrir la bibliothèque de matériaux" Click="Button_Click_3">
+                            <materialDesign:PackIcon Kind="DiamondStone" Foreground="#0E1D31" />
+                        </Button>
+                        <Separator />
+                        <TextBox
+                              materialDesign:HintAssist.Hint="Recherche d'un élément ?"
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                              VerticalAlignment="Center"
+                            Width="200"
+                            x:Name="SearchBarDataTable" 
+                               FontSize="11"
+                             materialDesign:HintAssist.Foreground="#76C2AF"
+                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF" TextChanged="SearchBarDataTable_TextChanged"
+                            />
+                        <ComboBox
+                             materialDesign:HintAssist.Foreground="#76C2AF"
+                            Margin="10 10 0 0"
+                             FontSize="11"
+                            VerticalAlignment="Center"
+                              materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF" 
+                            HorizontalAlignment="Right" x:Name="ComboBOM" Width="180" SelectionChanged="ComboBOM_SelectionChanged"/>
+                    </ToolBar>
+
+                <DataGrid x:Name="MaDataGrid" IsReadOnly="true" PreviewKeyDown="MaDataGrid_PreviewKeyDown" MouseDoubleClick="MaDataGrid_MouseDoubleClick" SelectionChanged="MaDataGrid_SelectionChanged" CellEditEnding="MaDataGrid_CellEditEnding"  Grid.Row="1" Grid.Column="1" FontSize="11" VerticalAlignment="Stretch" 
+                              Background="#F9F9F9" FrozenColumnCount="6" Focusable="True"  AlternatingRowBackground="#f5f5f5" CanUserAddRows="false" HeadersVisibility="Column" CanUserSortColumns="True" CanUserReorderColumns="True"
+                              CanUserDeleteRows="false" CanUserResizeColumns="True" CanUserResizeRows="false" BorderThickness="0.5" BorderBrush="Gray" AutoGenerateColumns="false"
+                              GridLinesVisibility="Vertical" VerticalGridLinesBrush="Gray" SelectionMode="Extended"  IsTextSearchCaseSensitive="False">
+
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header ="Qté" Width="53" IsReadOnly="true" Binding="{Binding Qte}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Type" Width="85" IsReadOnly="true" Binding="{Binding Type}"/>
+                        <DataGridTextColumn Header="Nomenclature" Width="120" Binding="{Binding Nomenclature}"/>
+                        <DataGridTextColumn Header="PartNumber" Width="150" IsReadOnly="False" Binding="{Binding PartNumber}"/>
+                        <DataGridTextColumn Header="Source" Width="75" IsReadOnly="true" Binding="{Binding Source}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="Acheté">
+                                            <Setter Property="Foreground" Value="IndianRed"/>
+                                        </Trigger>
+                                        <Trigger Property="Text" Value="Inconnu">
+                                            <Setter Property="Foreground" Value="DarkBlue"/>
+                                        </Trigger>
+                                        <Trigger Property="Text"  Value="Fabriqué">
+                                            <Setter Property="Foreground" Value="DarkGreen"/>
+                                        </Trigger>
+
+
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Désignation"  Width="172" Binding="{Binding DescriptionRef}"/>
+                        <DataGridTextColumn Header="Matière" x:Name="cMaterial" Width="100" IsReadOnly="True" Binding="{Binding Matiere}" />
+
+                        <DataGridTextColumn x:Name="CRev" Header="Rev" Width="60"  Binding="{Binding Revision}" Visibility="Collapsed"/>
+                        <DataGridTextColumn x:Name="CDetailNumber" Header="Detail Number" Width="150"  Binding="{Binding DetailNumber}" Visibility="Collapsed"/>
+                        <DataGridTextColumn x:Name="CStockSize" Header="Stock Size" Width="150"  Binding="{Binding StockSize}" Visibility="Collapsed"/>
+
+                        <DataGridTextColumn x:Name="CSym"  Header="Part Symétrique" Width="120" Binding="{Binding SymPart}"/>
+                        <DataGridTextColumn x:Name="CTTS" Header="Traitement/Aspect" Width="130" Binding="{Binding Traitement}"/>
+                        <DataGridTextColumn x:Name="CFour" Header="Fournisseur" Width="120" Binding="{Binding Fournisseur}"/>
+                        <DataGridTextColumn x:Name="CRef" Header="Référence" Width="120" Binding="{Binding Reference}"/>
+                        <DataGridTextColumn x:Name="CObservation" Header="Observations"  Width="250" Binding="{Binding Observation}"/>
+                        <DataGridTextColumn x:Name="CAnglais" Header="Anglais" Width="110" Binding="{Binding Anglais}" Visibility="Hidden"/>
+
+                        <DataGridTextColumn x:Name="Perso1" Header="Perso1" Visibility="Collapsed" Width="150" Binding="{Binding Perso1}"/>
+                        <DataGridTextColumn x:Name="Perso2" Header="Perso2" Visibility="Collapsed" Width="150" Binding="{Binding Perso2}"/>
+                        <DataGridTextColumn x:Name="Perso3" Header="Perso3" Visibility="Collapsed" Width="150" Binding="{Binding Perso3}"/>
+                        <DataGridTextColumn x:Name="Perso4" Header="Perso4" Visibility="Collapsed" Width="150" Binding="{Binding Perso4}"/>
+                        <DataGridTextColumn x:Name="Perso5" Header="Perso5" Visibility="Collapsed" Width="150" Binding="{Binding Perso5}"/>
+                        <DataGridTextColumn x:Name="Perso6" Header="Perso6" Visibility="Collapsed" Width="150" Binding="{Binding Perso6}"/>
+                        <DataGridTextColumn x:Name="Perso7" Header="Perso7" Visibility="Collapsed" Width="150" Binding="{Binding Perso7}"/>
+                        <DataGridTextColumn x:Name="Perso8" Header="Perso8" Visibility="Collapsed" Width="150" Binding="{Binding Perso8}"/>
+                        <DataGridTextColumn x:Name="Perso9" Header="Perso9" Visibility="Collapsed" Width="150" Binding="{Binding Perso9}"/>
+                        <DataGridTextColumn x:Name="Perso10" Header="Perso10" Visibility="Collapsed" Width="150" Binding="{Binding Perso10}"/>
+
+                    </DataGrid.Columns>
+                   
+                    <DataGrid.ContextMenu >
+                        <ContextMenu Opened="ContextMenu_Opened" FontSize="11">
+                            <MenuItem x:Name="SelCATIA_Grid" Header="Chercher dans CATIA" >
+                                <MenuItem.Icon>
+                                    <Image Source="/Icons/SelectCATIA.png" Width="20" Height="20"/>
+                                </MenuItem.Icon>
+                                <MenuItem.Style>
+                                    <Style TargetType="{x:Type MenuItem}">
+                                        <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_4"/>
+                                    </Style>
+                                </MenuItem.Style>
+                            </MenuItem>
+                            <MenuItem x:Name="ButtonTreeOpen_Grid" Header="Ouvrir">
+                                <MenuItem.Icon>
+                                    <Image Source="/Icons/Open.png" Width="20" Height="20"/>
+                                </MenuItem.Icon>
+                                <MenuItem.Style>
+                                    <Style TargetType="{x:Type MenuItem}">
+                                        <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_5"/>
+                                    </Style>
+                                </MenuItem.Style>
+                            </MenuItem>
+                            <MenuItem x:Name="ButtonCreateFrom" Header="Créer une copie">
+                                <MenuItem.Icon>
+                                    <Image Source="/Icons/COPY_.png" Width="20" Height="20"/>
+                                </MenuItem.Icon>
+                                <MenuItem.Style>
+                                    <Style TargetType="{x:Type MenuItem}">
+                                        <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_6"/>
+                                    </Style>
+                                </MenuItem.Style>
+                            </MenuItem>
+                            <Separator/>
+                            <MenuItem x:Name="Button_CreerPlan" Header="Creer plan">
+                                <MenuItem.Icon>
+                                    <Image Source="/Icons/CATIADrawing.ico" Width="15" Height="15"/>
+                                </MenuItem.Icon>
+                                <MenuItem.Style>
+                                    <Style TargetType="{x:Type MenuItem}">
+                                        <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_7"/>
+                                    </Style>
+                                </MenuItem.Style>
+                            </MenuItem>
+                            <MenuItem x:Name="ButtonNomenclature" Header="Nommenclature"  IsEnabled="false">
+                                <MenuItem.Icon>
+                                    <Image Source="/Icons/BOM.png" Width="15" Height="15"/>
+                                </MenuItem.Icon>
+                                <MenuItem.Style>
+                                    <Style TargetType="{x:Type MenuItem}">
+                                        <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_8"/>
+                                    </Style>
+                                </MenuItem.Style>
+                            </MenuItem>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#76C2AF" />
+                            <Setter Property="Foreground" Value="#F9F9F9"/>
+                            <Setter Property="FontSize" Value="11"/>
+                        </Style>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#0E1D31"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="#F9F9F9"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#0E1D31" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#F9F9F9"/>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <EventSetter Event="UIElement.MouseLeftButtonUp" Handler="EventCellClick"/>
+                            <Setter Property="FontSize" Value="11"/>
+                            
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+                <Popup  Name="PopupSource" StaysOpen="False" Grid.ColumnSpan="5" >
+
+                    <Menu FontSize="12" Width="150"  BorderBrush="#0E1D31" BorderThickness="1" Background="#F9F9F9">
+                                <Menu.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </Menu.ItemsPanel>
+                                <MenuItem x:Name="test1" Header="Acheté" VerticalContentAlignment="Center" Click="AcheteButton_Click">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Shop"  Foreground="IndianRed" />
+                                    </MenuItem.Icon>
+                                    <MenuItem.Style>
+                                        <Style TargetType="{x:Type MenuItem}">
+                                            <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click"/>
+                                        </Style>
+                                    </MenuItem.Style>
+                                </MenuItem>
+                        <MenuItem x:Name="test2" Header="Fabriqué" VerticalContentAlignment="Center" Click="FabriqueButton_Click">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Tools"  Foreground="DarkGreen" />
+                                    </MenuItem.Icon>
+                                    <MenuItem.Style>
+                                        <Style TargetType="{x:Type MenuItem}">
+                                            <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click"/>
+                                        </Style>
+                                    </MenuItem.Style>
+                                </MenuItem>
+                        <MenuItem x:Name="test3" Header="Inconnu" VerticalContentAlignment="Center" Click="InconnuButton_Click">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Electricity"  Foreground="DarkBlue" />
+                                    </MenuItem.Icon>
+                                    <MenuItem.Style>
+                                        <Style TargetType="{x:Type MenuItem}">
+                                            <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click"/>
+                                        </Style>
+                                    </MenuItem.Style>
+                                </MenuItem>
+                            </Menu>
+               
+
+                    </Popup>
+                 <Popup x:Name="PopupMaterials" StaysOpen="False" Grid.ColumnSpan="5" Width="310">
+                     
+                        <Border  BorderBrush="#0E1D31" BorderThickness="0.5" Background="#F9F9F9">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="500" Background="#F9F9F9" FontSize="11" Foreground="#0E1D31">
+                                <StackPanel Orientation="vertical" x:Name="MenuMaterial" />
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                 <Popup x:Name="PopupTraitements" StaysOpen="False" Width="310" Grid.ColumnSpan="5">
+                        <Border BorderBrush="#0E1D31" BorderThickness="0.5" Background="#F9F9F9">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="500" Background="#F9F9F9" FontSize="11" Foreground="#0E1D31">
+
+                                <StackPanel  x:Name="MenuTraitements" HorizontalAlignment="left" />
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                <ProgressBar IsIndeterminate="True" Grid.Column="1" Grid.Row="2" Visibility="Collapsed" Background="#76C2AF" Foreground="#0E1D31" Name="ProgressTableau"  />
+                <Grid  Grid.Column="1" Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    <StackPanel  Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Margin="10" x:Name="TextProductActif" HorizontalAlignment="Left"/>
+                        <Button ToolTip="Exporter vers Excel" Margin="5 0 0 5" Background="White" BorderThickness="0" BorderBrush="Transparent" Click="Button_Click_5" Width="25" Height="25" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">
+                            <materialDesign:PackIcon Kind="MicrosoftExcel" Foreground="Green"/>
+                        </Button>
+                        <Button ToolTip="Exporter l'arborescence" Margin="10 0 0 5" Click="Button_Click_4" BorderThickness="0" BorderBrush="Transparent" Background="White" Width="25" Height="25" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">
+                            <materialDesign:PackIcon Kind="FileTreeOutline" Foreground="Black"/>
+                        </Button>
+                    </StackPanel>
+                       
+                        <TextBlock Margin="10" x:Name="TextNbElements" HorizontalAlignment="Right" Grid.Column="1"/>
+                    </Grid>
+                </Grid>
+       
+        </Grid>
+
+        
+        
+        
+        
+        
+        
+        <ScrollViewer Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"  HorizontalScrollBarVisibility="Auto" x:Name="GridBibliotheque"  Visibility="Collapsed">
+            <Grid  >
+                <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.1}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Button x:Name="ButtonProfilsBosch" Background="#76C2AF" Content="Profilés bosch" Width="100" Height="40" Click="ButtonProfilsBosch_Click" Margin="10"/>
+                        <Button x:Name="ButtonProfilsACIER" Background="#76C2AF" Content="Profilés ACIER" Width="100" Height="40"  Margin="10"/>
+                        <Button x:Name="ButtonProfilsALU" Background="#76C2AF" Content="Profilés ALU" Width="100" Height="40"  Margin="10"/>
+                    </StackPanel>
+
+                </materialDesign:TransitioningContent>
+            </Grid>
+        </ScrollViewer>
+
+        <Grid Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"  x:Name="GridAbout"  Visibility="Hidden">
+            <Grid  >
+                <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.1}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                    
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="200"/>
+                        </Grid.RowDefinitions>
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="20" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Image Source="/Icons/AppKD.ico" Width="100"/>
+                                <Separator Margin="10"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="20" VerticalAlignment="Center">
+                                <TextBlock  Text="AppKD | Application gestion CATIA - 32 bits"/>
+                                <TextBlock Text="ID de produit : 495f60fe-4a76-4a61-9afb-3747e62eef89"/>
+                                <TextBlock Text="Mise à jour V3.0.15"/>
+                                <TextBlock Text="Date de la dernière Mise à Jour : Janvier 2022"/>
+                                <TextBlock Text="Développé sous : Windows 10 et CATIA V5 R27 anglais"/>
+                                <TextBlock Text="_____"/>
+                                <TextBlock Text="Application développée par DESVOIS Kévin"/>
+                                <TextBlock Text="ne peut être recopiée sans autorisation écrite de son propriétaire"/>
+                                <TextBlock Text="DESVOIS Kévin - desvoiskevin@gmail.com"/>
+                            </StackPanel>
+                        </Grid>
+
+                            <ScrollViewer Grid.Row="1" Width="900" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0">
+                                <StackPanel Width="auto" >
+                                    <TextBlock Text="V3.0.16 | Note de mise à jour" FontWeight="Bold" />
+                                <Separator/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[GENERAL]" Width="100"/>
+                                    <TextBlock Text="Correction d'un bug qui empêchait la prise en compte de la barre des tâches Windows"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[GENERAL]" Width="100"/>
+                                    <TextBlock Text="Mise à jour visuelle de certains éléments"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[GENERAL]" Width="100"/>
+                                    <TextBlock Text="Compatibilité de l'application revue à la version R21 [A FAIRE]"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
+                                    <TextBlock Text="Ajout de l'environnement Dassault et de la mise en plan automatique [RESTE A FAIRE LES 2D]"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
+                                    <TextBlock Text="Ajout de l'environnement Personnalisé"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
+                                    <TextBlock Text="Nouveau visuel si une Part est détectée, dans le but d'ajout de fonctios dans les prochains Patch"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
+                                    <TextBlock Text="Correction d'un bug qui affichait le tableau après calcul, malgré l'affichage d'une autre catégorie"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
+                                    <TextBlock Text="Correction d'un bug qui empêchait l'affichage du TreeView arpès réduction de la fenêtre principale"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
+                                    <TextBlock Text="Le renommage Dassault prend maintenant en compte PARTNumber + DESIGNATION"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
+                                    <TextBlock Text="Si environnement Dassault, le changement de désignation génère un renommage PARTNumber + DESIGNATION"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[PDF]" Width="100"/>
+                                    <TextBlock Text="Correction d'un bug mineur qui empêchait la détection de fichiers"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[SETTINGS]" Width="100"/>
+                                    <TextBlock Text="Re-structuration des options et fichiers sources dans le but d'un déploiement simplifié"/>
+                                </StackPanel>
+                            </StackPanel>
+                            </ScrollViewer>
+
+                     </Grid>
+                   
+                </materialDesign:TransitioningContent>
+            </Grid>
+        </Grid>
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <ScrollViewer Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"  HorizontalScrollBarVisibility="Auto" x:Name="GridPDF"  Visibility="Collapsed">
+            <Grid  >
+                <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.1}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <ToolBar  Style="{DynamicResource MaterialDesignToolBar}"  Grid.Row="0" HorizontalAlignment="Center">
+                            <ListBox Height="70"  x:Name="ListViewPDF" SelectionChanged="ListViewPDF_SelectionChanged" VerticalAlignment="center">
+                                <ListBoxItem 
+                                    ToolTip="Split les PDF">
+                                    <materialDesign:PackIcon Kind="SetSplit"  Foreground="#0E1D31" />
+                                </ListBoxItem>
+                                <ListBoxItem
+                                    ToolTip="Assemble les PDF">
+                                    <materialDesign:PackIcon Kind="Merge" Foreground="#0E1D31" />
+                                </ListBoxItem>
+                                <ListBoxItem
+                                    ToolTip="Ajout d'un texte sur l'ensemble des pages d'un PDF">
+                                    <materialDesign:PackIcon Kind="NoteText" Foreground="#0E1D31" />
+                                </ListBoxItem>
+                            </ListBox>
+                        </ToolBar>
+                        <StackPanel Background="#F9F9F9" Grid.Column="1" Grid.Row="1" AllowDrop="true" Drop="DragPanel_Drop" >
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0">
+                                <TextBlock x:Name="LabelPDF" Text="A partir d'un fichier PDF de plusieurs pages," FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Light" HorizontalAlignment="Center" />
+                                <TextBlock x:Name="Label2PDF" Text="fractionner les pages en plusieurs fichiers" FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" HorizontalAlignment="Center"   />
+                            </StackPanel>
+                            <Separator Margin="0,20,0,0" BorderBrush="Black" Width=" 400"/>
+
+                            <TextBox x:Name="TextWM" Margin="0,80,0,0" TextChanged="TextWM_TextChanged"   Width="450" FontSize="30" BorderThickness="0,0,0,1" FontFamily="Segoe UI Light">
+                                <TextBox.Style>
+                                    <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Watermark..." Foreground="Gray" FontSize="30" FontFamily="Segoe UI Light" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="false">
+                                                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsFocused" Value="true">
+                                                            <Setter Property="BorderBrush" TargetName="border" Value="#76C2AF"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Background" Value="#F9F9F9" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+
+                            <Button x:Name="But" Background="#76C2AF" Margin="0,40,0,0" Width="180" Height="50" Cursor="Hand" Foreground="#F9F9F9" Click="But_Click">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Opacity" Value="0.9"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <TextBlock Grid.Column="1" Text="Sélection des fichiers" Foreground="#F9F9F9" VerticalAlignment="center"  FontSize="16"/>
+                            </Button>
+
+                            <TextBlock x:Name="Tex" Text="[Glisser/Déposer les fichiers ou séléction des fichiers]" Margin="0,30,0,0" HorizontalAlignment="center"/>
+
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:TransitioningContent>
+            </Grid>
+        </ScrollViewer>
+
+        
+        
+        
+        
+        
+        
+        
+        <Grid Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"   x:Name="GridChart"  Visibility="Collapsed">
+            <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.1}">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        
+                        <TextBlock Text="Kevin DESVOS" Foreground="gray" Name="labelNameUser" FontFamily="Segoe UI Light" FontSize="20" />
+                        <TextBlock Text=" | " Foreground="gray" FontFamily="Segoe UI Light" FontSize="20"/>
+                        <TextBlock Text="eXcent" Foreground="gray" FontFamily="Segoe UI Light" FontSize="20"/>
+                            </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <materialDesign:Chip Content="Environnement Clients" Name="chip0" Click="Chip_Click" Width="200" Margin="0 0 10 0" IconBackground="#76C2AF" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon  Kind="TableUser" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
+                        <materialDesign:Chip Content="Bibliothèque TTS" Click="Chip_Click" Name="chip1" Width="200" Margin="0 0 10 0"  IconBackground="Gray" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon  Kind="FolderUserOutline" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
+                        <materialDesign:Chip Content="Drawings et Cartouches" Click="Chip_Click" Name="chip2" Margin="0 0 10 0" Width="200" IconBackground="Gray" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon  Kind="Draw" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
+                        <materialDesign:Chip Content="Général" Width="200" Click="Chip_Click" Name="chip3" IconBackground="Gray" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon  Kind="UserOutline" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
+                    </StackPanel>
+
+                    <TabControl Name="TabOptions" Style="{StaticResource MaterialDesignNavigatilRailTabControl}" Drop="TabOptions_Drop"  Background="#F9F9F9"  TabStripPlacement="Top" Grid.Row="2">
+                        <TabControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type TabItem}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </Style>
+                        </TabControl.ItemContainerStyle>
+                        <TabItem Background="#F9F9F9" BorderThickness="0" BorderBrush="#F9F9F9" >
+                            <Grid Margin="10 30 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="650"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Vertical" Name="StackPanelSettingsEnv"  Grid.Column="0" Grid.Row="1">
+                                   
+                                </StackPanel>
+                                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" Name="ToolbarPerso" IsEnabled="False" Grid.Row="0" Grid.Column="1">
+                                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Importer à partir d'un fichier text" Click="Button_Click_13" >
+                                        <materialDesign:PackIcon Kind="Import" Foreground="#0E1D31" />
+                                    </Button>
+                   
+                                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Ouvrir le fichier" Click="Button_Click_14" >
+                                        <materialDesign:PackIcon Kind="FolderEditOutline" Foreground="#0E1D31" />
+                                    </Button>
+                                
+                                </ToolBar>
+
+                                <DataGrid Grid.Column="1" Grid.Row="1" SelectionMode="Single" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="true" Name="DataGridProperties">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="PROPRIETES" Binding="{Binding Properties}" Width="200" />
+                                        <DataGridTextColumn Header="TYPE" Width="200" Binding="{Binding Type}" />
+                                        <DataGridTextColumn Header="VALEUR PAR DEFAULT" Width="200" Binding="{Binding Valeur}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                         
+                        </TabItem>
+                        <TabItem Background="#F9F9F9"  BorderThickness="0" BorderBrush="#F9F9F9">
+                       
+                        </TabItem>
+                        <TabItem Background="#F9F9F9"  BorderThickness="0" BorderBrush="#F9F9F9">
+                            <StackPanel Margin="20,20,0,0">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="320">
+                                    <Label Content="DRAWINGS" Width="320" HorizontalAlignment="Left" BorderThickness="0,0,0,1" BorderBrush="#615550" FontFamily="Segoe UI Light" FontSize="16" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <TextBlock Text="Usine :" Width="100" />
+                                    <TextBox x:Name="TextPlant" Text="Saint-Nazaire" Width="200" BorderThickness="0,0,0,1">
+                                        <TextBox.Style>
+                                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type TextBox}">
+                                                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="false">
+                                                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsFocused" Value="true">
+                                                                    <Setter Property="BorderBrush" TargetName="border" Value="#615550"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+                                    <TextBlock Text="Dessinateur :" Width="100" />
+                                    <TextBox x:Name="TextDessinateur"  Text="KD" Width="200" BorderThickness="0,0,0,1">
+                                        <TextBox.Style>
+                                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type TextBox}">
+                                                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="false">
+                                                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsFocused" Value="true">
+                                                                    <Setter Property="BorderBrush" TargetName="border" Value="#615550"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+                                    <TextBlock Text="Titre 1 :" Width="100" />
+                                    <TextBox x:Name="TextTitre1" Text="*" Width="200" BorderThickness="0,0,0,1">
+                                        <TextBox.Style>
+                                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type TextBox}">
+                                                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="false">
+                                                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsFocused" Value="true">
+                                                                    <Setter Property="BorderBrush" TargetName="border" Value="#615550"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+                                    <TextBlock Text="Titre 2" Width="100"  />
+                                    <TextBox  x:Name="TextTitre2" Text="*" Width="200" BorderThickness="0,0,0,1">
+                                        <TextBox.Style>
+                                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type TextBox}">
+                                                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="false">
+                                                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsFocused" Value="true">
+                                                                    <Setter Property="BorderBrush" TargetName="border" Value="#615550"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+                                    <TextBlock Text="Program :" Width="100" />
+                                    <TextBox  x:Name="TextProgram" Text="A320" Width="200" BorderThickness="0,0,0,1">
+                                        <TextBox.Style>
+                                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type TextBox}">
+                                                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="false">
+                                                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsFocused" Value="true">
+                                                                    <Setter Property="BorderBrush" TargetName="border" Value="#615550"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+                                    <TextBlock Text="CageCode :" Width="100" ToolTip="Renseigne le CageCode sur les fonds de calques SPIRIT" />
+                                    <TextBox x:Name="TextCageCode"  Text="*" Width="200" BorderThickness="0,0,0,1">
+                                        <TextBox.Style>
+                                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type TextBox}">
+                                                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="false">
+                                                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsFocused" Value="true">
+                                                                    <Setter Property="BorderBrush" TargetName="border" Value="#615550"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </StackPanel>
+                                <Button Content="Valider" Cursor="Hand" Click="ButtonSettingsCATIA_Click" Width="100" Height="20" HorizontalAlignment="Left" Margin="210,30,0,0" BorderThickness="0.1" Background="#615550" Foreground="White">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="#6B5B95"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderThickness="0.1">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="0.9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+
+                        </TabItem>
+                        <TabItem Background="#F9F9F9"  BorderThickness="0" BorderBrush="#F9F9F9">
+                            <StackPanel Margin="10 30 0 0" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <TextBox Margin="0 0 30 0" Name="textNameUser" TextChanged="textNameUser_TextChanged"
+                              materialDesign:HintAssist.Hint="Nom utilisateur" Text="Kevin DESVOIS"
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                              VerticalAlignment="Center"
+                            Width="200"
+                               FontSize="11"
+                             materialDesign:HintAssist.Foreground="#76C2AF"
+                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF"
+                            />
+                                <TextBox Margin="0 0 30 0"
+                              materialDesign:HintAssist.Hint="Initiales" Text="KD"
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                              VerticalAlignment="Center"
+                            Width="200"
+                               FontSize="11"
+                             materialDesign:HintAssist.Foreground="#76C2AF"
+                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF" 
+                            />
+                                <TextBox Margin="0 0 30 0"
+                              materialDesign:HintAssist.Hint="Entreprise" Text="eXcent"
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                              VerticalAlignment="Center"
+                            Width="200"
+                               FontSize="11"
+                             materialDesign:HintAssist.Foreground="#76C2AF"
+                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF" 
+                            />
+                            </StackPanel>
+                          
+                        </TabItem>
+
+                    </TabControl>
+
+                </Grid>
+           
+               
+            </materialDesign:TransitioningContent>
+        </Grid>
+
+        
+        
+        
+        
+        
+        
+        
+        <ScrollViewer Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"  HorizontalScrollBarVisibility="Auto" x:Name="GridAdmin"  Visibility="Collapsed">
+            <Grid >
+                <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.1}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="500"/>
+                        </Grid.RowDefinitions>
+
+                        <ToolBar>
+                            <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Ban/Unban utilisateur" Name="BanButton" Click="BanButton_Click">
+                                <materialDesign:PackIcon Kind="UserLock" Foreground="#0E1D31" />
+                            </Button>
+                            <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Supprimer utilisateur" Name="ButtonDeketeUser" Click="ButtonDeketeUser_Click">
+                                <materialDesign:PackIcon Kind="UserRemoveOutline"  Foreground="#0E1D31" />
+                            </Button>
+                            <TextBox materialDesign:HintAssist.Hint="Version à jour"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                            Width="200" Text="V3.0.9"
+                            x:Name="TextUpdateàJour" 
+                               FontSize="11"
+                             materialDesign:HintAssist.Foreground="#76C2AF"
+                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF" 
+                            />
+                            <TextBox materialDesign:HintAssist.Hint="Ban 1 ou Ban 0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                            Width="100" Text="0"
+                            x:Name="TextBanAll" 
+                               FontSize="11"
+                             materialDesign:HintAssist.Foreground="#76C2AF"
+                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF" 
+                            />
+                            <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Mise à jour Versuion" Name="ButtonSettingsG" Click="ButtonSettingsG_Click">
+                                <materialDesign:PackIcon Kind="Update" Foreground="#0E1D31" />
+                            </Button>
+
+                        </ToolBar>
+
+                        <DataGrid Name="DataGridAdmin" Grid.Row="1" FontSize="11" HorizontalAlignment="Left" Background="#F9F9F9"  AlternatingRowBackground="#f8f8f8" CanUserAddRows="false" HeadersVisibility="Column" CanUserDeleteRows="false" CanUserResizeColumns="false" CanUserResizeRows="false" BorderThickness="0.5" BorderBrush="Gray"  IsReadOnly="true" AutoGenerateColumns="false" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="NOM" Binding="{Binding Nom}" Width="200" />
+                                <DataGridTextColumn Header="IP LOCALE" Width="200" Binding="{Binding IPLocale}" />
+                                <DataGridTextColumn Header="IP PUBLIQUE" Width="200" Binding="{Binding IPPublic}" />
+                                <DataGridTextColumn Header="CONNEXIONS"  Width="200" Binding="{Binding Connexions}" />
+                                <DataGridTextColumn Header="BAN"  Width="150" Binding="{Binding Ban}" />
+                            </DataGrid.Columns>
+
+                            <DataGrid.Resources>
+                                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Background" Value="#76C2AF" />
+                                    <Setter Property="Foreground" Value="#F9F9F9"/>
+                                    <Setter Property="FontSize" Value="11"/>
+                                </Style>
+                            </DataGrid.Resources>
+                        </DataGrid>
+                    </Grid>
+                </materialDesign:TransitioningContent>
+            </Grid>
+        </ScrollViewer>
+
+        
+        
+        
+        <ScrollViewer Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"  HorizontalScrollBarVisibility="Auto" x:Name="GridStep"  Visibility="Hidden">
+            <Grid >
+                <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.1}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="400"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Background="#F9F9F9" Grid.Column="0" AllowDrop="true" Name="DragPanelDropStep"  Drop="DragPanelDropStep_Drop" >
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0">
+                                <TextBlock  Text="Convertir plusieurs éléments CATIA" FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Light" HorizontalAlignment="Center" />
+                                <TextBlock  Text="en fichiers STEP et inversement" FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" HorizontalAlignment="Center"   />
+                                <TextBlock  Text="peut être exécuté sans CATIA ouvert" FontSize="13" Foreground="#31465a" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" HorizontalAlignment="Center"   />
+                                <Separator Margin="0,20,0,0" BorderBrush="Black" Width=" 400"/>
+                            </StackPanel>
+
+                            <Button x:Name="ButtonStep" Background="#76C2AF" Margin="0,40,0,0" Width="180" Height="50" Cursor="Hand" Foreground="#F9F9F9" Click="ButtonStep_Click">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Opacity" Value="0.9"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <TextBlock Grid.Column="1" Text="Sélection des fichiers" Foreground="#F9F9F9" VerticalAlignment="center"  FontSize="16"/>
+                            </Button>
+                            <TextBlock Text="[Glisser/Déposer les fichiers ou séléction des fichiers]" Margin="0,30,0,0" HorizontalAlignment="center"/>
+
+                        </StackPanel>
+
+                        <StackPanel Background="#F9F9F9" Grid.Column="1" >
+                            <TextBox
+                              materialDesign:HintAssist.Hint="URL CATIA" Margin=" 0 50 0 0"
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                              VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Text="C:\Program Files\Dassault Systemes\B28\win_b64\code\bin"
+                                Width="380"
+                            x:Name="URLCatiaSTEP" 
+                               FontSize="11"
+                             materialDesign:HintAssist.Foreground="#76C2AF"
+                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF"
+                            />
+                            <TextBox
+                              materialDesign:HintAssist.Hint="Dossier de réception des fichiers convertis"
+                                Margin="0 10 0 0"
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                              VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Text="C:\Users\deske\OneDrive\Bureau\RECEPTION"
+                                Width="380"
+                            x:Name="URLFolderSTEPReception" 
+                               FontSize="11"
+                             materialDesign:HintAssist.Foreground="#76C2AF"
+                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF"
+                            />
+                            <TextBox
+                              materialDesign:HintAssist.Hint="Nom de la machine distante"
+                                Margin="0 10 0 0" ToolTip="Sur la machine distante il est important que service Backbone soit activé. Pour se faire dans cmd : "
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                              VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Width="380"
+                            x:Name="NameMachineDistanteSTEP" 
+                               FontSize="11"
+                             materialDesign:HintAssist.Foreground="#76C2AF"
+                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF"
+                            />
+                            <TextBlock Margin="0 10 0 0" FontSize="11">
+                                    <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" 
+                                     NavigateUri="http://catiadoc.free.fr/online/basil_C2/basilMQSeriesBatchMonitor.htm">Comment activer une machine distante via Backbone (simple)</Hyperlink>
+                            </TextBlock>
+
+                        </StackPanel>
+
+                    </Grid>
+                </materialDesign:TransitioningContent>
+            </Grid>
+        </ScrollViewer>
+
+   
+    </Grid>
+
+</Window>
