@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AppKD.exe" size="1043456">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AppKD.exe" size="1044480">
       <assemblyIdentity name="AppKD" version="3.0.0.5" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2LB+NcAuKREASCM35Ma2wAHil55SS4kqpSK2ZV096oo=</dsig:DigestValue>
+        <dsig:DigestValue>/bxh9/Vo/lfbXAJRLNPpS1Dxe6aKCbklspPeGZB1wAc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

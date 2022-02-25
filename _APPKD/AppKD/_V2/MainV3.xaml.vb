@@ -614,6 +614,9 @@ Public Class MainV3
             majForegroundTV(tv)
         Next
 
+
+
+
     End Sub
 
     Sub majForegroundTV(tv As TreeViewItem)
@@ -1079,6 +1082,7 @@ Public Class MainV3
                         p.Item(Perso9.Header).value = ic.Perso9
                     Catch ex As Exception
                     End Try
+
                 Case Perso10.Header
                     Dim t As TextBox = e.EditingElement
                     ic.Perso10 = t.Text
@@ -1124,19 +1128,32 @@ Public Class MainV3
                             p.Item(Perso7.Header).value = ic.Perso7
                         Catch ex As Exception
                         End Try
-                        FctionCATIA.SaveIC(ic)
+                        ' FctionCATIA.SaveIC(ic)
                     End If
                 Case "PartNumber"
+                    'MA55800Z00-PIECE_500006
                     Dim t As TextBox = e.EditingElement
                     If ListPartNumber.Contains(t.Text) And ic.PartNumber.Length > 0 Then
                         t.Text = ic.PartNumber
                     Else
-
                         ic.PartNumber = t.Text
                         ic.ProductCATIA.PartNumber = ic.PartNumber
                         FctionCATIA.SaveIC(ic)
                         ListPartNumber.Add(ic.PartNumber)
+                        If Env = "[DASSAULT AVIATION]" Then
+                            If ic.PartNumber Like "??#####?##-*_######" Then
+                                Dim ss() As String = Strings.Split(ic.PartNumber, "_")
+                                Dim p As Parameters = ic.ProductCATIA.UserRefProperties
+                                Try
+                                    p.Item(Perso9.Header).value = ss(1)
+                                Catch ex As Exception
+                                End Try
+                                ic.Perso9 = ss(1)
+                                BoolHaveTORefresh = True
+                            End If
+                        End If
                     End If
+
                 Case "Rev"
                     Dim t As TextBox = e.EditingElement
                     ic.Indice = t.Text
@@ -2425,6 +2442,12 @@ Public Class MainV3
         Else
             Dim m As New MessageErreur("Fonction non disponible pour les clients autre que DASSAULT", Notifications.Wpf.NotificationType.Error)
         End If
+    End Sub
+
+    Dim BoolHaveTORefresh As Boolean = False
+    Private Sub MaDataGrid_CurrentCellChanged(sender As Object, e As EventArgs)
+        If BoolHaveTORefresh = True Then ColDoc.Refresh()
+        BoolHaveTORefresh = False
     End Sub
 End Class
 

@@ -2213,7 +2213,9 @@ Boucle:
                     T.SetFontSize(0, 0, 2.5)
                     T.Name = "TitleBlock_Data_Tableau_5_" & i - 1
 
-                    T = mestexts.Add(CheckSiTextVide(ic.Perso4), X + 205, Y + 2.5 + (6 * (i - 1)))
+                    Dim s As String = ic.Perso4
+                    If s = "" And ic.Perso5 <> "" Then s = ic.Perso5 & " Kg"
+                    T = mestexts.Add(CheckSiTextVide(s), X + 205, Y + 2.5 + (6 * (i - 1))) 'dim brutes
                     T.WrappingWidth = 30
                     T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                     T.TextProperties.Justification = CatJustification.catCenter
