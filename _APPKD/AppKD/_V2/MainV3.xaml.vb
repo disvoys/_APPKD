@@ -748,6 +748,7 @@ Public Class MainV3
             CDetailNumber.Visibility = Visibility.Visible
             CStockSize.Visibility = Visibility.Visible
             cMaterial.Visibility = Visibility.Visible
+            CBOM.Visibility = Visibility.Visible
             CSym.Visibility = Visibility.Hidden
             CTTS.Visibility = Visibility.Hidden
             CFour.Visibility = Visibility.Hidden
@@ -764,9 +765,14 @@ Public Class MainV3
             Perso8.Visibility = Visibility.Hidden
             Perso9.Visibility = Visibility.Hidden
             Perso10.Visibility = Visibility.Hidden
+            ButtonSYM.Visibility = Visibility.Collapsed
+            ButtonOBS.Visibility = Visibility.Collapsed
+            ButtonBOM.Visibility = Visibility.Collapsed
+            SeparatorToHide.Visibility = Visibility.Visible
             cMaterial.Header = INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "Matière")
         ElseIf GetEnv() = "AIRBUS" Then
             CRev.Visibility = Visibility.Hidden
+            CBOM.Visibility = Visibility.Visible
             CDetailNumber.Visibility = Visibility.Hidden
             CStockSize.Visibility = Visibility.Hidden
             cMaterial.Visibility = Visibility.Visible
@@ -788,7 +794,12 @@ Public Class MainV3
             Perso8.Visibility = Visibility.Hidden
             Perso9.Visibility = Visibility.Hidden
             Perso10.Visibility = Visibility.Hidden
+            ButtonSYM.Visibility = Visibility.Visible
+            ButtonOBS.Visibility = Visibility.Visible
+            ButtonBOM.Visibility = Visibility.Visible
+            SeparatorToHide.Visibility = Visibility.Visible
         ElseIf GetEnv() = "DASSAULT AVIATION" Then
+            CBOM.Visibility = Visibility.Hidden
             Perso1.Visibility = Visibility.Hidden
             Perso2.Visibility = Visibility.Hidden
             Perso3.Visibility = Visibility.Hidden
@@ -875,7 +886,12 @@ Public Class MainV3
             CRev.Visibility = Visibility.Visible
             CDetailNumber.Visibility = Visibility.Hidden
             CStockSize.Visibility = Visibility.Hidden
+            ButtonSYM.Visibility = Visibility.Collapsed
+            ButtonOBS.Visibility = Visibility.Collapsed
+            ButtonBOM.Visibility = Visibility.Collapsed
+            SeparatorToHide.Visibility = Visibility.Collapsed
         Else
+            CBOM.Visibility = Visibility.Visible
             Perso1.Visibility = Visibility.Hidden
             Perso2.Visibility = Visibility.Hidden
             Perso3.Visibility = Visibility.Hidden
@@ -962,6 +978,10 @@ Public Class MainV3
             CRev.Visibility = Visibility.Hidden
             CDetailNumber.Visibility = Visibility.Hidden
             CStockSize.Visibility = Visibility.Hidden
+            ButtonSYM.Visibility = Visibility.Collapsed
+            ButtonOBS.Visibility = Visibility.Collapsed
+            ButtonBOM.Visibility = Visibility.Collapsed
+            SeparatorToHide.Visibility = Visibility.Collapsed
         End If
 
     End Sub 'MAJ SPIRIT
