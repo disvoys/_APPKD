@@ -1,12 +1,12 @@
 <html> <head> <title>  Nomenclature : MA62599Z00-F46C5747_050200 </title> </head> 
 <dl> 
-Date de calcul : vendredi 25 février 2022 16:59:50 
+Date de calcul : lundi 28 février 2022 14:19:14 
 <p> 
 <a name="Nomenclature : MA62599Z00-F46C5747_050200" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
   <tr><th colspan=3 > <b>Nomenclature : MA62599Z00-F46C5747_050200 </tr></th> 
 <tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
-  <tr><td>MA62599Z00-F46C5747_050208</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>MA62599Z00-F46C5747_050288</td><td>1</td><td>Pièce</td> </tr> 
   <tr><td>MA62599Z00-F46C5741_050226</td><td>1</td><td>Pièce</td> </tr> 
   <tr><td><A HREF="#Nomenclature : Grp_Broche">Grp_Broche</A></td><td>2</td><td>Assemblage</td> </tr> 
   <tr><td>EMILE-MAURIN-33-080-18-10,10-16</td><td>2</td><td>Pièce</td> </tr> 
@@ -63,7 +63,7 @@ Date de calcul : vendredi 25 février 2022 16:59:50
 <b>Total des pièces : 56  <br> 
 <table border=3 WIDTH="100%" CELLPADDING=5 > 
 <tr> <th>Référence</th><th>Quantité</th></tr> </tr> 
-  <tr><td>MA62599Z00-F46C5747_050208</td><td>1</td> </tr> 
+  <tr><td>MA62599Z00-F46C5747_050288</td><td>1</td> </tr> 
   <tr><td>MA62599Z00-F46C5741_050226</td><td>1</td> </tr> 
   <tr><td>MA62599Z00-F46C5745_050351</td><td>2</td> </tr> 
   <tr><td>MA62599Z00-F46C5747_050275</td><td>2</td> </tr> 
