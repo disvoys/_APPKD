@@ -1739,7 +1739,7 @@ Boucle:
 
         Dim maVue As DrawingView = s.Views.Item(3)
         Dim MonDoc As Document = maVue.GenerativeBehavior.Document.Parent
-        Dim MonIC As ItemCatia
+        Dim MonIC As ItemCatia = Nothing
 
 
         For Each ic As ItemCatia In ListDocuments

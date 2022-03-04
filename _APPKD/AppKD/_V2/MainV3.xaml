@@ -899,7 +899,7 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[PROPRIETES]" Width="100"/>
-                                    <TextBlock Text="Ajout de l'environnement Dassault et de la mise en plan automatique [RESTE A FAIRE LES 2D]"/>
+                                    <TextBlock Text="Ajout de l'environnement Dassault et remplissage automatique du cartouche 2D"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[PROPRIETES]" Width="100"/>
