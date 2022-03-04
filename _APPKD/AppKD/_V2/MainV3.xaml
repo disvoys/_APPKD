@@ -415,7 +415,7 @@
                 <DataGrid Grid.Row="1" HorizontalAlignment="Left" Name="DataGridPropertiesPart" Grid.Column="1" Width="400" FontSize="11" VerticalAlignment="Stretch" 
                               Background="#F9F9F9"  Focusable="True"  AlternatingRowBackground="#f5f5f5" CanUserAddRows="false" HeadersVisibility="Column" 
                               CanUserDeleteRows="false" HorizontalScrollBarVisibility="Hidden" CanUserResizeColumns="True" CanUserResizeRows="false" BorderThickness="0.5" BorderBrush="Gray" AutoGenerateColumns="false"
-                        CellEditEnding="DataGridPropertiesPart_CellEditEnding"
+                      CellEditEnding="DataGridPropertiesPart_CellEditEnding"
                           GridLinesVisibility="Vertical" VerticalGridLinesBrush="Gray" SelectionMode="Extended"  IsTextSearchCaseSensitive="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Propriétés" IsReadOnly="true" Width="200" Binding="{Binding Properties}"/>
@@ -562,16 +562,16 @@
                         <materialDesign:PackIcon Kind="ViewListOutline" Foreground="#0E1D31" />
                     </Button>
                     <Separator/>
-                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Nommenclature" Click="Button_Click_10">
+                        <Button Name="ButtonBOM"  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Nommenclature" Click="Button_Click_10">
                             <materialDesign:PackIcon Kind="Edit" Foreground="#0E1D31" />
                         </Button>
-                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Observations" Click="Button_Click_8">
+                        <Button Name="ButtonOBS" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Observations" Click="Button_Click_8">
                             <materialDesign:PackIcon Kind="Glasses" Foreground="#0E1D31" />
                         </Button>
-                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Symétrie" Click="Button_Click_6">
+                        <Button Name="ButtonSYM" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Symétrie" Click="Button_Click_6">
                             <materialDesign:PackIcon Kind="Mirror" Foreground="#0E1D31" />
                         </Button>
-                        <Separator/>
+                        <Separator Name="SeparatorToHide"/>
                         <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Fixer les éléments" Click="Button_Click_7">
                             <materialDesign:PackIcon Kind="AutoFix" Foreground="#0E1D31" />
                         </Button>
@@ -613,7 +613,7 @@
                             HorizontalAlignment="Right" x:Name="ComboBOM" Width="180" SelectionChanged="ComboBOM_SelectionChanged"/>
                     </ToolBar>
 
-                <DataGrid x:Name="MaDataGrid" IsReadOnly="true" PreviewKeyDown="MaDataGrid_PreviewKeyDown" MouseDoubleClick="MaDataGrid_MouseDoubleClick" SelectionChanged="MaDataGrid_SelectionChanged" CellEditEnding="MaDataGrid_CellEditEnding"  Grid.Row="1" Grid.Column="1" FontSize="11" VerticalAlignment="Stretch" 
+                <DataGrid x:Name="MaDataGrid" IsReadOnly="true" PreviewKeyDown="MaDataGrid_PreviewKeyDown" MouseDoubleClick="MaDataGrid_MouseDoubleClick" SelectionChanged="MaDataGrid_SelectionChanged" CurrentCellChanged="MaDataGrid_CurrentCellChanged"  CellEditEnding="MaDataGrid_CellEditEnding"  Grid.Row="1" Grid.Column="1" FontSize="11" VerticalAlignment="Stretch" 
                               Background="#F9F9F9" FrozenColumnCount="6" Focusable="True"  AlternatingRowBackground="#f5f5f5" CanUserAddRows="false" HeadersVisibility="Column" CanUserSortColumns="True" CanUserReorderColumns="True"
                               CanUserDeleteRows="false" CanUserResizeColumns="True" CanUserResizeRows="false" BorderThickness="0.5" BorderBrush="Gray" AutoGenerateColumns="false"
                               GridLinesVisibility="Vertical" VerticalGridLinesBrush="Gray" SelectionMode="Extended"  IsTextSearchCaseSensitive="False">
@@ -628,7 +628,7 @@
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Type" Width="85" IsReadOnly="true" Binding="{Binding Type}"/>
-                        <DataGridTextColumn Header="Nomenclature" Width="120" Binding="{Binding Nomenclature}"/>
+                        <DataGridTextColumn x:Name="CBOM" Header="Nomenclature" Width="120" Binding="{Binding Nomenclature}"/>
                         <DataGridTextColumn Header="PartNumber" Width="150" IsReadOnly="False" Binding="{Binding PartNumber}"/>
                         <DataGridTextColumn Header="Source" Width="75" IsReadOnly="true" Binding="{Binding Source}">
                             <DataGridTextColumn.ElementStyle>

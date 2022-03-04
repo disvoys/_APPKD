@@ -1981,16 +1981,16 @@ Boucle:
         Else
         End If
 
-        If Env = "[DASSAUT AVIATION"] Then
-        'rien à faire
+        If Env = "[DASSAULT AVIATION]" Then
+            'rien à faire
         End If
 
 
     End Sub
     Sub CreerLignesBOM(v As DrawingView, mestexts As DrawingTexts, ic As ItemCatia, i As Integer, TYPEPlan As String, LineB As LineBOM)
 
-        If Env = "[AIRBUS"] Then
-         Dim X, Y As Integer
+        If Env = "[AIRBUS]" Then
+            Dim X, Y As Integer
             Select Case TYPEPlan
                 Case 2
                     X = 979
@@ -2074,7 +2074,7 @@ Boucle:
 
                     Dim MaSourceRe As String = ic.Source
                     Select Case MaSourceRe
-                        Case "Inoconnu"
+                        Case "Inconnu"
                             MaSourceRe = ""
                         Case "Fabriqué"
                             MaSourceRe = "FAB"
@@ -2100,92 +2100,16 @@ Boucle:
                     T = mestexts.Add(ic.PartNumber, 385, 155 + (5 * i) - 5)
                     T.SetFontSize(0, 0, 2)
                     T.Name = "NomenclatureText_LinkPartNumber_" & i
-
-
-
-
-                    Dim sel As Selection = CATIA.ActiveDocument.Selection
-                    sel.Add(T)
-                    sel.VisProperties.SetShow(1)
-                    sel.Clear()
-
-                Else
-                    Dim T As DrawingText = mestexts.Add(CheckSiTextVide(LineB.REP), X, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_repere_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.PLANCHE), X + 9, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_planche_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.QTE), X + 19, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_quantite_" & i
-
-                    Dim strDescription As String = LineB.DESIGNATION
-                    If strDescription.Contains(vbCrLf) Then
-                        T = mestexts.Add(CheckSiTextVide(strDescription), X + 28, Y + 0 + (5 * i))
-                        T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                        T.SetFontSize(0, 0, 1.5)
-                        T.Name = "NomenclatureText_Designation_" & i
-                    Else
-                        T = mestexts.Add(CheckSiTextVide(strDescription), X + 28, Y + (5 * i))
-                        T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                        T.SetFontSize(0, 0, 2)
-                        T.Name = "NomenclatureText_Designation_" & i
-                    End If
-
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.PartNumber), X + 79, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_PartNumber_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.MATIERE), X + 115, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_matiere_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.ETAT), X + 131, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_etat_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.DIMBRUTES), X + 141, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_dimensions_brutes_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.OBSERVATIONS), X + 161, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_observations_" & i
-
-
-                    T = mestexts.Add(LineB.PartNumber, 385, 155 + (5 * i) - 5)
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_LinkPartNumber_" & i
-
-
-
-
-                    Dim sel As Selection = CATIA.ActiveDocument.Selection
-                    sel.Add(T)
-                    sel.VisProperties.SetShow(1)
-                    sel.Clear()
                 End If
 
             End If
         End If
-        If Env = "[DASSAUT AVIATION"] Then
-         Dim X, Y As Integer
+        If Env = "[DASSAULT AVIATION]" Then
+            Dim X, Y As Integer
             Select Case TYPEPlan
                 Case 2
-                    X = 979
-                    Y = 151
+                    X = 893
+                    Y = 128
                 Case 3 'OK
                     X = 299
                     Y = 128
@@ -2202,171 +2126,116 @@ Boucle:
                 Dim m As New MessageErreur("Une erreur interne à l'application s'est produite liée aux références CATIA", Notifications.Wpf.NotificationType.Error)
             Else
                 Dim L As Line2D
-                L = F.CreateLine(X, Y + (6 * i), X + 200, Y + (5 * i))
-                L.Name = "NomenclatureLine_" & i & "_1_1"
-                L = F.CreateLine(X, Y + (6 * (i - 1)), X, Y + (5 * i))
-                L.Name = "NomenclatureLine_" & i & "_1_2"
-                L = F.CreateLine(X + 8, Y + (6 * (i - 1)), X + 8, Y + (5 * i))
-                L.Name = "NomenclatureLine_" & i & "_1_3"
-                L = F.CreateLine(X + 18, Y + (6 * (i - 1)), X + 18, Y + (5 * i))
-                L.Name = "NomenclatureLine_" & i & "_1_4"
-                L = F.CreateLine(X + 27, Y + (6 * (i - 1)), X + 27, Y + (5 * i))
-                L.Name = "NomenclatureLine_" & i & "_1_5"
-                L = F.CreateLine(X + 78, Y + (6 * (i - 1)), X + 78, Y + (5 * i))
-                L.Name = "NomenclatureLine_" & i & "_1_11"
-                L = F.CreateLine(X + 114, Y + (6 * (i - 1)), X + 114, Y + (5 * i))
-                L.Name = "NomenclatureLine_" & i & "_1_6"
-                L = F.CreateLine(X + 130, Y + (6 * (i - 1)), X + 130, Y + (5 * i))
-                L.Name = "NomenclatureLine_" & i & "_1_7"
-                L = F.CreateLine(X + 140, Y + (6 * (i - 1)), X + 140, Y + (5 * i))
-                L.Name = "NomenclatureLine_" & i & "_1_8"
-                L = F.CreateLine(X + 160, Y + (6 * (i - 1)), X + 160, Y + (5 * i))
-                L.Name = "NomenclatureLine_" & i & "_1_9"
+                L = F.CreateLine(X, Y + (6 * (i - 1)), X + 285, Y + (6 * (i - 1)))
+                L.Name = "TitleBlock_Line_Row_Tableau_1" & i
+                L = F.CreateLine(X, Y + (6 * (i - 1)), X, Y + (6 * (i)))
+                L.Name = "TitleBlock_Line_Col_Tableau_1" & i - 1
+                L = F.CreateLine(X + 12, Y + (6 * (i - 1)), X + 12, Y + (6 * (i)))
+                L.Name = "TitleBlock_Line_Col_Tableau_2" & i - 1
+                L = F.CreateLine(X + 37, Y + (6 * (i - 1)), X + 37, Y + (6 * (i)))
+                L.Name = "TitleBlock_Line_Col_Tableau_3" & i - 1
+                L = F.CreateLine(X + 49, Y + (6 * (i - 1)), X + 49, Y + (6 * (i)))
+                L.Name = "TitleBlock_Line_Col_Tableau_4" & i - 1
+                L = F.CreateLine(X + 144, Y + (6 * (i - 1)), X + 144, Y + (6 * (i)))
+                L.Name = "TitleBlock_Line_Col_Tableau_5" & i - 1
+                L = F.CreateLine(X + 174, Y + (6 * (i - 1)), X + 174, Y + (6 * (i)))
+                L.Name = "TitleBlock_Line_Col_Tableau_6" & i - 1
+                L = F.CreateLine(X + 190, Y + (6 * (i - 1)), X + 190, Y + (6 * (i)))
+                L.Name = "TitleBlock_Line_Col_Tableau_7" & i - 1
+                L = F.CreateLine(X + 220, Y + (6 * (i - 1)), X + 220, Y + (6 * (i)))
+                L.Name = "TitleBlock_Line_Col_Tableau_8" & i - 1
+                L = F.CreateLine(X + 250, Y + (6 * (i - 1)), X + 250, Y + (6 * (i)))
+                L.Name = "TitleBlock_Line_Col_Tableau_9" & i - 1
 
                 If LineB Is Nothing Then
-                    Dim T As DrawingText = mestexts.Add(CheckSiTextVide(ic.Nomenclature), X, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_repere_" & i
+                    Dim T As DrawingText = mestexts.Add(Format(i, "00"), X + 6, Y + 2.5 + (6 * (i - 1)))
+                    T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
+                    T.TextProperties.Justification = CatJustification.catCenter
+                    T.SetParameterOnSubString(CatTextProperty.catBold, 0, 0, 1)
+                    T.SetParameterOnSubString(CatTextProperty.catItalic, 0, 0, 1)
+                    T.SetFontSize(0, 0, 4)
+                    T.Name = "TitleBlock_Text_Tableau_1_" & i - 1
 
-                    T = mestexts.Add(".", X + 9, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_planche_" & i
+                    T = mestexts.Add(CheckSiTextVide(ic.Perso9), X + 24.5, Y + 2.5 + (6 * (i - 1)))
+                    T.WrappingWidth = 25
+                    T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
+                    T.TextProperties.Justification = CatJustification.catCenter
+                    T.SetFontSize(0, 0, 2.5)
+                    T.Name = "TitleBlock_Data_Tableau_1_" & i - 1
 
-                    T = mestexts.Add(CheckSiTextVide(ic.Qte), X + 19, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_quantite_" & i
+                    T = mestexts.Add(CheckSiTextVide(ic.Qte), X + 43, Y + 2.5 + (6 * (i - 1)))
+                    T.WrappingWidth = 12
+                    T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
+                    T.TextProperties.Justification = CatJustification.catCenter
+                    T.SetFontSize(0, 0, 2.5)
+                    T.Name = "TitleBlock_Data_Tableau_2_" & i - 1
 
                     Dim strDescription As String = ic.ProductCATIA.DescriptionRef
                     If strDescription.Contains(vbCrLf) Then
-                        T = mestexts.Add(CheckSiTextVide(ic.ProductCATIA.DescriptionRef), X + 28, Y + 0 + (5 * i))
-                        T.AnchorPosition = CatTextAnchorPosition.catTopLeft
+                        T = mestexts.Add(CheckSiTextVide(ic.Perso7), X + 97, Y + 2.5 + (6 * (i - 1)))
+                        T.WrappingWidth = 93
+                        T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
+                        T.TextProperties.Justification = CatJustification.catCenter
                         T.SetFontSize(0, 0, 1.5)
-                        T.Name = "NomenclatureText_Designation_" & i
+                        T.Name = "TitleBlock_Data_Tableau_3_" & i - 1
                     Else
-                        T = mestexts.Add(CheckSiTextVide(ic.DescriptionRef), X + 28, Y + (5 * i))
-                        T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                        T.SetFontSize(0, 0, 2)
-                        T.Name = "NomenclatureText_Designation_" & i
+                        T = mestexts.Add(CheckSiTextVide(ic.Perso7), X + 97, Y + 2.5 + (6 * (i - 1)))
+                        T.WrappingWidth = 93
+                        T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
+                        T.TextProperties.Justification = CatJustification.catCenter
+                        T.SetFontSize(0, 0, 2.5)
+                        T.Name = "TitleBlock_Data_Tableau_3_" & i - 1
                     End If
 
 
-                    T = mestexts.Add(CheckSiTextVide(ic.PartNumber), X + 79, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_PartNumber_" & i
+                    T = mestexts.Add(CheckSiTextVide(ic.Matiere), X + 159, Y + 2.5 + (6 * (i - 1)))
+                    T.WrappingWidth = 30
+                    T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
+                    T.TextProperties.Justification = CatJustification.catCenter
+                    T.SetFontSize(0, 0, 2.5)
+                    T.Name = "TitleBlock_Data_Tableau_4_" & i - 1
 
-                    T = mestexts.Add(CheckSiTextVide(ic.Matiere), X + 115, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_matiere_" & i
+
 
                     Dim MaSourceRe As String = ic.Source
                     Select Case MaSourceRe
-                        Case "Inoconnu"
-                            MaSourceRe = ""
+                        Case "Inconnu"
+                            MaSourceRe = "-"
                         Case "Fabriqué"
                             MaSourceRe = "FAB"
                         Case "Acheté"
                             MaSourceRe = "ACHAT"
                     End Select
-                    T = mestexts.Add(CheckSiTextVide(MaSourceRe), X + 131, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_etat_" & i
+                    T = mestexts.Add(CheckSiTextVide(MaSourceRe), X + 182, Y + 2.5 + (6 * (i - 1)))
+                    T.WrappingWidth = 16
+                    T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
+                    T.TextProperties.Justification = CatJustification.catCenter
+                    T.SetFontSize(0, 0, 2.5)
+                    T.Name = "TitleBlock_Data_Tableau_5_" & i - 1
 
-                    T = mestexts.Add(".", X + 141, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_dimensions_brutes_" & i
+                    Dim s As String = ic.Perso4
+                    If s = "" And ic.Perso5 <> "" Then s = ic.Perso5 & " Kg"
+                    T = mestexts.Add(CheckSiTextVide(s), X + 205, Y + 2.5 + (6 * (i - 1))) 'dim brutes
+                    T.WrappingWidth = 30
+                    T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
+                    T.TextProperties.Justification = CatJustification.catCenter
+                    T.SetFontSize(0, 0, 2.5)
+                    T.Name = "TitleBlock_Data_Tableau_6_" & i - 1
 
-                    T = mestexts.Add(CheckSiTextVide(ic.Observation), X + 161, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_observations_" & i
+                    T = mestexts.Add(CheckSiTextVide(ic.Traitement), X + 235, Y + 2.5 + (6 * (i - 1)))
+                    T.WrappingWidth = 30
+                    T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
+                    T.TextProperties.Justification = CatJustification.catCenter
+                    T.SetFontSize(0, 0, 2.5)
+                    T.Name = "TitleBlock_Data_Tableau_7_" & i - 1
 
+                    T = mestexts.Add(".", X + 267.5, Y + 2.5 + (6 * (i - 1)))
+                    T.WrappingWidth = 35
+                    T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
+                    T.TextProperties.Justification = CatJustification.catCenter
+                    T.SetFontSize(0, 0, 2.5)
+                    T.Name = "TitleBlock_Data_Tableau_8_" & i - 1
 
-                    T = mestexts.Add(ic.PartNumber, 385, 155 + (5 * i) - 5)
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_LinkPartNumber_" & i
-
-
-
-
-                    Dim sel As Selection = CATIA.ActiveDocument.Selection
-                    sel.Add(T)
-                    sel.VisProperties.SetShow(1)
-                    sel.Clear()
-
-                Else
-                    Dim T As DrawingText = mestexts.Add(CheckSiTextVide(LineB.REP), X, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_repere_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.PLANCHE), X + 9, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_planche_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.QTE), X + 19, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_quantite_" & i
-
-                    Dim strDescription As String = LineB.DESIGNATION
-                    If strDescription.Contains(vbCrLf) Then
-                        T = mestexts.Add(CheckSiTextVide(strDescription), X + 28, Y + 0 + (5 * i))
-                        T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                        T.SetFontSize(0, 0, 1.5)
-                        T.Name = "NomenclatureText_Designation_" & i
-                    Else
-                        T = mestexts.Add(CheckSiTextVide(strDescription), X + 28, Y + (5 * i))
-                        T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                        T.SetFontSize(0, 0, 2)
-                        T.Name = "NomenclatureText_Designation_" & i
-                    End If
-
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.PartNumber), X + 79, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_PartNumber_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.MATIERE), X + 115, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_matiere_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.ETAT), X + 131, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_etat_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.DIMBRUTES), X + 141, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_dimensions_brutes_" & i
-
-                    T = mestexts.Add(CheckSiTextVide(LineB.OBSERVATIONS), X + 161, Y + (5 * i))
-                    T.AnchorPosition = CatTextAnchorPosition.catTopLeft
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_observations_" & i
-
-
-                    T = mestexts.Add(LineB.PartNumber, 385, 155 + (5 * i) - 5)
-                    T.SetFontSize(0, 0, 2)
-                    T.Name = "NomenclatureText_LinkPartNumber_" & i
-
-
-
-
-                    Dim sel As Selection = CATIA.ActiveDocument.Selection
-                    sel.Add(T)
-                    sel.VisProperties.SetShow(1)
-                    sel.Clear()
                 End If
 
             End If
