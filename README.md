@@ -22,7 +22,7 @@ App|KD vous permettra de renouer avec la technique. Les tâches répétitives se
 
 
 
-> La denrière mise à jour date du 03/2022,
+> La dernière mise à jour date du 03/2022,
 > L'application est continuellement mise à jour.
 
 

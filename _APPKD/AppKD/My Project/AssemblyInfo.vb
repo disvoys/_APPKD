@@ -13,7 +13,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("DESVOIS")>
 <Assembly: AssemblyProduct("AppKD")>
 <Assembly: AssemblyCopyright("Copyright ©  2018")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyTrademark("App|KD")>
 <Assembly: ComVisible(True)>
 
 'Pour commencer à générer des applications localisables, définissez

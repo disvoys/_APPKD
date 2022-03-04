@@ -40,7 +40,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 5">
                     <TextBlock Text="AIRBUS"  x:Name="labelClient" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
                     <TextBlock Text="|"  Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                    <TextBlock Text="V3.0.15" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBlock Text="V3.0.16" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
                     <Button Width="30" Height="30" Padding="0" Background="{x:Null}" ToolTip="Options" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 0 0" Click="Button_Click_11">
                         <materialDesign:PackIcon Kind="Settings" />
                     </Button>
@@ -899,7 +899,7 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[PROPRIETES]" Width="100"/>
-                                    <TextBlock Text="Ajout de l'environnement Dassault et de la mise en plan automatique [RESTE A FAIRE LES 2D]"/>
+                                    <TextBlock Text="Ajout de l'environnement Dassault et remplissage automatique du cartouche 2D"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[PROPRIETES]" Width="100"/>

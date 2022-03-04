@@ -1,6 +1,6 @@
 <html> <head> <title>  Nomenclature : MA62599Z00-F46C5747_050200 </title> </head> 
 <dl> 
-Date de calcul : lundi 28 février 2022 14:19:14 
+Date de calcul : vendredi 4 mars 2022 11:43:12 
 <p> 
 <a name="Nomenclature : MA62599Z00-F46C5747_050200" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
@@ -12,6 +12,7 @@ Date de calcul : lundi 28 février 2022 14:19:14
   <tr><td>EMILE-MAURIN-33-080-18-10,10-16</td><td>2</td><td>Pièce</td> </tr> 
   <tr><td><A HREF="#Nomenclature : Grp_Bridage">Grp_Bridage</A></td><td>2</td><td>Assemblage</td> </tr> 
   <tr><td><A HREF="#Nomenclature : Grp_Visserie">Grp_Visserie</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : test">test</A></td><td>1</td><td>Assemblage</td> </tr> 
 </table> <p> <p> 
 <a name="Nomenclature : Grp_Broche" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
@@ -58,9 +59,29 @@ Date de calcul : lundi 28 février 2022 14:19:14
   <tr><td>ISO 4762 SCREW M8x50 STEEL HEXAGON SOCKET HEAD CAP</td><td>1</td><td>Pièce</td> </tr> 
   <tr><td>ISO 7093-1 WASHER 8x24 STEEL GRADE A PLAIN LARGE SERIES</td><td>2</td><td>Pièce</td> </tr> 
 </table> <p> <p> 
+<a name="Nomenclature : test" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : test </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>test2</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : comp1">comp1</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : testprod1">testprod1</A></td><td>1</td><td>Assemblage</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : comp1" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : comp1 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>test3</td><td>2</td><td>Pièce</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : testprod1" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : testprod1 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>test3</td><td>2</td><td>Pièce</td> </tr> 
+</table> <p> <p> 
 <hr><h1>Récapitulatif sur : MA62599Z00-F46C5747_050200 </h1> 
-<b>Pièces différentes : 21  <br> 
-<b>Total des pièces : 56  <br> 
+<b>Pièces différentes : 23  <br> 
+<b>Total des pièces : 61  <br> 
 <table border=3 WIDTH="100%" CELLPADDING=5 > 
 <tr> <th>Référence</th><th>Quantité</th></tr> </tr> 
   <tr><td>MA62599Z00-F46C5747_050288</td><td>1</td> </tr> 
@@ -84,5 +105,7 @@ Date de calcul : lundi 28 février 2022 14:19:14
   <tr><td>ISO 7093-1 WASHER 8x24 STEEL GRADE A PLAIN LARGE SERIES</td><td>8</td> </tr> 
   <tr><td>ISO 4762 SCREW M6x25 STEEL HEXAGON SOCKET HEAD CAP</td><td>1</td> </tr> 
   <tr><td>ISO 8752 SPRING PIN 8x55 STEEL SLOTTED HEAVY DUTY</td><td>1</td> </tr> 
+  <tr><td>test2</td><td>1</td> </tr> 
+  <tr><td>test3</td><td>4</td> </tr> 
 </table> 
 </html>  </tr> 

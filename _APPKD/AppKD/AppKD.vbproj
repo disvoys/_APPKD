@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\deske\OneDrive\Bureau\</PublishUrl>
+    <PublishUrl>C:\Users\Kevin.DESVOIS\Documents\xgitlab\appkd\_APPKD\AppKD_Publication\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -32,7 +32,7 @@
     <PublisherName>Kevin DESVOIS</PublisherName>
     <SuiteName>APP-KD</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>63</ApplicationRevision>
+    <ApplicationRevision>65</ApplicationRevision>
     <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
