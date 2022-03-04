@@ -1727,12 +1727,158 @@ Boucle:
         End Select
     End Function
 
+    Sub MajCartoucheDassault()
+
+        Dim d As DrawingDocument = CATIA.ActiveDocument
+        Dim s As DrawingSheet = d.Sheets.ActiveSheet
+
+        If s.Views.Count < 3 Then
+            Dim m As New MessageErreur("Aucune vue n'est détectée pour pouvoir créer les liens avec le 3D. Créer une vue réessayer.", Notifications.Wpf.NotificationType.Error)
+            Exit Sub
+        End If
+
+        Dim maVue As DrawingView = s.Views.Item(3)
+        Dim MonDoc As Document = maVue.GenerativeBehavior.Document.Parent
+        Dim MonIC As ItemCatia
+
+
+        For Each ic As ItemCatia In ListDocuments
+            If ic.FileName = MonDoc.FullName Then
+                MonIC = ic
+                Exit For
+            End If
+        Next
+
+        If MonIC Is Nothing Then
+            CATIA.DisplayFileAlerts = False
+            CATIA.Documents.Open(MonDoc.FullName)
+            CATIA.DisplayFileAlerts = True
+        End If
+
+
+        Dim Da As String = ""
+        Dim Jour As Integer = Today.Day
+        Dim Mois As Integer = Today.Month
+        Dim annee As String = Today.Year
+        Da = Format(Jour, "00") & "-" & GetMonth(Mois) & "-" & Right(annee, 2)
+
+        For Each T As DrawingText In s.Views.Item(2).Texts
+            'DASSAULT        
+            If T.Name = "TitleBlock_Data_Rights6" Then
+                T.Text = My.Settings.DRN.ToString
+            End If
+            If T.Name = "TitleBlock_Data_Rights7" Then
+                T.Text = Da
+            End If
+            If T.Name = "TitleBlock_Data_Rights8" Then
+                T.Text = My.Settings.TITLE1.ToString
+            End If
+            If T.Name = "TitleBlock_Data_Rights9" Then
+                T.Text = My.Settings.TITLE2.ToString
+            End If
+
+            Dim n As String = MonIC.PartNumber
+
+            If n.Length > 11 Then
+                Dim Usine As String = Strings.Left(n, 2)
+                If T.Name = "TitleBlock_Data_Rights12" Then
+                    T.Text = Usine
+                End If
+                If T.Name = "TitleBlock_Text_Rights13" Then
+                    Select Case Usine
+                        Case "MA"
+                            T.Text = "Etablissement de Martignas"
+                        Case "BZ"
+                            T.Text = "Etablissement de Biaritz"
+                    End Select
+                End If
+                If T.Name = "TitleBlock_Data_Rights13" Then
+                    Dim f As String = Strings.Left(n, 5)
+                    f = Strings.Right(f, 3)
+                    T.Text = f
+                End If
+                If T.Name = "TitleBlock_Data_Rights14" Then
+                    Dim f As String = Strings.Left(n, 7)
+                    f = Strings.Right(f, 2)
+                    T.Text = f
+                End If
+                If T.Name = "TitleBlock_Data_Rights15" Then
+                    Dim f As String = Strings.Left(n, 8)
+                    f = Strings.Right(f, 1)
+                    T.Text = f
+                End If
+                If T.Name = "TitleBlock_Data_Rights16" Then
+                    Dim f As String = Strings.Left(n, 10)
+                    f = Strings.Right(f, 2)
+                    T.Text = f
+                End If
+                If T.Name = "TitleBlock_Data_Rights17" Then
+                    Dim f() As String = Strings.Split(n, "_")
+                    Dim ss As String = f(0)
+                    ss = Strings.Right(ss, ss.Length - 11)
+                    T.Text = ss
+                End If
+            Else
+                Dim m As New MessageErreur("Le PartNumber de l'élément CATIA n'est pas au format de Dassault. Impossible de générer le plan correctement.", Notifications.Wpf.NotificationType.Error)
+            End If
+            If T.Name = "TitleBlock_Data_Grille_date_18" Then
+                T.Text = GetMonth(Mois) & "-" & Right(annee, 2)
+            End If
+
+            If T.Name = "TitleBlock_Data_Tableau_1_0" Then
+                T.Text = MonIC.Perso9
+            End If
+
+            If T.Name = "TitleBlock_Data_Tableau_3_0" Then
+                T.Text = MonIC.DescriptionRef
+            End If
+            If T.Name = "TitleBlock_Data_Tableau_4_0" Then
+                T.Text = MonIC.Matiere
+            End If
+
+            If T.Name = "TitleBlock_Data_Tableau_5_0" Then
+                Select Case MonIC.Source
+                    Case "Fabriqué"
+                        T.Text = "FAB"
+                    Case "Acheté"
+                        T.Text = "ACH"
+                    Case "Inconnu"
+                        T.Text = "INC"
+                End Select
+
+            End If
+            If T.Name = "TitleBlock_Data_Tableau_6_0" Then
+                T.Text = MonIC.Perso5 & " Kg"
+            End If
+            If T.Name = "TitleBlock_Data_Tableau_7_0" Then
+                T.Text = MonIC.Traitement
+            End If
+
+
+        Next
+
+
+    End Sub
+
+
+#Region "NOMECNALTURE 2D"
+
+
+
+
+    Dim ListIC As New List(Of ItemCatia)
     Sub GoNomenclature(Product As String)
 
+        For Each item In ListDocuments
+            item.Qte = Nothing
+        Next
+
+        ListIC.Clear()
 
         ModifFichierNomenclature(DossierBase & "\Données\BOM.txt", Product)
 
-        Dim ListIC As New List(Of ItemCatia)
+
+        Dim ListComponents As New List(Of String)
 
         Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
         Const charTab As Char = CChar(vbTab)
@@ -1747,13 +1893,15 @@ Boucle:
                     Dim CompOK As Boolean = True
                     For Each ic As ItemCatia In ListDocuments
                         If ic.PartNumber = monPN Then
-                            ic.Qte = quantite
+                            ic.Qte = Convert.ToInt32(ic.Qte) + Convert.ToInt32(quantite)
                             ListIC.Add(ic)
                             CompOK = False
                             Exit For
                         End If
                     Next
                     If CompOK = True Then '<= c'est un components
+                        ListComponents.Add(monPN)
+                        '   MsgBox(monPN)
                         'composant non pris en compte - à modifier
                     End If
                 End If
@@ -1761,7 +1909,7 @@ Boucle:
             sr.Close()
         End Using
 
-
+        RecursComponents(ListComponents)
 
         For Each item In ListDocuments
             If ListIC.Contains(item) Then
@@ -1775,12 +1923,49 @@ Boucle:
 
     End Sub
 
-#Region "NOMECNALTURE 2D"
+
+    Sub RecursComponents(l As List(Of String))
 
 
-    Sub testNomenclature()
+        For Each item In l
+
+            Dim ListComponents As New List(Of String)
+            ModifFichierNomenclature(DossierBase & "\Données\BOM.txt", item)
+            Const charTab As Char = CChar(vbTab)
+            Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
 
 
+            Using sr As StreamReader = New StreamReader(FichierNomenclature, Encoding.GetEncoding("iso-8859-1"))
+                Dim BoolStart As Boolean = False
+                While Not sr.EndOfStream
+                    Dim line As String = sr.ReadLine
+                    If line Like "*" & charTab & "*" Then
+                        Dim l_() As String = Strings.Split(line, charTab)
+                        Dim monPN As String = l_(0)
+                        Dim quantite As String = l_(1)
+                        Dim CompOK As Boolean = True
+                        For Each ic As ItemCatia In ListDocuments
+                            If ic.PartNumber = monPN Then
+                                ic.Qte = Convert.ToInt32(ic.Qte) + Convert.ToInt32(quantite)
+                                ListIC.Add(ic)
+                                CompOK = False
+                                Exit For
+                            End If
+                        Next
+                        If CompOK = True Then '<= c'est un components
+                            ListComponents.Add(monPN)
+                            '   MsgBox(monPN)
+                            'composant non pris en compte - à modifier
+                        End If
+                    End If
+                End While
+                sr.Close()
+            End Using
+
+
+            RecursComponents(ListComponents)
+
+        Next
 
 
     End Sub

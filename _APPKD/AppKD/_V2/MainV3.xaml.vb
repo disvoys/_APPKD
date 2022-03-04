@@ -2434,7 +2434,7 @@ Public Class MainV3
         If GetEnv() = "DASSAULT AVIATION" Then
             FctionCATIA.CheckActiveDoc()
             If TypeActiveDoc = "DRAWING" Then
-                FctionCATIA.testNomenclature()
+                FctionCATIA.MajCartoucheDassault()
             Else
                 Dim m As New MessageErreur("Ouvrir un plan pour pouvoir utiliser cette fonction", Notifications.Wpf.NotificationType.Error)
 
