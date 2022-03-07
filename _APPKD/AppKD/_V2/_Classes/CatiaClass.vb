@@ -1358,17 +1358,17 @@ Boucle:
             For Each T As DrawingText In MaSheet.Views.Item(2).Texts
                 'DASSAULT        
                 If T.Name = "TitleBlock_Data_Rights6" Then
-                        T.Text = My.Settings.DRN.ToString
-                    End If
-                    If T.Name = "TitleBlock_Data_Rights7" Then
-                        T.Text = Da
-                    End If
-                    If T.Name = "TitleBlock_Data_Rights8" Then
-                        T.Text = My.Settings.TITLE1.ToString
-                    End If
-                    If T.Name = "TitleBlock_Data_Rights9" Then
-                        T.Text = My.Settings.TITLE2.ToString
-                    End If
+                    T.Text = My.Settings.DRN.ToString
+                End If
+                If T.Name = "TitleBlock_Data_Rights7" Then
+                    T.Text = Da
+                End If
+                If T.Name = "TitleBlock_Data_Rights8" Then
+                    T.Text = My.Settings.TITLE1.ToString
+                End If
+                If T.Name = "TitleBlock_Data_Rights9" Then
+                    T.Text = My.Settings.TITLE2.ToString
+                End If
 
                 Dim n As String = ic.PartNumber
 
@@ -1926,14 +1926,11 @@ Boucle:
 
     Sub RecursComponents(l As List(Of String))
 
-
         For Each item In l
-
             Dim ListComponents As New List(Of String)
             ModifFichierNomenclature(DossierBase & "\Données\BOM.txt", item)
             Const charTab As Char = CChar(vbTab)
             Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
-
 
             Using sr As StreamReader = New StreamReader(FichierNomenclature, Encoding.GetEncoding("iso-8859-1"))
                 Dim BoolStart As Boolean = False
@@ -1961,8 +1958,6 @@ Boucle:
                 End While
                 sr.Close()
             End Using
-
-
             RecursComponents(ListComponents)
 
         Next
@@ -2697,52 +2692,52 @@ Public Class ItemCatia
 
 
                     Try
-                    Perso1 = p.UserRefProperties.Item(nPerso1).ValueAsString
-                Catch ex As Exception
-                End Try
-                Try
-                    Perso2 = p.UserRefProperties.Item(nPerso2).ValueAsString
-                Catch ex As Exception
-                End Try
-                Try
-                    Perso3 = p.UserRefProperties.Item(nPerso3).ValueAsString
-                Catch ex As Exception
-                End Try
-                Try
-                    Perso4 = p.UserRefProperties.Item(nPerso4).ValueAsString
-                Catch ex As Exception
-                End Try
-                Try
-                    Perso5 = p.UserRefProperties.Item(nPerso5).ValueAsString
-                Catch ex As Exception
-                End Try
-                Try
-                    Perso6 = p.UserRefProperties.Item(nPerso6).ValueAsString
-                Catch ex As Exception
-                End Try
-                Try
-                    Perso7 = p.UserRefProperties.Item(nPerso7).ValueAsString
-                Catch ex As Exception
-                End Try
-                Try
-                    Perso8 = p.UserRefProperties.Item(nPerso8).ValueAsString
-                Catch ex As Exception
-                End Try
-                Try
-                    Perso9 = p.UserRefProperties.Item(nPerso9).ValueAsString
-                Catch ex As Exception
-                End Try
-                Try
-                    Perso10 = p.UserRefProperties.Item(nPerso10).ValueAsString
-                Catch ex As Exception
-                End Try
+                        Perso1 = p.UserRefProperties.Item(nPerso1).ValueAsString
+                    Catch ex As Exception
+                    End Try
+                    Try
+                        Perso2 = p.UserRefProperties.Item(nPerso2).ValueAsString
+                    Catch ex As Exception
+                    End Try
+                    Try
+                        Perso3 = p.UserRefProperties.Item(nPerso3).ValueAsString
+                    Catch ex As Exception
+                    End Try
+                    Try
+                        Perso4 = p.UserRefProperties.Item(nPerso4).ValueAsString
+                    Catch ex As Exception
+                    End Try
+                    Try
+                        Perso5 = p.UserRefProperties.Item(nPerso5).ValueAsString
+                    Catch ex As Exception
+                    End Try
+                    Try
+                        Perso6 = p.UserRefProperties.Item(nPerso6).ValueAsString
+                    Catch ex As Exception
+                    End Try
+                    Try
+                        Perso7 = p.UserRefProperties.Item(nPerso7).ValueAsString
+                    Catch ex As Exception
+                    End Try
+                    Try
+                        Perso8 = p.UserRefProperties.Item(nPerso8).ValueAsString
+                    Catch ex As Exception
+                    End Try
+                    Try
+                        Perso9 = p.UserRefProperties.Item(nPerso9).ValueAsString
+                    Catch ex As Exception
+                    End Try
+                    Try
+                        Perso10 = p.UserRefProperties.Item(nPerso10).ValueAsString
+                    Catch ex As Exception
+                    End Try
 
-                Try
-                    Indice = p.Revision
+                    Try
+                        Indice = p.Revision
 
-                Catch ex As Exception
-                End Try
-            End If
+                    Catch ex As Exception
+                    End Try
+                End If
 
 
 
