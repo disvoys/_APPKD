@@ -538,12 +538,20 @@ Public Class CatiaClass
         AssConvertor.SetSecondaryFormat(VarMaListNom)
         AssConvertor.Print("HTML", NomFichier, p)
 
+        ModifFichierNomenclature(DossierBase & "\Données\BOM.txt")
 
 
     End Sub
-    Sub ModifFichierNomenclature(txt As String, PN As String)
 
-        Dim StrSTOP As String = ""
+    Sub ModifFichierNomenclature(txt As String)
+
+        Dim strtocheck As String = ""
+        If MaLangue = "Francais" Then
+            strtocheck = "<b>Total des p"
+        Else
+            strtocheck = "<b>Total parts"
+        End If
+
         Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
         If IO.File.Exists(FichierNomenclature) Then
             IO.File.Delete(FichierNomenclature)
@@ -556,40 +564,47 @@ Public Class CatiaClass
                     Dim BoolStart As Boolean = False
                     While Not sr.EndOfStream
                         Dim line As String = sr.ReadLine
-                        If PN = "Ensemble des éléments" Then ' ICRacine.PartNumber Then
-                            StrSTOP = "<hr><h1>R*capitulati*: *"
-                        Else
-                            StrSTOP = "*: " & PN & "*></A> "
-                        End If
-
-
-                        If line Like StrSTOP Then
-                            BoolStart = True
-                        End If
-                        If BoolStart = True Then
-                            If line Like "  <tr><td><A HREF=*</td><td>Assembl*</td> </tr>*" Then
-                                line = Replace(line, "</td><td>Assembly</td> </tr>", "")
-                                line = Replace(line, "</td><td>Assemblage</td> </tr>", "")
-                                line = Replace(line, "  <tr><td><A HREF=", "")
-                                line = Replace(line, "</A></td><td>", ControlChars.Tab)
-                                line = Replace(line, "#Bill of Material: ", "")
-                                line = Replace(line, "#Nomenclature : ", "")
-                                If line.Contains(">") Then
-                                    Dim lines() = Strings.Split(line, ">")
-                                    line = lines(1)
-                                End If
+                        If Left(line, 8) = "<a name=" Then
+                            If MaLangue = "Francais" Then
+                                line = "[" & Right(line, line.Length - 24)
+                                line = Left(line, line.Length - 8)
+                                line = line & "]"
                                 sw.WriteLine(line)
-                            ElseIf line Like "  <tr><td>*</td> </tr>*" Then
-                                line = Replace(line, "  <tr><td>", "")
-                                line = Replace(line, "</td><td>", ControlChars.Tab)
-                                line = Replace(line, "</td> </tr>", "")
-                                line = Strings.Left(line, Len(line) - 1)
+                            Else
+                                line = "[" & Right(line, line.Length - 27)
+                                line = Left(line, line.Length - 8)
+                                line = line & "]"
                                 sw.WriteLine(line)
                             End If
+                        ElseIf line Like "  <tr><td><A HREF=*</td> </tr>*" Then
+                            line = Replace(line, "</td><td>Assembly</td> </tr>", "") 'pas fait
+                            line = Replace(line, "</td><td>Assemblage</td> </tr> ", "")
+                            line = Replace(line, "  <tr><td><A HREF=", "")
+                            line = Replace(line, "</A></td><td>", ControlChars.Tab)
+                            line = Replace(line, "#Bill of Material: ", "")
+                            line = Replace(line, "#Nomenclature : ", "")
+                            If line.Contains(">") Then
+                                Dim lines() = Strings.Split(line, ">")
+                                line = lines(1)
+                            End If
+                            Dim lines_() = Strings.Split(line, ControlChars.Tab)
+                            line = lines_(0) & ControlChars.Tab & lines_(1)
+                            If Strings.Left(line, 2) = "  " Then line = Strings.Right(line, line.Length - 2)
+                            sw.WriteLine(line)
+                        ElseIf Left(line, 14) = strtocheck Then
+                            sw.WriteLine("[ALL-BOM-APPKD]")
+                        ElseIf line Like "*<tr><td>*</td> </tr>*" Then
+                            line = Replace(line, "<tr><td>", "")
+                            line = Replace(line, "</td> </tr> ", "")
+                            line = Replace(line, "</td><td>", ControlChars.Tab)
+                            Dim lines_() = Strings.Split(line, ControlChars.Tab)
+                            line = lines_(0) & ControlChars.Tab & lines_(1)
+                            If Strings.Left(line, 2) = "  " Then line = Strings.Right(line, line.Length - 2)
+                            sw.WriteLine(line)
+                        Else
+                            'nothing
                         End If
-                        If line Like "</table>*" Then
-                            BoolStart = False
-                        End If
+
                     End While
                     sr.Close()
                 End Using
@@ -747,7 +762,7 @@ Boucle2:
             FixAll.CATMain(prd)
 
             Dim m As New MessageErreur("L'arborescence a été générée avec succès", Notifications.Wpf.NotificationType.Information)
-        Catch ex As Exception
+                            Catch ex As Exception
             Dim m As New MessageErreur("Une erreur s'est produite. Vérifier qu'aucun autre élément existe déjà à ce nom.", Notifications.Wpf.NotificationType.Error)
         End Try
 
@@ -1867,49 +1882,64 @@ Boucle:
 
 
     Dim ListIC As New List(Of ItemCatia)
-    Sub GoNomenclature(Product As String)
-
-        For Each item In ListDocuments
-            item.Qte = Nothing
-        Next
-
-        ListIC.Clear()
-
-        ModifFichierNomenclature(DossierBase & "\Données\BOM.txt", Product)
+    Dim BoolMessWarningComponents As Boolean = False
+    Sub GetBomDetails(Product As String, multiple As Integer, level As Integer)
 
 
         Dim ListComponents As New List(Of String)
-
         Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
         Const charTab As Char = CChar(vbTab)
         Using sr As StreamReader = New StreamReader(FichierNomenclature, Encoding.GetEncoding("iso-8859-1"))
             Dim BoolStart As Boolean = False
             While Not sr.EndOfStream
                 Dim line As String = sr.ReadLine
-                If line Like "*" & charTab & "*" Then
+                If BoolStart = True Then
                     Dim l_() As String = Strings.Split(line, charTab)
-                    Dim monPN As String = l_(0)
-                    Dim quantite As String = l_(1)
-                    Dim CompOK As Boolean = True
-                    For Each ic As ItemCatia In ListDocuments
-                        If ic.PartNumber = monPN Then
-                            ic.Qte = Convert.ToInt32(ic.Qte) + Convert.ToInt32(quantite)
-                            ListIC.Add(ic)
-                            CompOK = False
-                            Exit For
+                    If l_.Count = 2 Then
+                        Dim monPN As String = l_(0)
+                        Dim quantite As String = l_(1)
+                        Dim isComponents As Boolean = True
+                        For Each ic As ItemCatia In ListDocuments
+                            If ic.PartNumber = monPN Then
+                                Dim level_ As Integer
+                                If level = 0 Then
+                                    level_ = 1
+                                Else
+                                    level_ = level
+                                End If
+                                ic.Qte = Convert.ToInt32(ic.Qte) + (Convert.ToInt32(quantite) * multiple * level_)
+                                ListIC.Add(ic)
+                                isComponents = False
+                                Exit For
+                            End If
+                        Next
+                        If isComponents = True Then
+                            GetBomDetails(monPN, Convert.ToInt32(quantite), level + 1)
+                            BoolMessWarningComponents = True
                         End If
-                    Next
-                    If CompOK = True Then '<= c'est un components
-                        ListComponents.Add(monPN)
-                        '   MsgBox(monPN)
-                        'composant non pris en compte - à modifier
+                    Else
+                        BoolStart = False
                     End If
                 End If
+
+                If line = "[" & Product & "]" Then BoolStart = True
+
+
             End While
             sr.Close()
         End Using
+    End Sub
 
-        RecursComponents(ListComponents)
+    Sub GoNomenclature(Product As String)
+
+        BoolMessWarningComponents = False
+        For Each item In ListDocuments
+            item.Qte = Nothing
+        Next
+        ListIC.Clear()
+        If Product = "Ensemble des éléments" Then Product = "ALL-BOM-APPKD"
+        GetBomDetails(Product, 1, 0)
+
 
         For Each item In ListDocuments
             If ListIC.Contains(item) Then
@@ -1919,6 +1949,9 @@ Boucle:
             End If
         Next
 
+        If BoolMessWarningComponents = True Then
+            Dim m As New MessageErreur("Des composants ont été détéctés lors de la génération de la nommenclature. Assurez-vous d'avoir un nom différent pour chaque composant afin de ne pas fausser le calcul des quantités de pièces", Notifications.Wpf.NotificationType.Warning)
+        End If
 
 
     End Sub
@@ -1928,7 +1961,7 @@ Boucle:
 
         For Each item In l
             Dim ListComponents As New List(Of String)
-            ModifFichierNomenclature(DossierBase & "\Données\BOM.txt", item)
+            '       ModifFichierNomenclature(DossierBase & "\Données\BOM.txt", item)
             Const charTab As Char = CChar(vbTab)
             Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
 

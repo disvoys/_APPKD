@@ -261,7 +261,7 @@ Public Class Load
 
         Try
             Dim str() As String = Strings.Split(MonActiveDoc.Name, ".CATProduct")
-            Dim str_ As String = str(0)
+            Dim str_ As String = MonActiveDoc.Product.Name 'str(0) 'kevin à corriger
             MonMainV3.ComboBOM.Items.Add(str_)
 
 
@@ -270,9 +270,8 @@ Public Class Load
             For Each ic As ItemCatia In ListDocuments
                 If ic.Type = "PRODUCT" Then
                     Dim strIC() = Strings.Split(ic.Doc.Name, ".CATProduct")
-                    Dim strIC_ As String = strIC(0)
-                    l.Add(strIC_)
-                    '   PRenommage.ComboBOM.Items.Add(strIC_)
+                    Dim strIC_ As String = ic.PartNumber  ' strIC(0)
+                    l.Add(strIC_) 'kevin à corriger
                 End If
             Next
 

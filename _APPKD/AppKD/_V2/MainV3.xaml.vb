@@ -1840,7 +1840,7 @@ Public Class MainV3
         If ic Is Nothing Then
             Exit Sub
         Else
-            Dim str() As String = Strings.Split(ic.Doc.Name, ".CATProduct")
+            Dim str() As String = Strings.Split(ic.Doc.Name, ".CATProduct") 'kevin à corriger
             Dim str_ As String = str(0)
             ComboBOM.SelectedValue = str_
             MajBOm(Nothing)

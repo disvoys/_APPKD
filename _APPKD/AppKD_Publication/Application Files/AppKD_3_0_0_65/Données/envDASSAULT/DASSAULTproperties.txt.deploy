@@ -1,0 +1,9 @@
+NomPuls_Marquage	+	string
+NomPuls_Traitement	+	string
+NomPuls_Protection	+	string
+NomPuls_Dim_Brutes	+	string
+NomPuls_Masse	+	string
+NomPuls_Matiere	+	string
+NomPuls_Designation	+	string
+NomPuls_Indice	+	string
+NomPuls_Planche	+	string
