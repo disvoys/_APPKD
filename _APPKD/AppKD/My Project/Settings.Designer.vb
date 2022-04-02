@@ -55,7 +55,7 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("2022-04-01")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("2022-05-01")>  _
     Public ReadOnly Property Shutdown() As Date
         Get
             Return CType(Me("Shutdown"),Date)

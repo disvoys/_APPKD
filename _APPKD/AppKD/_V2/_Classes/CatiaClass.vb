@@ -538,12 +538,15 @@ Public Class CatiaClass
         AssConvertor.SetSecondaryFormat(VarMaListNom)
         AssConvertor.Print("HTML", NomFichier, p)
 
+        BoolMessWarningComponents = False
         ModifFichierNomenclature(DossierBase & "\Données\BOM.txt")
 
 
     End Sub
 
     Sub ModifFichierNomenclature(txt As String)
+
+        listComponents.Clear()
 
         Dim strtocheck As String = ""
         If MaLangue = "Francais" Then
@@ -569,6 +572,11 @@ Public Class CatiaClass
                                 line = "[" & Right(line, line.Length - 24)
                                 line = Left(line, line.Length - 8)
                                 line = line & "]"
+                                If listComponents.Contains(line) Then
+                                    BoolMessWarningComponents = True
+                                Else
+                                    listComponents.Add(line)
+                                End If
                                 sw.WriteLine(line)
                             Else
                                 line = "[" & Right(line, line.Length - 27)
@@ -1883,10 +1891,10 @@ Boucle:
 
     Dim ListIC As New List(Of ItemCatia)
     Dim BoolMessWarningComponents As Boolean = False
+    Dim listComponents As New List(Of String)
     Sub GetBomDetails(Product As String, multiple As Integer, level As Integer)
 
 
-        Dim ListComponents As New List(Of String)
         Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
         Const charTab As Char = CChar(vbTab)
         Using sr As StreamReader = New StreamReader(FichierNomenclature, Encoding.GetEncoding("iso-8859-1"))
@@ -1896,6 +1904,7 @@ Boucle:
                 If BoolStart = True Then
                     Dim l_() As String = Strings.Split(line, charTab)
                     If l_.Count = 2 Then
+
                         Dim monPN As String = l_(0)
                         Dim quantite As String = l_(1)
                         Dim isComponents As Boolean = True
@@ -1915,8 +1924,8 @@ Boucle:
                         Next
                         If isComponents = True Then
                             GetBomDetails(monPN, Convert.ToInt32(quantite), level + 1)
-                            BoolMessWarningComponents = True
                         End If
+
                     Else
                         BoolStart = False
                     End If
@@ -1932,7 +1941,7 @@ Boucle:
 
     Sub GoNomenclature(Product As String)
 
-        BoolMessWarningComponents = False
+
         For Each item In ListDocuments
             item.Qte = Nothing
         Next
@@ -1949,54 +1958,13 @@ Boucle:
             End If
         Next
 
-        If BoolMessWarningComponents = True Then
-            Dim m As New MessageErreur("Des composants ont été détéctés lors de la génération de la nommenclature. Assurez-vous d'avoir un nom différent pour chaque composant afin de ne pas fausser le calcul des quantités de pièces", Notifications.Wpf.NotificationType.Warning)
+        If BoolMessWarningComponents = True And Product <> "ALL-BOM-APPKD" Then
+            Dim m As New MessageErreur("Des doublons dans les noms des composants ont été détéctés. Assurez-vous d'avoir un nom différent pour chaque composant. La nommenclature en l'état pourrait avoir des erreurs.", Notifications.Wpf.NotificationType.Error)
         End If
 
 
     End Sub
 
-
-    Sub RecursComponents(l As List(Of String))
-
-        For Each item In l
-            Dim ListComponents As New List(Of String)
-            '       ModifFichierNomenclature(DossierBase & "\Données\BOM.txt", item)
-            Const charTab As Char = CChar(vbTab)
-            Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
-
-            Using sr As StreamReader = New StreamReader(FichierNomenclature, Encoding.GetEncoding("iso-8859-1"))
-                Dim BoolStart As Boolean = False
-                While Not sr.EndOfStream
-                    Dim line As String = sr.ReadLine
-                    If line Like "*" & charTab & "*" Then
-                        Dim l_() As String = Strings.Split(line, charTab)
-                        Dim monPN As String = l_(0)
-                        Dim quantite As String = l_(1)
-                        Dim CompOK As Boolean = True
-                        For Each ic As ItemCatia In ListDocuments
-                            If ic.PartNumber = monPN Then
-                                ic.Qte = Convert.ToInt32(ic.Qte) + Convert.ToInt32(quantite)
-                                ListIC.Add(ic)
-                                CompOK = False
-                                Exit For
-                            End If
-                        Next
-                        If CompOK = True Then '<= c'est un components
-                            ListComponents.Add(monPN)
-                            '   MsgBox(monPN)
-                            'composant non pris en compte - à modifier
-                        End If
-                    End If
-                End While
-                sr.Close()
-            End Using
-            RecursComponents(ListComponents)
-
-        Next
-
-
-    End Sub
 
     Sub CreerNomenclature2D(listIc As List(Of ItemCatia), EachElements As Boolean)
 

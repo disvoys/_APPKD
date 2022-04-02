@@ -187,50 +187,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="_V2\_Classes\CatiaClass.vb" />
-    <Compile Include="_V2\_Classes\ClassDB.vb" />
-    <Compile Include="_V2\_Classes\ClassInformationComputer.vb" />
-    <Compile Include="_V2\_Classes\ClassPDF.vb" />
-    <Compile Include="_V2\_Classes\ClassUsers.vb" />
-    <Compile Include="_V2\_Classes\IniFIleClass.vb" />
-    <Compile Include="_V2\Load.vb" />
-    <Compile Include="_V2\MainV3.xaml.vb">
+    <Compile Include="_CODE_\_V2\_Classes\CatiaClass.vb" />
+    <Compile Include="_CODE_\_V2\_Classes\ClassDB.vb" />
+    <Compile Include="_CODE_\_V2\_Classes\ClassGetBOMfromTV.vb" />
+    <Compile Include="_CODE_\_V2\_Classes\ClassInformationComputer.vb" />
+    <Compile Include="_CODE_\_V2\_Classes\ClassPDF.vb" />
+    <Compile Include="_CODE_\_V2\_Classes\ClassUsers.vb" />
+    <Compile Include="_CODE_\_V2\_Classes\IniFIleClass.vb" />
+    <Compile Include="_CODE_\_V2\Load.vb" />
+    <Compile Include="_CODE_\_V2\MainV3.xaml.vb">
       <DependentUpon>MainV3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="_V2\WindowRenameDassault.xaml.vb">
+    <Compile Include="_CODE_\_V2\WindowRenameDassault.xaml.vb">
       <DependentUpon>WindowRenameDassault.xaml</DependentUpon>
     </Compile>
-    <Compile Include="_V2\Window_PDxF.xaml.vb">
+    <Compile Include="_CODE_\_V2\Window_PDxF.xaml.vb">
       <DependentUpon>Window_PDxF.xaml</DependentUpon>
     </Compile>
-    <Compile Include="_V2\Window_UnitsDraw.xaml.vb">
+    <Compile Include="_CODE_\_V2\Window_UnitsDraw.xaml.vb">
       <DependentUpon>Window_UnitsDraw.xaml</DependentUpon>
     </Compile>
-    <Compile Include="_V2\_Classes\MessageErreur.vb" />
-    <Compile Include="Pages\DialogChoixPlan.Designer.vb">
+    <Compile Include="_CODE_\_V2\_Classes\MessageErreur.vb" />
+    <Compile Include="_CODE_\Pages\DialogChoixPlan.Designer.vb">
       <DependentUpon>DialogChoixPlan.vb</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DialogChoixPlan.vb">
+    <Compile Include="_CODE_\Pages\DialogChoixPlan.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Mes Variables\Variables.vb" />
+    <Compile Include="_CODE_\Mes Variables\Variables.vb" />
     <Compile Include="Application.xaml.vb">
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="_V2\MainV3.xaml">
+    <Page Include="_CODE_\_V2\MainV3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="_V2\WindowRenameDassault.xaml">
+    <Page Include="_CODE_\_V2\WindowRenameDassault.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="_V2\Window_PDxF.xaml">
+    <Page Include="_CODE_\_V2\Window_PDxF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="_V2\Window_UnitsDraw.xaml">
+    <Page Include="_CODE_\_V2\Window_UnitsDraw.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -312,7 +313,7 @@
     <Content Include="Icons\SelectCATIA.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Pages\DialogChoixPlan.resx">
+    <EmbeddedResource Include="_CODE_\Pages\DialogChoixPlan.resx">
       <DependentUpon>DialogChoixPlan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">

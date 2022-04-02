@@ -1,0 +1,128 @@
+﻿<Page x:Class="PagePDF"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AppKD"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="800"
+      Title="PagePDF"
+      Loaded="Page_Loaded">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="80"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView Margin="0,0,0,0" Grid.Column="0" BorderThickness="0,0,1,0" Name="ListViewPDF" Background="#9B1B30"  >
+
+            <ListViewItem Height="40" Margin="0,30,0,0" Cursor="Hand" Foreground="White" Style="{StaticResource StyleListPDF}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Split" FontSize="15" Margin="15,0,0,0"/>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem Height="40" Cursor="Hand" Foreground="White" Style="{StaticResource StyleListPDF}" >
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fusionner" FontSize="15" Margin="15,0,0,0"/>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem Height="40" Cursor="Hand" Foreground="White" Style="{StaticResource StyleListPDF}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="WaterMarker" FontSize="15" Margin="15,0,0,0"/>
+                </StackPanel>
+            </ListViewItem>
+            <Separator/>
+            <ListViewItem Height="40" Cursor="Hand" Foreground="White" Style="{StaticResource StyleListPDF}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Compresser" FontSize="15" Margin="15,0,0,0"/>
+                </StackPanel>
+            </ListViewItem>
+
+        </ListView>
+
+        <StackPanel Background="White" Grid.Column="1" AllowDrop="true" Drop="DragPanel_Drop" >
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0">
+                <TextBlock Name="LabelPDF" Text="A partir d'un fichier PDF de plusieurs pages," FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Light" HorizontalAlignment="Center" />
+                <TextBlock Name="Label2PDF" Text="fractionner les pages en plusieurs fichiers" FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" HorizontalAlignment="Center"   />
+            </StackPanel>
+            <Separator Margin="0,20,0,0"/>
+
+            <TextBox x:Name="TextWM" Margin="0,80,0,0" TextChanged="TextWM_TextChanged"   Width="450" FontSize="30" BorderThickness="0,0,0,1" FontFamily="Segoe UI Light" >
+                <TextBox.Style>
+                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Watermark..." Foreground="Gray" FontSize="30" FontFamily="Segoe UI Light" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                        </Trigger>
+                                        <Trigger Property="IsFocused" Value="true">
+                                            <Setter Property="BorderBrush" TargetName="border" Value="#9B1B30"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            
+            <Button Background="#9B1B30" Margin="0,200,0,0" Width="180" Height="50" Cursor="Hand" Click="Button_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <TextBlock Grid.Column="1" Text="Sélection des fichiers" Foreground="white" VerticalAlignment="center"  FontSize="16"/>
+            </Button>
+            
+            <TextBlock Text="[Glisser/Déposer les fichiers ou séléction des fichiers]" Margin="0,30,0,0" HorizontalAlignment="center"/>
+     
+        </StackPanel>
+
+
+        <Border Background="#9B1B30" Opacity="0.5" Grid.Column="2">
+            <TextBlock Name="TitlePage" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontSize="30" Width="20" TextWrapping="Wrap" Text="SPLIT" FontFamily="Segoe UI Light" />
+        </Border>
+    </Grid>
+    
+    
+    
+</Page>

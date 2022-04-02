@@ -1,0 +1,428 @@
+﻿<Page x:Class="Page2D"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AppKD"
+      xmlns:mat="http://metro.mahapps.com/winfx/xaml/controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1200"
+      Title="Page2D"
+      Background="White"
+      Loaded="Page_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch">
+            <TextBlock 
+                                Text="Mise en plan" FontSize="24" 
+                                HorizontalAlignment="left" VerticalAlignment="Top" 
+                                Foreground="#FF7A7A7A" FontWeight="Light" 
+                Margin="20,0,0,0"
+                        />
+            <Separator/>
+        </StackPanel>
+
+
+        <ToolBar Grid.Row="1" Grid.Column="0" Background="White"  >
+            <Button x:Name="ButtonADFILES"  ToolTip="Ajouter des fichiers" Click="ButtonADFILES_Click"  Width="30" Height="30">
+                <Image Source="/icons/ADDFILES.png"/>
+            </Button>
+            <Button x:Name="ButtonDeletefile"  ToolTip="Supprimer la séléction" Click="ButtonDeletefile_Click"  Width="30" Height="30">
+                <Image Source="/icons/DELETE.png"/>
+            </Button>
+            <Separator/>
+            <Button x:Name="ButtonAddSuffixe"  ToolTip="Ajout du suffixe -01" Click="ButtonAddSuffixe_Click"  Width="30" Height="30">
+                <Image Source="/icons/RENAME_.png"/>
+              
+            </Button>
+            <Separator/>
+            <Button x:Name="ButtonLinks"  ToolTip="Modifier les liens d'un drawing" Click="ButtonAddSuffixe_Click"  Width="30" Height="30">
+                <Image Source="/icons/LINK.png"/>
+            </Button>
+        </ToolBar>
+        <Grid  Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <ListView x:Name="ListFiles" />
+            <StackPanel Grid.Row="2" Background="WhiteSmoke">
+                <Label BorderThickness="0.1" Width="350" BorderBrush="Black" x:Name="CountFiles" Content="Aucun fichier séléctionné" HorizontalAlignment="Right"/>
+            </StackPanel>
+
+        </Grid>
+      
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <GroupBox x:Name="Group1" Margin="5" Width="500" Background="White" HorizontalAlignment="left" Header="Conversion" Grid.Column="0" Grid.Row="0" IsEnabled="False">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="vertical" Grid.Row="1" Margin="10">
+                    
+                        <CheckBox Margin="5" x:Name="Cpdf" Content="PDF" IsChecked="True"/>
+                        <CheckBox Margin="5" x:Name="CDxf" Content="DXF" IsChecked="False"/>
+                        <CheckBox Margin="5" x:Name="Cdwg" Content="DWG" IsChecked="False"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="center" Orientation="Horizontal">
+                        <Button Click="Button_Click" Width="120" Margin="5" Content="Lancer la conversion"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox x:Name="Group2" Margin="5" Width="500" Background="White" HorizontalAlignment="left" Header="Mise à jour cartouche" Grid.Column="0" Grid.Row="1" IsEnabled="False">
+                <StackPanel>
+                    <GroupBox  Margin=" 5">
+                        <StackPanel>
+                            <CheckBox x:Name="BoolTitre" Content="TITRE"/>
+                            <TextBox x:Name="Titre1" Width="200" HorizontalAlignment="left"  Margin="20,5,0,0" >
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Titre 1" Foreground="Gray"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Background" Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="false">
+                                                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsFocused" Value="true">
+                                                            <Setter Property="BorderBrush" TargetName="border" Value="#2ecc71"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                            <TextBox x:Name="Titre2" Width="200"  HorizontalAlignment="left" Margin="20,5,0,0" >
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Titre 2" Foreground="Gray"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Background" Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="false">
+                                                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsFocused" Value="true">
+                                                            <Setter Property="BorderBrush" TargetName="border" Value="#2ecc71"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </StackPanel>
+
+                    </GroupBox>
+                    <GroupBox  Margin=" 5">
+                        <StackPanel>
+                            <CheckBox x:Name="BoolProgram" Content="PROGRAMME"/>
+                            <TextBox x:Name="Program1" Width="200" HorizontalAlignment="left"  Margin="20,5,0,0" >
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Programme 1" Foreground="Gray"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Background" Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="false">
+                                                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsFocused" Value="true">
+                                                            <Setter Property="BorderBrush" TargetName="border" Value="#2ecc71"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                            <TextBox x:Name="Program2" Width="200"  HorizontalAlignment="left" Margin="20,5,0,0" >
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Programme 2" Foreground="Gray"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Background" Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="false">
+                                                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsFocused" Value="true">
+                                                            <Setter Property="BorderBrush" TargetName="border" Value="#2ecc71"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </StackPanel>
+
+                    </GroupBox>
+                    <GroupBox  Margin=" 5">
+                        <StackPanel>
+                            <CheckBox x:Name="BoolSite" Content="SITE"/>
+                            <TextBox x:Name="SITE1" Width="200" HorizontalAlignment="left"  Margin="20,5,0,0" >
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Site" Foreground="Gray"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Background" Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="false">
+                                                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsFocused" Value="true">
+                                                            <Setter Property="BorderBrush" TargetName="border" Value="#2ecc71"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox  Margin=" 5">
+                        <StackPanel>
+                            <CheckBox x:Name="BoolNumOutillage" Content="NUMERO OUTILLAGE"/>
+                            <TextBox x:Name="TextPartnumber" Width="200" HorizontalAlignment="left"  Margin="20,5,0,0" >
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Numéro outillage" Foreground="Gray"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Background" Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="false">
+                                                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsFocused" Value="true">
+                                                            <Setter Property="BorderBrush" TargetName="border" Value="#2ecc71"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox  Margin=" 5">
+                        <StackPanel>
+                            <CheckBox x:Name="BoolDessinateur" Content="DESSINATEUR"/>
+                            <TextBox x:Name="DESS" Width="200" HorizontalAlignment="left"  Margin="20,5,0,0" >
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Dessinateur" Foreground="Gray"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Background" Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="false">
+                                                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsFocused" Value="true">
+                                                            <Setter Property="BorderBrush" TargetName="border" Value="#2ecc71"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </StackPanel>
+
+                    </GroupBox>
+                    <GroupBox  Margin=" 5">
+                        <StackPanel>
+                            <CheckBox x:Name="BoolDate" Content="DATE"/>
+
+                            <DatePicker Width="200" HorizontalAlignment="left" Margin="20,5,0,0" x:Name="Date1" />
+                      
+                        </StackPanel>
+
+                    </GroupBox>
+                    <StackPanel Orientation="Horizontal" Margin="5" >
+                        <CheckBox x:Name="BoolBOM" Content="Nomenclature"/>
+                        <Image Source="/icons/INFO.png" Width="15" Margin="10,0,0,0" Height="15" ToolTip="Nécéssite un temps de calcul beaucoup plus important."/>
+                    </StackPanel>
+                    <Button x:Name="ButtonMajCartouche" Click="ButtonMajCartouche_Click"  Width="120" Margin="5" Content="Mise à jour cartouches" HorizontalAlignment="right" />
+                </StackPanel>
+     
+                
+            </GroupBox>
+
+        </Grid>
+ 
+    </Grid>
+</Page>

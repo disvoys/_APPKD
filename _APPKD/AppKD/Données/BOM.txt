@@ -1,97 +1,187 @@
-<html> <head> <title>  Bill of Material: 123D02123456782 </title> </head> 
+<html> <head> <title>  Nomenclature : MA62599Z00-F46C5747_050200 </title> </head> 
 <dl> 
-Compute Date: mercredi 9 mars 2022 23:49:22 
+Date de calcul : samedi 2 avril 2022 17:15:59 
 <p> 
-<a name="Bill of Material: 123D02123456782" ></A> 
+<a name="Nomenclature : MA62599Z00-F46C5747_050200" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Bill of Material: 123D02123456782 </tr></th> 
-<tr> <th>Part Number</th><th>Quantity</th><th>Type</th></tr> </tr> 
-  <tr><td><A HREF="#Bill of Material: MA845600Z01-FEWqsdfqs">MA845600Z01-FEWqsdfqs</A></td><td>1</td><td>Assembly</td> </tr> 
-  <tr><td><A HREF="#Bill of Material: Compressor Section Assembly">Compressor Section Assembly</A></td><td>1</td><td>Assembly</td> </tr> 
-  <tr><td><A HREF="#Bill of Material: test outillage">test outillage</A></td><td>1</td><td>Assembly</td> </tr> 
-  <tr><td><A HREF="#Bill of Material: Product2">Product2</A></td><td>2</td><td>Assembly</td> </tr> 
+  <tr><th colspan=3 > <b>Nomenclature : MA62599Z00-F46C5747_050200 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>MA62599Z00-F46C5747_050288</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>MA62599Z00-F46C5741_050226</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_Broche">Grp_Broche</A></td><td>2</td><td>Assemblage</td> </tr> 
+  <tr><td>EMILE-MAURIN-33-080-18-10,10-16</td><td>2</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_Bridage">Grp_Bridage</A></td><td>2</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_Visserie">Grp_Visserie</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : testkd">testkd</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : testprod1">testprod1</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_Prod1--">Grp_Prod1--</A></td><td>2</td><td>Assemblage</td> </tr> 
 </table> <p> <p> 
-<a name="Bill of Material: MA845600Z01-FEWqsdfqs" ></A> 
+<a name="Nomenclature : Grp_Broche" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Bill of Material: MA845600Z01-FEWqsdfqs </tr></th> 
-<tr> <th>Part Number</th><th>Quantity</th><th>Type</th></tr> </tr> 
-  <tr><td>123D02123456789985</td><td>1</td><td>Part</td> </tr> 
-  <tr><td>jackJack123</td><td>1</td><td>Part</td> </tr> 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_Broche </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>MA62599Z00-F46C5745_050351</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>MA62599Z00-F46C5747_050275</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>MA62599Z00-F46C5747_060587</td><td>1</td><td>Pièce</td> </tr> 
 </table> <p> <p> 
-<a name="Bill of Material: Compressor Section Assembly" ></A> 
+<a name="Nomenclature : Grp_Bridage" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Bill of Material: Compressor Section Assembly </tr></th> 
-<tr> <th>Part Number</th><th>Quantity</th><th>Type</th></tr> </tr> 
-  <tr><td>air_turbine_bracket_eng_drw</td><td>1</td><td>Part</td> </tr> 
-  <tr><td>air_turbine_case_eng_drw</td><td>1</td><td>Part</td> </tr> 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_Bridage </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>MA62599Z00-F46C5745_050204</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>MA62599Z00-F46C5747_050259</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>NORELEM-07142-10</td><td>2</td><td>Pièce</td> </tr> 
+  <tr><td>ISO 4762 SCREW M8x30 STEEL HEXAGON SOCKET HEAD CAP</td><td>2</td><td>Pièce</td> </tr> 
+  <tr><td>ISO 7089 WASHER 8x16 STEEL GRADE A PLAIN NORMAL SERIES</td><td>2</td><td>Pièce</td> </tr> 
+  <tr><td>ISO_4762_M6x70_STEEL_HEXAGON_SOCKET_HEAD_CAP_SCREW</td><td>2</td><td>Pièce</td> </tr> 
+  <tr><td>NORELEM-07121-10x50</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>ISO 4032 NUT M10 STEEL GRADE A HEXAGON</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>NORELEM-06170-100044</td><td>1</td><td>Pièce</td> </tr> 
 </table> <p> <p> 
-<a name="Bill of Material: test outillage" ></A> 
+<a name="Nomenclature : Grp_Visserie" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Bill of Material: test outillage </tr></th> 
-<tr> <th>Part Number</th><th>Quantity</th><th>Type</th></tr> </tr> 
-  <tr><td>123D021234567810123</td><td>1</td><td>Part</td> </tr> 
-  <tr><td>123D02123456781011</td><td>1</td><td>Part</td> </tr> 
-  <tr><td>123D02123232222222</td><td>1</td><td>Part</td> </tr> 
-  <tr><td><A HREF="#Bill of Material: Product1">Product1</A></td><td>1</td><td>Assembly</td> </tr> 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_Visserie </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_Fix.Poutre">Grp_Fix.Poutre</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td>ISO 4762 SCREW M6x25 STEEL HEXAGON SOCKET HEAD CAP</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>ISO 8752 SPRING PIN 8x55 STEEL SLOTTED HEAVY DUTY</td><td>1</td><td>Pièce</td> </tr> 
 </table> <p> <p> 
-<a name="Bill of Material: Product1" ></A> 
+<a name="Nomenclature : Grp_Fix.Poutre" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Bill of Material: Product1 </tr></th> 
-<tr> <th>Part Number</th><th>Quantity</th><th>Type</th></tr> </tr> 
-  <tr><td>123D02123456781008</td><td>1</td><td>Part</td> </tr> 
-  <tr><td>123D021234567899991</td><td>1</td><td>Part</td> </tr> 
-  <tr><td><A HREF="#Bill of Material: Product456">Product456</A></td><td>1</td><td>Assembly</td> </tr> 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_Fix.Poutre </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>ISO 8752 SPRING PIN 6x35 STEEL SLOTTED HEAVY DUTY</td><td>2</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_Boulon">Grp_Boulon</A></td><td>4</td><td>Assemblage</td> </tr> 
 </table> <p> <p> 
-<a name="Bill of Material: Product456" ></A> 
+<a name="Nomenclature : Grp_Boulon" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Bill of Material: Product456 </tr></th> 
-<tr> <th>Part Number</th><th>Quantity</th><th>Type</th></tr> </tr> 
-  <tr><td>Part1</td><td>1</td><td>Part</td> </tr> 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_Boulon </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>ISO 10511 NUT M8 STEEL PREVAILING TORQUE TYPE HEXAGON THIN</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>ISO 4762 SCREW M8x50 STEEL HEXAGON SOCKET HEAD CAP</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>ISO 7093-1 WASHER 8x24 STEEL GRADE A PLAIN LARGE SERIES</td><td>2</td><td>Pièce</td> </tr> 
 </table> <p> <p> 
-<a name="Bill of Material: Product2" ></A> 
+<a name="Nomenclature : testkd" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Bill of Material: Product2 </tr></th> 
-<tr> <th>Part Number</th><th>Quantity</th><th>Type</th></tr> </tr> 
-  <tr><td>123D021234567899991</td><td>1</td><td>Part</td> </tr> 
-  <tr><td>air_turbine_bracket_eng_drw</td><td>1</td><td>Part</td> </tr> 
-  <tr><td><A HREF="#Bill of Material: Product3">Product3</A></td><td>2</td><td>Assembly</td> </tr> 
+  <tr><th colspan=3 > <b>Nomenclature : testkd </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>test2</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_Fix.Poutre">Grp_Fix.Poutre</A></td><td>1</td><td>Assemblage</td> </tr> 
 </table> <p> <p> 
-<a name="Bill of Material: Product3" ></A> 
+<a name="Nomenclature : Grp_Fix.Poutre" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Bill of Material: Product3 </tr></th> 
-<tr> <th>Part Number</th><th>Quantity</th><th>Type</th></tr> </tr> 
-  <tr><td>Part1</td><td>2</td><td>Part</td> </tr> 
-  <tr><td><A HREF="#Bill of Material: Product4">Product4</A></td><td>1</td><td>Assembly</td> </tr> 
-  <tr><td><A HREF="#Bill of Material: Product5">Product5</A></td><td>1</td><td>Assembly</td> </tr> 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_Fix.Poutre </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>test3</td><td>3</td><td>Pièce</td> </tr> 
 </table> <p> <p> 
-<a name="Bill of Material: Product4" ></A> 
+<a name="Nomenclature : testprod1" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Bill of Material: Product4 </tr></th> 
-<tr> <th>Part Number</th><th>Quantity</th><th>Type</th></tr> </tr> 
-  <tr><td>Part2</td><td>1</td><td>Part</td> </tr> 
+  <tr><th colspan=3 > <b>Nomenclature : testprod1 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>test3</td><td>2</td><td>Pièce</td> </tr> 
+  <tr><td>EMILE-MAURIN-33-080-18-10,10-16</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : testprod2">testprod2</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_Prod1">Grp_Prod1</A></td><td>1</td><td>Assemblage</td> </tr> 
 </table> <p> <p> 
-<a name="Bill of Material: Product5" ></A> 
+<a name="Nomenclature : testprod2" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Bill of Material: Product5 </tr></th> 
-<tr> <th>Part Number</th><th>Quantity</th><th>Type</th></tr> </tr> 
-  <tr><td>Part3</td><td>1</td><td>Part</td> </tr> 
+  <tr><th colspan=3 > <b>Nomenclature : testprod2 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>test3</td><td>1</td><td>Pièce</td> </tr> 
 </table> <p> <p> 
-<hr><h1>Recapitulation of: 123D02123456782 </h1> 
-<b>Different parts: 12  <br> 
-<b>Total parts: 30  <br> 
+<a name="Nomenclature : Grp_Prod1" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_Prod1 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>ISO 10511 NUT M8 STEEL PREVAILING TORQUE TYPE HEXAGON THIN</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>ISO 4762 SCREW M8x50 STEEL HEXAGON SOCKET HEAD CAP</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>ISO 7093-1 WASHER 8x24 STEEL GRADE A PLAIN LARGE SERIES</td><td>2</td><td>Pièce</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : Grp_Prod1--" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_Prod1-- </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>MA62599Z00-F46C5741_050226</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_1">Grp_1</A></td><td>1</td><td>Assemblage</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : Grp_1" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_1 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_2">Grp_2</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Product1">Product1</A></td><td>1</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_5">Grp_5</A></td><td>1</td><td>Assemblage</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : Grp_2" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_2 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>Part1</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>Part2</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_4">Grp_4</A></td><td>1</td><td>Assemblage</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : Grp_4" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_4 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>Part6</td><td>3</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_5">Grp_5</A></td><td>2</td><td>Assemblage</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : Grp_5" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_5 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>Part7</td><td>2</td><td>Pièce</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : Product1" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Product1 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>Part3</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>Part4</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>Part1</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_3">Grp_3</A></td><td>1</td><td>Assemblage</td> </tr> 
+</table> <p> <p> 
+<a name="Nomenclature : Grp_3" ></A> 
+<TABLE border=3 width="100%" cellpadding=5 > 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_3 </tr></th> 
+<tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
+  <tr><td>Part5</td><td>1</td><td>Pièce</td> </tr> 
+</table> <p> <p> 
+<hr><h1>Récapitulatif sur : MA62599Z00-F46C5747_050200 </h1> 
+<b>Pièces différentes : 30  <br> 
+<b>Total des pièces : 100  <br> 
 <table border=3 WIDTH="100%" CELLPADDING=5 > 
-<tr> <th>Part Number</th><th>Quantity</th></tr> </tr> 
-  <tr><td>123D02123456789985</td><td>1</td> </tr> 
-  <tr><td>jackJack123</td><td>1</td> </tr> 
-  <tr><td>air_turbine_bracket_eng_drw</td><td>3</td> </tr> 
-  <tr><td>air_turbine_case_eng_drw</td><td>1</td> </tr> 
-  <tr><td>123D021234567810123</td><td>1</td> </tr> 
-  <tr><td>123D02123456781011</td><td>1</td> </tr> 
-  <tr><td>123D02123232222222</td><td>1</td> </tr> 
-  <tr><td>123D02123456781008</td><td>1</td> </tr> 
-  <tr><td>123D021234567899991</td><td>3</td> </tr> 
-  <tr><td>Part1</td><td>9</td> </tr> 
-  <tr><td>Part2</td><td>4</td> </tr> 
-  <tr><td>Part3</td><td>4</td> </tr> 
+<tr> <th>Référence</th><th>Quantité</th></tr> </tr> 
+  <tr><td>MA62599Z00-F46C5747_050288</td><td>1</td> </tr> 
+  <tr><td>MA62599Z00-F46C5741_050226</td><td>3</td> </tr> 
+  <tr><td>MA62599Z00-F46C5745_050351</td><td>2</td> </tr> 
+  <tr><td>MA62599Z00-F46C5747_050275</td><td>2</td> </tr> 
+  <tr><td>MA62599Z00-F46C5747_060587</td><td>2</td> </tr> 
+  <tr><td>EMILE-MAURIN-33-080-18-10,10-16</td><td>3</td> </tr> 
+  <tr><td>MA62599Z00-F46C5745_050204</td><td>2</td> </tr> 
+  <tr><td>MA62599Z00-F46C5747_050259</td><td>2</td> </tr> 
+  <tr><td>NORELEM-07142-10</td><td>4</td> </tr> 
+  <tr><td>ISO 4762 SCREW M8x30 STEEL HEXAGON SOCKET HEAD CAP</td><td>4</td> </tr> 
+  <tr><td>ISO 7089 WASHER 8x16 STEEL GRADE A PLAIN NORMAL SERIES</td><td>4</td> </tr> 
+  <tr><td>ISO_4762_M6x70_STEEL_HEXAGON_SOCKET_HEAD_CAP_SCREW</td><td>4</td> </tr> 
+  <tr><td>NORELEM-07121-10x50</td><td>2</td> </tr> 
+  <tr><td>ISO 4032 NUT M10 STEEL GRADE A HEXAGON</td><td>2</td> </tr> 
+  <tr><td>NORELEM-06170-100044</td><td>2</td> </tr> 
+  <tr><td>ISO 8752 SPRING PIN 6x35 STEEL SLOTTED HEAVY DUTY</td><td>2</td> </tr> 
+  <tr><td>ISO 10511 NUT M8 STEEL PREVAILING TORQUE TYPE HEXAGON THIN</td><td>5</td> </tr> 
+  <tr><td>ISO 4762 SCREW M8x50 STEEL HEXAGON SOCKET HEAD CAP</td><td>5</td> </tr> 
+  <tr><td>ISO 7093-1 WASHER 8x24 STEEL GRADE A PLAIN LARGE SERIES</td><td>10</td> </tr> 
+  <tr><td>ISO 4762 SCREW M6x25 STEEL HEXAGON SOCKET HEAD CAP</td><td>1</td> </tr> 
+  <tr><td>ISO 8752 SPRING PIN 8x55 STEEL SLOTTED HEAVY DUTY</td><td>1</td> </tr> 
+  <tr><td>test2</td><td>1</td> </tr> 
+  <tr><td>test3</td><td>6</td> </tr> 
+  <tr><td>Part1</td><td>4</td> </tr> 
+  <tr><td>Part2</td><td>2</td> </tr> 
+  <tr><td>Part6</td><td>6</td> </tr> 
+  <tr><td>Part7</td><td>12</td> </tr> 
+  <tr><td>Part3</td><td>2</td> </tr> 
+  <tr><td>Part4</td><td>2</td> </tr> 
+  <tr><td>Part5</td><td>2</td> </tr> 
 </table> 
 </html>  </tr> 
