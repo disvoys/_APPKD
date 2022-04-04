@@ -26,7 +26,6 @@ Public Class MainV3
         GridChart.Visibility = Visibility.Collapsed
         GridBibliotheque.Visibility = Visibility.Collapsed
         GridAbout.Visibility = Visibility.Collapsed
-        GridAdmin.Visibility = Visibility.Collapsed
         GridLoaded.Visibility = Visibility.Visible
         GridStep.Visibility = Visibility.Collapsed
         GridContentCATPART.Visibility = Visibility.Collapsed
@@ -76,18 +75,6 @@ Public Class MainV3
         aggrandirFenetre()
 
         Exit Sub
-        'PARTIE ADMIN DESACTIVEE
-        If cSQL.IsPortOpen("db4free.net", 3306) = True Then
-            If My.Computer.Network.IsAvailable Then
-                cSQL.ConnectionToDB()
-                cSQL.CheckUser()
-                LoadUsers()
-            Else
-                Dim merr As New MessageErreur("Impossible de vérifier les mises à jour, vérifier votre connexion internet", Notifications.Wpf.NotificationType.Error)
-            End If
-        Else
-            Dim merr As New MessageErreur("Erreur : Ouvrir le port TCP 3306. Contacter l'administrateur.", Notifications.Wpf.NotificationType.Error)
-        End If
 
     End Sub 'LOAD
 
@@ -98,7 +85,7 @@ Public Class MainV3
             If File.Exists("\\multilauncher\AppKDData\_ne pas supprimer.txt") Then
                 'verif fichier droit utilisateur selon numero carte mere
             Else
-                MsgBox("Vérifier la connexion avec le réseau. Impossible de récupérer les fichiers eXcent. Contacter l'administrateur.", MsgBoxStyle.Critical)
+                MsgBox("Vous n'avez pas les droits pour utiliser l'application. Contacter l'administrateur.", MsgBoxStyle.Critical)
                 End
             End If
         End If
@@ -213,21 +200,15 @@ Public Class MainV3
             StackPanelSettingsEnv.Children.Add(s)
 
             AddHandler g.Click, AddressOf ToogleSettingsEnv_Click
-            AddHandler s.mousedown, AddressOf ToogleSettingsEnv_Click
+            AddHandler s.MouseDown, AddressOf ToogleSettingsEnv_Click
 
         Next
 
 
         ' StackPanelSettingsEnv
     End Sub
-    Sub LoadUsers()
-        cSQLUsers.Load()
-        ColDocUsers = New ListCollectionView(ListUsers)
-        DataGridAdmin.ItemsSource = ColDocUsers
-    End Sub
+
     Private Sub Window_Closed(sender As Object, e As EventArgs)
-        cSQL.CLoseConnexion()
-        If Directory.Exists("C:\Users\deske\Google Drive\TAFF\_APPKD\AppKD\bin\Debug\app.publish") Then Directory.Delete("C:\Users\deske\Google Drive\TAFF\_APPKD\AppKD\bin\Debug\app.publish")
         End
     End Sub 'CLOSE
     Private Sub Window_MouseMove(sender As Object, e As MouseEventArgs)
@@ -460,7 +441,6 @@ Public Class MainV3
                 GridChart.Visibility = Visibility.Collapsed
                 GridBibliotheque.Visibility = Visibility.Collapsed
                 GridAbout.Visibility = Visibility.Collapsed
-                GridAdmin.Visibility = Visibility.Collapsed
                 GridMacros.Visibility = Visibility.Collapsed
                 GridPDF.Visibility = Visibility.Collapsed
                 GridStep.Visibility = Visibility.Collapsed
@@ -474,7 +454,6 @@ Public Class MainV3
                 GridLoaded.Visibility = Visibility.Collapsed
                 GridMacros.Visibility = Visibility.Visible
                 GridPDF.Visibility = Visibility.Collapsed
-                GridAdmin.Visibility = Visibility.Collapsed
                 GridStep.Visibility = Visibility.Collapsed
                 GridContentCATPART.Visibility = Visibility.Collapsed
             Case 2 'BIBLIOTHEQUE
@@ -485,7 +464,6 @@ Public Class MainV3
                 GridMacros.Visibility = Visibility.Collapsed
                 GridLoaded.Visibility = Visibility.Collapsed
                 GridPDF.Visibility = Visibility.Collapsed
-                GridAdmin.Visibility = Visibility.Collapsed
                 GridStep.Visibility = Visibility.Collapsed
                 GridContentCATPART.Visibility = Visibility.Collapsed
             Case 3 'SEPARATOR
@@ -498,7 +476,6 @@ Public Class MainV3
                 GridMacros.Visibility = Visibility.Collapsed
                 GridLoaded.Visibility = Visibility.Collapsed
                 GridPDF.Visibility = Visibility.Visible
-                GridAdmin.Visibility = Visibility.Collapsed
                 GridStep.Visibility = Visibility.Collapsed
                 GridContentCATPART.Visibility = Visibility.Collapsed
 
@@ -511,7 +488,6 @@ Public Class MainV3
                 GridMacros.Visibility = Visibility.Collapsed
                 GridLoaded.Visibility = Visibility.Collapsed
                 GridPDF.Visibility = Visibility.Collapsed
-                GridAdmin.Visibility = Visibility.Collapsed
                 GridStep.Visibility = Visibility.Visible
                 GridContentCATPART.Visibility = Visibility.Collapsed
             Case 6 'SEPARATOR
@@ -525,7 +501,6 @@ Public Class MainV3
                 GridLoaded.Visibility = Visibility.Collapsed
                 GridPDF.Visibility = Visibility.Collapsed
                 GridStep.Visibility = Visibility.Collapsed
-                GridAdmin.Visibility = Visibility.Collapsed
                 GridContentCATPART.Visibility = Visibility.Collapsed
             Case 8 'INFO
                 GridContentBDD.Visibility = Visibility.Collapsed
@@ -536,21 +511,8 @@ Public Class MainV3
                 GridStep.Visibility = Visibility.Collapsed
                 GridLoaded.Visibility = Visibility.Collapsed
                 GridPDF.Visibility = Visibility.Collapsed
-                GridAdmin.Visibility = Visibility.Collapsed
                 GridContentCATPART.Visibility = Visibility.Collapsed
 
-            Case 9 'ADMIN
-
-                GridContentBDD.Visibility = Visibility.Collapsed
-                GridChart.Visibility = Visibility.Collapsed
-                GridBibliotheque.Visibility = Visibility.Collapsed
-                GridAbout.Visibility = Visibility.Collapsed
-                GridMacros.Visibility = Visibility.Collapsed
-                GridLoaded.Visibility = Visibility.Collapsed
-                GridPDF.Visibility = Visibility.Collapsed
-                GridStep.Visibility = Visibility.Collapsed
-                GridAdmin.Visibility = Visibility.Visible
-                GridContentCATPART.Visibility = Visibility.Collapsed
         End Select
 
 
@@ -2092,28 +2054,8 @@ Public Class MainV3
         Process.Start("https://docs.google.com/spreadsheets/d/1IKvGSCUcCIcX1kBaWi9LIOPTso6A1NBqbHrjCPkLREU/edit#gid=0")
     End Sub
 
-    Private Sub BanButton_Click(sender As Object, e As RoutedEventArgs)
-
-        Dim u As ClassUsers = DataGridAdmin.SelectedItem
-        Dim t As Integer = u.Ban
-        If t = 0 Then
-            t = 1
-        Else
-            t = 0
-        End If
-        u.Ban = t
-        ColDocUsers.Refresh()
-
-        cSQLUsers.BanUser(u.IPLocale, u.IPPublic, t)
-
-    End Sub
-
-    Private Sub ButtonSettingsG_Click(sender As Object, e As RoutedEventArgs)
-
-        cSQLUsers.UpdateTableSettingsG(TextUpdateàJour.Text, TextBanAll.Text)
 
 
-    End Sub
     Private Sub DragPanelDropStep_Drop(sender As Object, e As DragEventArgs)
 
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
@@ -2231,15 +2173,6 @@ Public Class MainV3
         System.Diagnostics.Process.Start(e.Uri.AbsoluteUri)
     End Sub
 
-    Private Sub ButtonDeketeUser_Click(sender As Object, e As RoutedEventArgs)
-        Dim u As ClassUsers = DataGridAdmin.SelectedItem
-
-        cSQLUsers.RemoveUser(u.IPLocale, u.IPPublic)
-
-        ColDocUsers.Remove(u)
-        ColDocUsers.Refresh()
-
-    End Sub
 
     Private Sub Button_Click_11(sender As Object, e As RoutedEventArgs)
 
@@ -2458,6 +2391,11 @@ Public Class MainV3
     Private Sub MaDataGrid_CurrentCellChanged(sender As Object, e As EventArgs)
         If BoolHaveTORefresh = True Then ColDoc.Refresh()
         BoolHaveTORefresh = False
+    End Sub
+
+    Private Sub Button_Click_16(sender As Object, e As RoutedEventArgs)
+        FctionRenameDassault.Rename("test")
+
     End Sub
 End Class
 

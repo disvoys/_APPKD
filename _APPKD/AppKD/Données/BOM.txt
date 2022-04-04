@@ -1,6 +1,6 @@
 <html> <head> <title>  Nomenclature : MA62599Z00-F46C5747_050200 </title> </head> 
 <dl> 
-Date de calcul : samedi 2 avril 2022 17:15:59 
+Date de calcul : dimanche 3 avril 2022 18:27:08 
 <p> 
 <a name="Nomenclature : MA62599Z00-F46C5747_050200" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
@@ -14,7 +14,7 @@ Date de calcul : samedi 2 avril 2022 17:15:59
   <tr><td><A HREF="#Nomenclature : Grp_Visserie">Grp_Visserie</A></td><td>1</td><td>Assemblage</td> </tr> 
   <tr><td><A HREF="#Nomenclature : testkd">testkd</A></td><td>1</td><td>Assemblage</td> </tr> 
   <tr><td><A HREF="#Nomenclature : testprod1">testprod1</A></td><td>1</td><td>Assemblage</td> </tr> 
-  <tr><td><A HREF="#Nomenclature : Grp_Prod1--">Grp_Prod1--</A></td><td>2</td><td>Assemblage</td> </tr> 
+  <tr><td><A HREF="#Nomenclature : Grp_Prod1">Grp_Prod1</A></td><td>2</td><td>Assemblage</td> </tr> 
 </table> <p> <p> 
 <a name="Nomenclature : Grp_Broche" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
@@ -97,9 +97,9 @@ Date de calcul : samedi 2 avril 2022 17:15:59
   <tr><td>ISO 4762 SCREW M8x50 STEEL HEXAGON SOCKET HEAD CAP</td><td>1</td><td>Pièce</td> </tr> 
   <tr><td>ISO 7093-1 WASHER 8x24 STEEL GRADE A PLAIN LARGE SERIES</td><td>2</td><td>Pièce</td> </tr> 
 </table> <p> <p> 
-<a name="Nomenclature : Grp_Prod1--" ></A> 
+<a name="Nomenclature : Grp_Prod1" ></A> 
 <TABLE border=3 width="100%" cellpadding=5 > 
-  <tr><th colspan=3 > <b>Nomenclature : Grp_Prod1-- </tr></th> 
+  <tr><th colspan=3 > <b>Nomenclature : Grp_Prod1 </tr></th> 
 <tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
   <tr><td>MA62599Z00-F46C5741_050226</td><td>1</td><td>Pièce</td> </tr> 
   <tr><td><A HREF="#Nomenclature : Grp_1">Grp_1</A></td><td>1</td><td>Assemblage</td> </tr> 
@@ -146,7 +146,7 @@ Date de calcul : samedi 2 avril 2022 17:15:59
 <TABLE border=3 width="100%" cellpadding=5 > 
   <tr><th colspan=3 > <b>Nomenclature : Grp_3 </tr></th> 
 <tr> <th>Référence</th><th>Quantité</th><th>Type</th></tr> </tr> 
-  <tr><td>Part5</td><td>1</td><td>Pièce</td> </tr> 
+  <tr><td>MA12345H-DSQQDS</td><td>1</td><td>Pièce</td> </tr> 
 </table> <p> <p> 
 <hr><h1>Récapitulatif sur : MA62599Z00-F46C5747_050200 </h1> 
 <b>Pièces différentes : 30  <br> 
@@ -182,6 +182,6 @@ Date de calcul : samedi 2 avril 2022 17:15:59
   <tr><td>Part7</td><td>12</td> </tr> 
   <tr><td>Part3</td><td>2</td> </tr> 
   <tr><td>Part4</td><td>2</td> </tr> 
-  <tr><td>Part5</td><td>2</td> </tr> 
+  <tr><td>MA12345H-DSQQDS</td><td>2</td> </tr> 
 </table> 
 </html>  </tr> 

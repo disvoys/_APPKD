@@ -31,6 +31,7 @@ Module Variables
     Public WithEvents FctionPDF As ClassPDF = New ClassPDF
     Public WithEvents FctionGetInfo As ClassInformationComputer = New ClassInformationComputer
     Public WithEvents FctionGetBOM As ClassGetBOMfromTV = New ClassGetBOMfromTV
+    Public WithEvents FctionRenameDassault As ClassRenameDassault = New ClassRenameDassault
 
 
 

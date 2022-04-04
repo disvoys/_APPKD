@@ -111,7 +111,7 @@
                                 <TextBlock Text="Outil PDF" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem ToolTip="Convertir des fichiers CATIA en STEP et inversement" IsEnabled="True">
+                        <ListViewItem ToolTip="Convertir des fichiers CATIA en STEP et inversement" IsEnabled="False">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="FileSwap" VerticalAlignment="Center"/>
                                 <TextBlock Text="Convertir STEP" VerticalAlignment="Center" Margin="20 0"/>
@@ -130,12 +130,7 @@
                                 <TextBlock Text="À propos" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem ToolTip="Paramètres Admin" Name="listAdmin" IsEnabled="False">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="ShieldAccountOutline" VerticalAlignment="Center"/>
-                                <TextBlock Text="Admin" VerticalAlignment="Center" Margin="20 0"/>
-                            </StackPanel>
-                        </ListViewItem>
+                        
                     </ListView>
                 </Grid>
             </Grid>
@@ -559,7 +554,7 @@
                             <materialDesign:PackIcon Kind="ViewListOutline" Foreground="#0E1D31" />
                         </Button>
                     <Button  VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click_15"  ToolTip="Mise à jour du cartouche">
-                        <materialDesign:PackIcon Kind="ViewListOutline" Foreground="#0E1D31" />
+                        <materialDesign:PackIcon Kind="AutoDownload" Foreground="#0E1D31" />
                     </Button>
                     <Separator/>
                         <Button Name="ButtonBOM"  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Nommenclature" Click="Button_Click_10">
@@ -569,11 +564,11 @@
                             <materialDesign:PackIcon Kind="Glasses" Foreground="#0E1D31" />
                         </Button>
                         <Button Name="ButtonSYM" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Symétrie" Click="Button_Click_6">
-                            <materialDesign:PackIcon Kind="Mirror" Foreground="#0E1D31" />
+                            <materialDesign:PackIcon Kind="CodeParentheses" Foreground="#0E1D31" />
                         </Button>
                         <Separator Name="SeparatorToHide"/>
                         <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Fixer les éléments" Click="Button_Click_7">
-                            <materialDesign:PackIcon Kind="AutoFix" Foreground="#0E1D31" />
+                            <materialDesign:PackIcon Kind="Webhook" Foreground="#0E1D31" />
                         </Button>
                     <materialDesign:Badged BadgeBackground="#76C2AF" Name="BadgeReloadMass" BadgeForeground="White" BadgePlacementMode="Right" CornerRadius="5">
                         <Button Click="Button_Click_9"
@@ -588,10 +583,13 @@
                         <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Renommage des instances" Click="Button_Click_2">
                             <materialDesign:PackIcon Kind="Rename" Foreground="#0E1D31" />
                         </Button>
-                        <Separator/>
+                    <Button  VerticalAlignment="Center" Visibility="Collapsed" HorizontalAlignment="Center" ToolTip="Renommage automatique" Click="Button_Click_16">
+                        <materialDesign:PackIcon Kind="Gyro" Foreground="#0E1D31" />
+                    </Button>
+                    <Separator/>
 
                     <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Ouvrir la bibliothèque de matériaux" Click="Button_Click_3">
-                            <materialDesign:PackIcon Kind="DiamondStone" Foreground="#0E1D31" />
+                            <materialDesign:PackIcon Kind="HexagonSlice3" Foreground="#0E1D31" />
                         </Button>
                         <Separator />
                         <TextBox
@@ -871,8 +869,8 @@
                             <StackPanel Grid.Column="1" Margin="20" VerticalAlignment="Center">
                                 <TextBlock  Text="AppKD | Application gestion CATIA - 32 bits"/>
                                 <TextBlock Text="ID de produit : 495f60fe-4a76-4a61-9afb-3747e62eef89"/>
-                                <TextBlock Text="Mise à jour V3.0.15"/>
-                                <TextBlock Text="Date de la dernière Mise à Jour : Janvier 2022"/>
+                                <TextBlock Text="Mise à jour V3.0.16"/>
+                                <TextBlock Text="Date de la dernière Mise à Jour : Avril 2022"/>
                                 <TextBlock Text="Développé sous : Windows 10 et CATIA V5 R27 anglais"/>
                                 <TextBlock Text="_____"/>
                                 <TextBlock Text="Application développée par DESVOIS Kévin"/>
@@ -880,6 +878,7 @@
                                 <TextBlock Text="DESVOIS Kévin - desvoiskevin@gmail.com"/>
                             </StackPanel>
                         </Grid>
+
 
                             <ScrollViewer Grid.Row="1" Width="900" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0">
                                 <StackPanel Width="auto" >
@@ -896,6 +895,10 @@
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[GENERAL]" Width="100"/>
                                     <TextBlock Text="Compatibilité de l'application revue à la version R21 [A FAIRE]"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[GENERAL]" Width="100"/>
+                                    <TextBlock Text="Ajout d'une mention qui indique l'utilisation de PDFClown"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[BOM]" Width="100"/>
@@ -920,14 +923,6 @@
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[PROPRIETES]" Width="100"/>
                                     <TextBlock Text="Correction d'un bug qui empêchait l'affichage du TreeView arpès réduction de la fenêtre principale"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
-                                    <TextBlock Text="Le renommage Dassault prend maintenant en compte PARTNumber + DESIGNATION"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
-                                    <TextBlock Text="Si environnement Dassault, le changement de désignation génère un renommage PARTNumber + DESIGNATION"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[PDF]" Width="100"/>
@@ -962,6 +957,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
                         <ToolBar  Style="{DynamicResource MaterialDesignToolBar}"  Grid.Row="0" HorizontalAlignment="Center">
                             <ListBox Height="70"  x:Name="ListViewPDF" SelectionChanged="ListViewPDF_SelectionChanged" VerticalAlignment="center">
@@ -1052,6 +1048,20 @@
 
                             <TextBlock x:Name="Tex" Text="[Glisser/Déposer les fichiers ou séléction des fichiers]" Margin="0,30,0,0" HorizontalAlignment="center"/>
 
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="Utilisation de l'API "/>
+                            <TextBlock FontSize="11">
+                                    <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" 
+                                     NavigateUri="http://www.pdfclown.org/">©PDFClown</Hyperlink>
+                            </TextBlock>
+                            <TextBlock Text=" | licence protégée par "/>
+                            <TextBlock  FontSize="11">
+                                    <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" 
+                                     NavigateUri=" http://www.gnu.org/licenses/lgpl-3.0.html"> GNU LGPL V2</Hyperlink>
+                            </TextBlock>
+
+                           
                         </StackPanel>
                     </Grid>
                 </materialDesign:TransitioningContent>
@@ -1373,74 +1383,7 @@
             </materialDesign:TransitioningContent>
         </Grid>
 
-        
-        
-        
-        
-        
-        
-        
-        <ScrollViewer Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"  HorizontalScrollBarVisibility="Auto" x:Name="GridAdmin"  Visibility="Collapsed">
-            <Grid >
-                <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.1}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="60"/>
-                            <RowDefinition Height="500"/>
-                        </Grid.RowDefinitions>
-
-                        <ToolBar>
-                            <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Ban/Unban utilisateur" Name="BanButton" Click="BanButton_Click">
-                                <materialDesign:PackIcon Kind="UserLock" Foreground="#0E1D31" />
-                            </Button>
-                            <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Supprimer utilisateur" Name="ButtonDeketeUser" Click="ButtonDeketeUser_Click">
-                                <materialDesign:PackIcon Kind="UserRemoveOutline"  Foreground="#0E1D31" />
-                            </Button>
-                            <TextBox materialDesign:HintAssist.Hint="Version à jour"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                            Width="200" Text="V3.0.9"
-                            x:Name="TextUpdateàJour" 
-                               FontSize="11"
-                             materialDesign:HintAssist.Foreground="#76C2AF"
-                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF" 
-                            />
-                            <TextBox materialDesign:HintAssist.Hint="Ban 1 ou Ban 0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                            Width="100" Text="0"
-                            x:Name="TextBanAll" 
-                               FontSize="11"
-                             materialDesign:HintAssist.Foreground="#76C2AF"
-                         materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF" 
-                            />
-                            <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Mise à jour Versuion" Name="ButtonSettingsG" Click="ButtonSettingsG_Click">
-                                <materialDesign:PackIcon Kind="Update" Foreground="#0E1D31" />
-                            </Button>
-
-                        </ToolBar>
-
-                        <DataGrid Name="DataGridAdmin" Grid.Row="1" FontSize="11" HorizontalAlignment="Left" Background="#F9F9F9"  AlternatingRowBackground="#f8f8f8" CanUserAddRows="false" HeadersVisibility="Column" CanUserDeleteRows="false" CanUserResizeColumns="false" CanUserResizeRows="false" BorderThickness="0.5" BorderBrush="Gray"  IsReadOnly="true" AutoGenerateColumns="false" >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="NOM" Binding="{Binding Nom}" Width="200" />
-                                <DataGridTextColumn Header="IP LOCALE" Width="200" Binding="{Binding IPLocale}" />
-                                <DataGridTextColumn Header="IP PUBLIQUE" Width="200" Binding="{Binding IPPublic}" />
-                                <DataGridTextColumn Header="CONNEXIONS"  Width="200" Binding="{Binding Connexions}" />
-                                <DataGridTextColumn Header="BAN"  Width="150" Binding="{Binding Ban}" />
-                            </DataGrid.Columns>
-
-                            <DataGrid.Resources>
-                                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                                    <Setter Property="Background" Value="#76C2AF" />
-                                    <Setter Property="Foreground" Value="#F9F9F9"/>
-                                    <Setter Property="FontSize" Value="11"/>
-                                </Style>
-                            </DataGrid.Resources>
-                        </DataGrid>
-                    </Grid>
-                </materialDesign:TransitioningContent>
-            </Grid>
-        </ScrollViewer>
-
-        
-        
-        
+                
         <ScrollViewer Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"  HorizontalScrollBarVisibility="Auto" x:Name="GridStep"  Visibility="Hidden">
             <Grid >
                 <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.1}">

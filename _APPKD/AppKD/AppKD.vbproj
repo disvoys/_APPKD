@@ -32,7 +32,7 @@
     <PublisherName>Kevin DESVOIS</PublisherName>
     <SuiteName>APP-KD</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>67</ApplicationRevision>
+    <ApplicationRevision>68</ApplicationRevision>
     <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -192,6 +192,7 @@
     <Compile Include="_CODE_\_V2\_Classes\ClassGetBOMfromTV.vb" />
     <Compile Include="_CODE_\_V2\_Classes\ClassInformationComputer.vb" />
     <Compile Include="_CODE_\_V2\_Classes\ClassPDF.vb" />
+    <Compile Include="_CODE_\_V2\_Classes\ClassRenameDassault.vb" />
     <Compile Include="_CODE_\_V2\_Classes\ClassUsers.vb" />
     <Compile Include="_CODE_\_V2\_Classes\IniFIleClass.vb" />
     <Compile Include="_CODE_\_V2\Load.vb" />
