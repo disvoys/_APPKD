@@ -9,15 +9,18 @@ Imports MySqlConnector
 'UsersAppKD
 'NamePc IPLocale IPPublic Localisation Count Type Ban
 
+
 Public Class ClassDB
 
+    Const id_ As String = ""
+    Const pw_ As String = ""
 
     Sub ConnectionToDB()
 
         Dim err As Boolean = False
 
         With cn
-            .ConnectionString = "server=db4free.net;port=3306;user id=kevind;password=mdpkevind;database=testexkd"
+            .ConnectionString = "server=db4free.net;port=3306;user id=" & id_ & ";password=" & pw_ & ";database=testexkd"
             .Open()
 
         End With
@@ -31,7 +34,7 @@ Public Class ClassDB
 
         cn.Open()
 
-        Dim cmd As New MySqlCommand("SELECT ShutDown FROM SettingsAppKD", cn)
+        Dim cmd As New MySqlCommand("Select ShutDown FROM SettingsAppKD", cn)
         Dim reader As MySqlDataReader = cmd.ExecuteReader
         reader.Read()
 

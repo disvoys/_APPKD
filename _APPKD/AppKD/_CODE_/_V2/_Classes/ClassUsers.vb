@@ -28,7 +28,8 @@ End Class
 
 
 Public Class LoadDTUsers
-
+    Const id_ As String = ""
+    Const pw_ As String = ""
     Sub Load()
 
         ConnexionToDB()
@@ -41,7 +42,7 @@ Public Class LoadDTUsers
         Dim err As Boolean = False
         Try
             With cn_
-                .ConnectionString = "server=db4free.net;port=3306;user id=kevind;password=mdpkevind;database=testexkd;Connect Timeout=1000;pooling=true"
+                .ConnectionString = "server=db4free.net;port=3306;user id=" & id_ & ";password=" & pw_ & ";database=testexkd;Connect Timeout=1000;pooling=true"
                 .Open()
             End With
         Catch ex As Exception
