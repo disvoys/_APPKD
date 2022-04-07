@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AppKD.exe" size="1049088">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AppKD.exe" size="1049600">
       <assemblyIdentity name="AppKD" version="3.0.0.5" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>tC2+IBNx0dlaCA5NKQekRj9m+Ur2bZvhuxWI+O9pOoc=</dsig:DigestValue>
+        <dsig:DigestValue>n9FCQFamfe6aCmmmCt8I5WX5UqRoFtXmzpclWcKG42I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -309,6 +309,24 @@
       <dsig:DigestValue>Ayg8I+whaSDb44VKCQm/LNnT90jkDCPkyu6hSx9FSWc=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Données\envDASSAULT\DASSAULT-A0_TEMPLATE.CATDrawing" size="474872">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>XuXSSQPdW1PBIwtCJQMt+DUrxfKeLIdQEK8RhhrY7cg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Données\envDASSAULT\DASSAULT-A2_TEMPLATE.CATDrawing" size="452252">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>XwkLpSP6QbrXz5wQbh2veqlYJ5wMOTMXmV0S6vpYa0M=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Données\envDASSAULT\DASSAULTproperties.txt" size="235">
     <hash>
       <dsig:Transforms>
@@ -318,13 +336,13 @@
       <dsig:DigestValue>mLJs5T6g/GU9lT98xmAL9nJmwOuTk0Bb7oCYFJxIupE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Données\Environnements.ini" size="1346">
+  <file name="Données\Environnements.ini" size="1091">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>VWYQ3f7ZD4CEltCFoQi8RBuK7CunxPxGd7U6z9mrNKw=</dsig:DigestValue>
+      <dsig:DigestValue>J1x9jNrIy0WiPFZphGWU838L6StV99YhcWQeZMhx0l0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Données\envPERSO\PERSO_CATALOGUE MATIERES.CATMaterial" size="1936694">

@@ -32,7 +32,7 @@
     <PublisherName>Kevin DESVOIS</PublisherName>
     <SuiteName>APP-KD</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>68</ApplicationRevision>
+    <ApplicationRevision>69</ApplicationRevision>
     <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -355,8 +355,12 @@
     <Content Include="Données\envPERSO\PERSO_CATALOGUE MATIERES.CATMaterial">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Données\envDASSAULT\DASSAULT-A0_TEMPLATE.CATDrawing" />
-    <None Include="Données\envDASSAULT\DASSAULT-A2_TEMPLATE.CATDrawing" />
+    <Content Include="Données\envDASSAULT\DASSAULT-A0_TEMPLATE.CATDrawing">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envDASSAULT\DASSAULT-A2_TEMPLATE.CATDrawing">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="kdKeys.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="packages.config" />

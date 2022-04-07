@@ -482,7 +482,7 @@ Public Class CatiaClass
 
     Sub CheckLangue(p As Product)
 
-        Dim NomFichier As String = DossierBase & "\Données\BOM.txt"
+        Dim NomFichier As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\BOM.txt"
         Dim AssConvertor As AssemblyConvertor
         AssConvertor = p.GetItem("BillOfMaterial")
         Dim nullstr(0)
@@ -510,7 +510,7 @@ Public Class CatiaClass
     End Sub
     Public Sub GetBOM(p As Product)
 
-        Dim NomFichier As String = DossierBase & "\Données\BOM.txt"
+        Dim NomFichier As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\BOM.txt"
         Dim AssConvertor As AssemblyConvertor
         AssConvertor = p.GetItem("BillOfMaterial")
         Dim nullstr(2)
@@ -538,7 +538,7 @@ Public Class CatiaClass
         AssConvertor.SetSecondaryFormat(VarMaListNom)
         AssConvertor.Print("HTML", NomFichier, p)
 
-        ModifFichierNomenclature(DossierBase & "\Données\BOM.txt")
+        ModifFichierNomenclature(My.Computer.FileSystem.SpecialDirectories.Temp & "\BOM.txt")
 
 
     End Sub
@@ -552,7 +552,7 @@ Public Class CatiaClass
             strtocheck = "<b>Total parts"
         End If
 
-        Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
+        Dim FichierNomenclature As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\BOM_.txt"
         If IO.File.Exists(FichierNomenclature) Then
             IO.File.Delete(FichierNomenclature)
         End If
@@ -1887,7 +1887,7 @@ Boucle:
 
 
         Dim ListComponents As New List(Of String)
-        Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
+        Dim FichierNomenclature As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\BOM_.txt"
         Const charTab As Char = CChar(vbTab)
         Using sr As StreamReader = New StreamReader(FichierNomenclature, Encoding.GetEncoding("iso-8859-1"))
             Dim BoolStart As Boolean = False
@@ -1961,9 +1961,8 @@ Boucle:
 
         For Each item In l
             Dim ListComponents As New List(Of String)
-            '       ModifFichierNomenclature(DossierBase & "\Données\BOM.txt", item)
             Const charTab As Char = CChar(vbTab)
-            Dim FichierNomenclature As String = DossierBase & "\Données\BOM_.txt"
+            Dim FichierNomenclature As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\BOM_.txt"
 
             Using sr As StreamReader = New StreamReader(FichierNomenclature, Encoding.GetEncoding("iso-8859-1"))
                 Dim BoolStart As Boolean = False

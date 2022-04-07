@@ -2238,3 +2238,5 @@ C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\obj\Debug\_CODE_\_V2\MainV3
 C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\obj\Debug\_CODE_\_V2\WindowRenameDassault.baml
 C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\obj\Debug\_CODE_\_V2\Window_PDxF.baml
 C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\obj\Debug\_CODE_\_V2\Window_UnitsDraw.baml
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Données\envDASSAULT\DASSAULT-A0_TEMPLATE.CATDrawing
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Données\envDASSAULT\DASSAULT-A2_TEMPLATE.CATDrawing

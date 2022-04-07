@@ -4,7 +4,7 @@ Public Class ClassGetBOMfromTV
 
     Sub BOMAllElements()
 
-        Using sr As IO.StreamReader = New IO.StreamReader(DossierBase & "\Données\BOM_.txt", Encoding.GetEncoding("iso-8859-1"))
+        Using sr As IO.StreamReader = New IO.StreamReader(My.Computer.FileSystem.SpecialDirectories.Temp & "\BOM_.txt", Encoding.GetEncoding("iso-8859-1"))
             Dim BoolStart_ As Boolean = False
             While Not sr.EndOfStream
                 Dim line As String = sr.ReadLine
@@ -38,7 +38,7 @@ Public Class ClassGetBOMfromTV
         Dim nameComponentsError As String = ""
         Dim ListCoponentsDoublon As New List(Of String)
 
-        Using sr As IO.StreamReader = New IO.StreamReader(DossierBase & "\Données\BOM_.txt", Encoding.GetEncoding("iso-8859-1"))
+        Using sr As IO.StreamReader = New IO.StreamReader(My.Computer.FileSystem.SpecialDirectories.Temp & "\BOM_.txt", Encoding.GetEncoding("iso-8859-1"))
             Dim BoolStart_ As Boolean = False
             While Not sr.EndOfStream
                 Dim line As String = sr.ReadLine
@@ -91,7 +91,7 @@ Public Class ClassGetBOMfromTV
         Dim nameComponentsError As String = ""
         Dim ListCoponentsDoublon As New List(Of String)
 
-        Using sr As IO.StreamReader = New IO.StreamReader(DossierBase & "\Données\BOM_.txt", Encoding.GetEncoding("iso-8859-1"))
+        Using sr As IO.StreamReader = New IO.StreamReader(My.Computer.FileSystem.SpecialDirectories.Temp & "\BOM_.txt", Encoding.GetEncoding("iso-8859-1"))
             While Not sr.EndOfStream
                 Dim line As String = sr.ReadLine
                 If Left(line, 1) = "[" And Right(line, 1) = "]" Then

@@ -29,6 +29,8 @@ Public Class Load
 
     Private Sub bgw_doWork(ByVal sender As Object, ByVal e As DoWorkEventArgs)
 
+        TypeActiveDoc = Nothing
+
         Try
             Bgw.ReportProgress(0, "Initilisation des données...")
         Catch ex As Exception

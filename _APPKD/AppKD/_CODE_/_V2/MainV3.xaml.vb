@@ -38,8 +38,8 @@ Public Class MainV3
 
         Try
             INIFiles = New GestionINIFiles(DossierBase & "\Données\Request.ini")
-            FichierTreeTxt = DossierBase & "\Données\CatiaTreeTxt.txt"
-            TreeSauv = DossierBase & "\Données\CatiaTreeSauv.txt"
+            FichierTreeTxt = My.Computer.FileSystem.SpecialDirectories.Temp & "\CatiaTreeTxt.txt"
+            TreeSauv = My.Computer.FileSystem.SpecialDirectories.Temp & "\CatiaTreeSauv.txt"
             CatalogueMatieres = DossierBase & "\Données\_CATALOGUE MATIERES_v2.CATMaterial"
         Catch ex As Exception
             Dim m As New MessageErreur("Des fichiers sont manquants pour que l'application fonctionne correctement. Réinstaller l'application.", Notifications.Wpf.NotificationType.Error)
@@ -1639,7 +1639,10 @@ Public Class MainV3
                     p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = ic.Traitement
                 Catch ex As Exception
                     FctionCATIA.AddParamatres(ic.Owner, ic)
-                    p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = ic.Traitement
+                    Try
+                        p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = ic.Traitement
+                    Catch ex_ As Exception
+                    End Try
                 End Try
             End If
         Next
