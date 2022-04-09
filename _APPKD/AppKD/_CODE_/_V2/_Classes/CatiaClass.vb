@@ -357,7 +357,7 @@ Public Class CatiaClass
 
     Public Sub GetParamStdPartStelia()
 
-        Dim MaPart As PartDocument = CATIA.Documents.Open(DossierBase & "\Données\TD_TEMPLATE_CATPART-FR01.CATPart")
+        Dim MaPart As PartDocument = CATIA.Documents.Open(DossierBase & "\TD_TEMPLATE_CATPART-FR01.CATPart")
         Dim MaP As Part = MaPart.Part
         Dim MonProduct As Product = MaPart.Product
 
@@ -614,157 +614,40 @@ Public Class CatiaClass
 
     End Sub
 
-    Sub SaveDassaut(s As String)
-        Try
-            Dim d As ProductDocument = CATIA.Documents.Item(s)
-            Dim fil As String = Path.GetTempPath & s
-            d.SaveAs(fil)
-
-            Dim P As Product = d.Product
-            Dim MesParams As Parameters = P.UserRefProperties
-
-            For Each item As ItemProperties In MonMainV3.DataGridProperties.Items
-
-                Dim NameParam As String = item.Properties.ToString
-                Dim ValueParam As String = item.Valeur.ToString
-                Dim TypeParam As String = UCase(item.Type.ToString)
-                If NameParam = Nothing Then GoTo Boucle
-                If TypeParam = Nothing Then GoTo Boucle
-
-                Dim MonParametreToUse As Parameter
-
-                Select Case TypeParam
-                    Case "INTEGER"
-                        Dim intParam1 As IntParam = MesParams.CreateInteger(NameParam, ValueParam.ToString)
-                        MonParametreToUse = intParam1
-                    Case "STRING"
-                        Dim strParam1 As StrParam = MesParams.CreateString(NameParam, ValueParam.ToString)
-                        MonParametreToUse = strParam1
-
-                    Case "MASS"
-                        Dim dimension1 As Dimension
-                        dimension1 = MesParams.CreateDimension(NameParam.ToString, "MASS", 0#)
-                        dimension1.ValuateFromString(ValueParam.ToString)
-                        dimension1.Rename(NameParam.ToString)
-                        MonParametreToUse = dimension1
-                    Case "VOLUME"
-                        Dim dimension1 As Dimension
-                        dimension1 = MesParams.CreateDimension(NameParam.ToString, "VOLUME", 0#)
-                        dimension1.ValuateFromString(ValueParam.ToString)
-                        dimension1.Rename(NameParam.ToString)
-                        MonParametreToUse = dimension1
-                    Case "AREA"
-                        Dim dimension1 As Dimension
-                        dimension1 = MesParams.CreateDimension(NameParam.ToString, "AREA", 0#)
-                        dimension1.ValuateFromString(ValueParam.ToString)
-                        dimension1.Rename(NameParam.ToString)
-                        MonParametreToUse = dimension1
-                    Case "LENGTH"
-                        Dim dimension1 As Dimension
-                        dimension1 = MesParams.CreateDimension(NameParam.ToString, "LENGTH", 0#)
-                        dimension1.ValuateFromString(ValueParam.ToString)
-                        dimension1.Rename(NameParam.ToString)
-                        MonParametreToUse = dimension1
-                    Case "BOOLEAN"
-                        Dim boolParam1 As BoolParam
-                        boolParam1 = MesParams.CreateBoolean(NameParam, True)
-                        boolParam1.ValuateFromString(ValueParam.ToString)
-                        MonParametreToUse = boolParam1
-                End Select
-
-Boucle:
-            Next
-
-        Catch ex As Exception
-            Dim d As PartDocument = CATIA.Documents.Item(s)
-            Dim fil As String = Path.GetTempPath & s
-            d.SaveAs(fil)
-
-            Dim P As Product = d.Product
-            Dim MesParams As Parameters = P.UserRefProperties
-
-            For Each item As ItemProperties In MonMainV3.DataGridProperties.Items
-
-                Dim NameParam As String = item.Properties.ToString
-                Dim ValueParam As String = item.Valeur.ToString
-                Dim TypeParam As String = UCase(item.Type.ToString)
-                If NameParam = Nothing Then GoTo Boucle2
-                If TypeParam = Nothing Then GoTo Boucle2
-
-                Dim MonParametreToUse As Parameter
-
-                Select Case TypeParam
-                    Case "INTEGER"
-                        Dim intParam1 As IntParam = MesParams.CreateInteger(NameParam, ValueParam.ToString)
-                        MonParametreToUse = intParam1
-                    Case "STRING"
-                        Dim strParam1 As StrParam = MesParams.CreateString(NameParam, ValueParam.ToString)
-                        MonParametreToUse = strParam1
-
-                    Case "MASS"
-                        Dim dimension1 As Dimension
-                        dimension1 = MesParams.CreateDimension(NameParam.ToString, "MASS", 0#)
-                        dimension1.ValuateFromString(ValueParam.ToString)
-                        dimension1.Rename(NameParam.ToString)
-                        MonParametreToUse = dimension1
-                    Case "VOLUME"
-                        Dim dimension1 As Dimension
-                        dimension1 = MesParams.CreateDimension(NameParam.ToString, "VOLUME", 0#)
-                        dimension1.ValuateFromString(ValueParam.ToString)
-                        dimension1.Rename(NameParam.ToString)
-                        MonParametreToUse = dimension1
-                    Case "AREA"
-                        Dim dimension1 As Dimension
-                        dimension1 = MesParams.CreateDimension(NameParam.ToString, "AREA", 0#)
-                        dimension1.ValuateFromString(ValueParam.ToString)
-                        dimension1.Rename(NameParam.ToString)
-                        MonParametreToUse = dimension1
-                    Case "LENGTH"
-                        Dim dimension1 As Dimension
-                        dimension1 = MesParams.CreateDimension(NameParam.ToString, "LENGTH", 0#)
-                        dimension1.ValuateFromString(ValueParam.ToString)
-                        dimension1.Rename(NameParam.ToString)
-                        MonParametreToUse = dimension1
-                    Case "BOOLEAN"
-                        Dim boolParam1 As BoolParam
-                        boolParam1 = MesParams.CreateBoolean(NameParam, True)
-                        boolParam1.ValuateFromString(ValueParam.ToString)
-                        MonParametreToUse = boolParam1
-                End Select
-
-Boucle2:
-            Next
-
-        End Try
-
-
-    End Sub
     Sub ArboDassault(n As String)
+
         CATIA.DisplayFileAlerts = False
-        Try
-            Dim prd As ProductDocument = CATIA.Documents.Add("Product")
-            Dim p As Product = prd.Product
-            p.Name = n
-            p.PartNumber = n
-            p.Products.AddNewProduct("Environnement Avion")
-            p.Products.AddNewComponent("Part", n & "_CTR001")
-            Dim p2 As Product = p.Products.AddNewComponent("Product", n & "_010000")
-            p2.Products.AddNewComponent("Part", n & "_999999")
-            p2.Products.AddNewComponent("Part", n & "_000002")
 
-            SaveDassaut(n & "_CTR001.CATPart")
-            SaveDassaut(n & "_999999.CATPart")
-            SaveDassaut(n & "_000002.CATPart")
-            SaveDassaut(n & "_010000.CATProduct")
-            SaveDassaut(p.PartNumber & ".CATProduct")
+        Dim pr As ProductDocument = CATIA.Documents.Open("\\multilauncher\AppKDData\envDASSAULT\ArboType\MA00001Z00-REFBE_000000.CATProduct")
+
+        'produit de tete
+        Dim p As Product = pr.Product
+        p.Name = n
+        p.PartNumber = n
+
+        'PartCTRL
+        Dim pCTRL As Product = p.Products.Item(2)
+        pCTRL.Name = n & "_CTR001"
+        pCTRL.PartNumber = n & "_CTR001"
 
 
-            FixAll.CATMain(prd)
+        'ProductOUTILLAGE
+        Dim pOUT As Product = p.Products.Item(3)
+        pOUT.Name = n & "_010000"
+        pOUT.PartNumber = n & "_010000"
 
-            Dim m As New MessageErreur("L'arborescence a été générée avec succès", Notifications.Wpf.NotificationType.Information)
-                            Catch ex As Exception
-            Dim m As New MessageErreur("Une erreur s'est produite. Vérifier qu'aucun autre élément existe déjà à ce nom.", Notifications.Wpf.NotificationType.Error)
-        End Try
+        'PartGEO
+        Dim pPARTGEO As Product = p.Products.Item(3).Products.Item(1)
+        pPARTGEO.Name = n & "_999999"
+        pPARTGEO.PartNumber = n & "_999999"
+
+
+        Dim s As String = Path.GetTempPath
+        CATIA.Documents.Item("MA00001Z00-REFBE_CTR001.CATPart").SaveAs(s & pCTRL.PartNumber & ".CATPart")
+        CATIA.Documents.Item("MA00001Z00-REFBE_999999.CATPart").SaveAs(s & pPARTGEO.PartNumber & ".CATPart")
+        CATIA.Documents.Item("MA00001Z00-REFBE_010000.CATProduct").SaveAs(s & pOUT.PartNumber & ".CATProduct")
+        CATIA.Documents.Item("MA00001Z00-REFBE_000000.CATProduct").SaveAs(s & n & ".CATProduct")
+
 
         CATIA.DisplayFileAlerts = True
 
@@ -1040,15 +923,20 @@ Boucle:
             AppActivate("CATIA V5 - [" & CATIA.ActiveDocument.Name & "]")
             If Not ic Is Nothing Then
                 CATIA.ActiveDocument.Selection.Clear()
-                If ic.Type = "PART" Then
-                    CATIA.ActiveDocument.Selection.Search("Name=" & ic.ProductCATIA.Name & "*;all")
-                Else
-                    CATIA.ActiveDocument.Selection.Search("Name=" & ic.ProductCATIA.Name & "*;all")
-                End If
                 If MaLangue = "Anglais" Then
+                    If ic.Type = "PART" Then
+                        CATIA.ActiveDocument.Selection.Search("Name='" & ic.PartNumber & "';all")
+                    Else
+                        CATIA.ActiveDocument.Selection.Search("Name=" & ic.PartNumber & ";all")
+                    End If
                     CATIA.StartCommand("Reframe On")
                     CATIA.StartCommand("Center graph")
                 ElseIf MaLangue = "Francais" Then
+                    If ic.Type = "PART" Then
+                        CATIA.ActiveDocument.Selection.Search("Nom='" & ic.PartNumber & "';tout")
+                    Else
+                        CATIA.ActiveDocument.Selection.Search("Nom=" & ic.PartNumber & ";tout")
+                    End If
                     CATIA.StartCommand("Centrer sur")
                     CATIA.StartCommand("Centrer le graphe")
                 End If
@@ -1274,21 +1162,38 @@ Boucle:
         Dim p As PartDocument = MonActiveDoc
         If Not p Is Nothing Then
             Dim MaPart As Part = p.Part
-
             Dim N As New TreeViewItem
-            Dim t As New TextBlock
-            t.Text = Strings.Left(p.Name, p.Name.Length - 8)
-            N.Header = t
+            Dim Lab As New Label
+            Dim st As New StackPanel
 
+            Dim Im As New Image With {
+            .Width = 16,
+            .Height = 16
+        }
 
-
+            Im.Source = New BitmapImage(New Uri(DossierImage & "CATIAPart.ico"))
+            Lab.Content = Strings.Left(p.Name, p.Name.Length - 8)
+            st.Orientation = Orientation.Horizontal
+            st.Children.Add(Im)
+            st.Children.Add(Lab)
+            N.Header = st
 
             For Each item As Body In MaPart.Bodies
                 If item.InBooleanOperation = False Then
                     Dim tn As New TreeViewItem
                     Dim tnn As New TextBlock
-                    tnn.Text = item.Name
-                    tn.Header = tnn
+                    Dim tnlabel As New Label
+                    Dim tnim As New Image With {
+                        .Width = 16,
+                        .Height = 16,
+                        .Source = New BitmapImage(New Uri(DossierImage & "BODY.png"))
+                        }
+                    Dim tnstack As New StackPanel
+                    tnlabel.Content = item.Name
+                    tnstack.Orientation = Orientation.Horizontal
+                    tnstack.Children.Add(tnim)
+                    tnstack.Children.Add(tnlabel)
+                    tn.Header = tnstack
                     N.Items.Add(tn)
                 End If
             Next
@@ -1297,7 +1202,7 @@ Boucle:
             MonMainV3.TVCatpart.Items.Add(N)
 
         End If
-
+        MonMainV3.TVCatpart.Items(0).IsExpanded = True
     End Sub
     Function GetAllItemProperties(p As Product) As List(Of String)
 
@@ -1353,17 +1258,13 @@ Boucle:
         Dim k = DialogPlanA320.ShowDialog()
 
         If k = Forms.DialogResult.OK Then
-            Dim Draw As DrawingDocument
-
+            Dim Draw As DrawingDocument = Nothing
             If DialogPlanA320.RadioA0.Checked = True Then
                 Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(INIProperties.GetString(MonMainV3.GetEnv, "Template2DPetitFormat", "")))
             ElseIf DialogPlanA320.RadioA2.Checked = True Then
                 Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(INIProperties.GetString(MonMainV3.GetEnv, "Template2DGrandFormat", "")))
             End If
-
-#Disable Warning BC42104 ' La variable 'Draw' est utilisée avant qu'une valeur ne lui ait été assignée. Une exception de référence null peut se produire au moment de l'exécution.
             Dim MaSheet As DrawingSheet = Draw.Sheets.ActiveSheet
-#Enable Warning BC42104 ' La variable 'Draw' est utilisée avant qu'une valeur ne lui ait été assignée. Une exception de référence null peut se produire au moment de l'exécution.
             Dim Da As String = ""
             Dim Jour As Integer = Today.Day
             Dim Mois As Integer = Today.Month
@@ -1744,6 +1645,8 @@ Boucle:
 
     Sub MajCartoucheDassault()
 
+
+
         Dim d As DrawingDocument = CATIA.ActiveDocument
         Dim s As DrawingSheet = d.Sheets.ActiveSheet
 
@@ -1751,6 +1654,8 @@ Boucle:
             Dim m As New MessageErreur("Aucune vue n'est détectée pour pouvoir créer les liens avec le 3D. Créer une vue réessayer.", Notifications.Wpf.NotificationType.Error)
             Exit Sub
         End If
+
+        DeleteBOMExistante(s.Views.Item("Background View"))
 
         Dim maVue As DrawingView = s.Views.Item(3)
         Dim MonDoc As Document = maVue.GenerativeBehavior.Document.Parent
@@ -1769,6 +1674,9 @@ Boucle:
             CATIA.Documents.Open(MonDoc.FullName)
             CATIA.DisplayFileAlerts = True
         End If
+
+        CreerLignesBOM(s.Views.Item("Background View"), s.Views.Item("Background View").Texts, MonIC, 1, s.PaperSize, Nothing)
+        CreerTitreBOM(s.Views.Item("Background View"), s.Views.Item("Background View").Texts, s.PaperSize)
 
 
         Dim Da As String = ""
@@ -2316,6 +2224,8 @@ Boucle:
 
             End If
         End If
+
+
         If Env = "[DASSAULT AVIATION]" Then
             Dim X, Y As Integer
             Select Case TYPEPlan
@@ -2853,7 +2763,6 @@ Public Class PropertiesPart
                 item.ValuateFromString(Value)
             End If
         Next
-
     End Sub
 End Class
 Public Class ItemTV

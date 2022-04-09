@@ -37,10 +37,10 @@ Public Class MainV3
         CreerCheckBoxEnvironnementSettings()
 
         Try
-            INIFiles = New GestionINIFiles(DossierBase & "\Données\Request.ini")
+            INIFiles = New GestionINIFiles(DossierBase & "\Request.ini")
             FichierTreeTxt = My.Computer.FileSystem.SpecialDirectories.Temp & "\CatiaTreeTxt.txt"
             TreeSauv = My.Computer.FileSystem.SpecialDirectories.Temp & "\CatiaTreeSauv.txt"
-            CatalogueMatieres = DossierBase & "\Données\_CATALOGUE MATIERES_v2.CATMaterial"
+            CatalogueMatieres = DossierBase & "\_CATALOGUE MATIERES_v2.CATMaterial"
         Catch ex As Exception
             Dim m As New MessageErreur("Des fichiers sont manquants pour que l'application fonctionne correctement. Réinstaller l'application.", Notifications.Wpf.NotificationType.Error)
         End Try
@@ -80,10 +80,17 @@ Public Class MainV3
 
     Sub VerifDroitUseApp()
         If FctionGetInfo.GetCarteMere() = "NBQ17110016440771E7200" Then
-
+            'PC KEVIN
+            DossierBase = "C:\Users\deske\OneDrive\Bureau\Donnees"
+            If File.Exists(DossierBase & "\Environnements.ini") Then
+            Else
+                MsgBox("Vous n'avez pas les droits pour utiliser l'application. Contacter l'administrateur.", MsgBoxStyle.Critical)
+                End
+            End If
         Else
-            If File.Exists("\\multilauncher\AppKDData\_ne pas supprimer.txt") Then
-                'verif fichier droit utilisateur selon numero carte mere
+                If File.Exists("\\multilauncher\AppKDData\_ne pas supprimer.txt") Then
+                'PC EXCENT CONNECTE AU RESEAU
+                DossierBase = "\\multilauncher\AppKDData"
             Else
                 MsgBox("Vous n'avez pas les droits pour utiliser l'application. Contacter l'administrateur.", MsgBoxStyle.Critical)
                 End
@@ -106,22 +113,16 @@ Public Class MainV3
             If g.Tag = s Then
                 g.IsChecked = True
                 Env = g.Tag
-                If g.Tag = "[ENVIRONNEMENT PERSO]" Then
-                    ToolbarPerso.IsEnabled = True
-                    TabOptions.AllowDrop = True
-                Else
-                    ToolbarPerso.IsEnabled = False
-                    TabOptions.AllowDrop = False
-                End If
+                ToolbarPerso.IsEnabled = False
+                TabOptions.AllowDrop = False
                 Dim f As String = GetAs(INIProperties.GetString(GetEnv, "FichierProperties", ""))
-
                 RemplirTableauEnvPerso(f)
                 labelClient.Text = GetEnv()
             End If
         Next
     End Sub
     Sub ListeEnvironements()
-        INIProperties = New GestionINIFiles(DossierBase & "\Données\Environnements.ini")
+        INIProperties = New GestionINIFiles(DossierBase & "\Environnements.ini")
         Using sr As New StreamReader(INIProperties.FileName)
             While Not sr.EndOfStream
                 Dim l As String = sr.ReadLine
@@ -166,6 +167,8 @@ Public Class MainV3
             End If
             If GetEnv() <> s Then
                 NeedReload = True
+                MajVisuColonnesTableau()
+
             End If
         Next
     End Sub
@@ -250,7 +253,6 @@ Public Class MainV3
             End Try
         End If
 
-        VerifFenetre()
 
     End Sub 'MOUSE MOVE
 
@@ -318,6 +320,7 @@ Public Class MainV3
                         ic.ProductCATIA.UserRefProperties.Item(sm).ValuateFromString(MaMasse)
                     End Try
                     If Env = "[DASSAULT AVIATION]" Then
+                        'ERREUR KEVIN ic.pers5 =>>>> chercher la variable ic correspondante à l'id colonne
                         ic.Perso5 = MaMasse
                     End If
                 End If
@@ -617,6 +620,8 @@ Public Class MainV3
             Try
                 Dim it As ItemTV = TryCast(tvi.DataContext, ItemTV)
                 FctionCATIA.OpenFile(it.ItemCATIA.FileName)
+                ReloadSimple()
+
             Catch ex As Exception
                 MsgBox("Impossible d'ouvrir le fichier demandé.", vbCritical)
             End Try
@@ -708,132 +713,89 @@ Public Class MainV3
     End Sub
     Sub MajVisuColonnesTableau()
 
+
+
         If GetEnv() = "SPIRIT AEROSYSTEMS" Then
-            CRev.Visibility = Visibility.Visible
-            CDetailNumber.Visibility = Visibility.Visible
-            CStockSize.Visibility = Visibility.Visible
-            cMaterial.Visibility = Visibility.Visible
-            CBOM.Visibility = Visibility.Visible
-            CSym.Visibility = Visibility.Hidden
-            CTTS.Visibility = Visibility.Hidden
-            CFour.Visibility = Visibility.Hidden
-            CRef.Visibility = Visibility.Hidden
-            CObservation.Visibility = Visibility.Hidden
-            CAnglais.Visibility = Visibility.Hidden
-            Perso1.Visibility = Visibility.Hidden
-            Perso2.Visibility = Visibility.Hidden
-            Perso3.Visibility = Visibility.Hidden
-            Perso4.Visibility = Visibility.Hidden
-            Perso5.Visibility = Visibility.Hidden
-            Perso6.Visibility = Visibility.Hidden
-            Perso7.Visibility = Visibility.Hidden
-            Perso8.Visibility = Visibility.Hidden
-            Perso9.Visibility = Visibility.Hidden
-            Perso10.Visibility = Visibility.Hidden
+
             ButtonSYM.Visibility = Visibility.Collapsed
             ButtonOBS.Visibility = Visibility.Collapsed
             ButtonBOM.Visibility = Visibility.Collapsed
-            SeparatorToHide.Visibility = Visibility.Visible
+            SeparatorToHide.Visibility = Visibility.Collapsed
             cMaterial.Header = INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "Matière")
+            CBOM.Width = 220
+            cPN.Width = 270
+            cDesignation.Width = 330
         ElseIf GetEnv() = "AIRBUS" Then
-            CRev.Visibility = Visibility.Hidden
-            CBOM.Visibility = Visibility.Visible
-            CDetailNumber.Visibility = Visibility.Hidden
-            CStockSize.Visibility = Visibility.Hidden
-            cMaterial.Visibility = Visibility.Visible
             cMaterial.Header = INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "Matière")
             CTTS.Header = INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")
-            CSym.Visibility = Visibility.Visible
-            CTTS.Visibility = Visibility.Visible
-            CFour.Visibility = Visibility.Visible
-            CRef.Visibility = Visibility.Visible
-            CObservation.Visibility = Visibility.Visible
-            CAnglais.Visibility = Visibility.Hidden
-            Perso1.Visibility = Visibility.Hidden
-            Perso2.Visibility = Visibility.Hidden
-            Perso3.Visibility = Visibility.Hidden
-            Perso4.Visibility = Visibility.Hidden
-            Perso5.Visibility = Visibility.Hidden
-            Perso6.Visibility = Visibility.Hidden
-            Perso7.Visibility = Visibility.Hidden
-            Perso8.Visibility = Visibility.Hidden
-            Perso9.Visibility = Visibility.Hidden
-            Perso10.Visibility = Visibility.Hidden
             ButtonSYM.Visibility = Visibility.Visible
             ButtonOBS.Visibility = Visibility.Visible
             ButtonBOM.Visibility = Visibility.Visible
             SeparatorToHide.Visibility = Visibility.Visible
+            CBOM.Width = 120
+            cPN.Width = 150
+            cDesignation.Width = 172
         ElseIf GetEnv() = "DASSAULT AVIATION" Then
-            CBOM.Visibility = Visibility.Hidden
-            Perso1.Visibility = Visibility.Hidden
-            Perso2.Visibility = Visibility.Hidden
-            Perso3.Visibility = Visibility.Hidden
-            Perso4.Visibility = Visibility.Hidden
-            Perso5.Visibility = Visibility.Hidden
-            Perso6.Visibility = Visibility.Hidden
-            Perso7.Visibility = Visibility.Hidden 'DESIGNATION
-            Perso8.Visibility = Visibility.Hidden
-            Perso9.Visibility = Visibility.Hidden
-            Perso10.Visibility = Visibility.Hidden
+
             Dim i As Integer = 1
             For Each item As ItemProperties In DataGridProperties.Items
                 Select Case i
                     Case 1 'MARQUAGE
-                        Perso1.Visibility = Visibility.Hidden
+                        Perso1.Visibility = GetVisu(item)
                         Perso1.Header = item.Properties
                         nPerso1 = item.Properties
                         GetBindMatiere(Perso1, item.Properties)
                         GetBindTTS(Perso1, item.Properties)
                     Case 2 'TRAITEMENT
-                        Perso2.Visibility = Visibility.Visible
+                        Perso2.Visibility = GetVisu(item)
                         Perso2.Header = item.Properties
                         nPerso2 = item.Properties
                         GetBindMatiere(Perso2, item.Properties)
                         GetBindTTS(Perso2, item.Properties)
                     Case 3 'PROTECTION
-                        Perso3.Visibility = Visibility.Hidden
+                        Perso3.Visibility = GetVisu(item)
                         Perso3.Header = item.Properties
                         nPerso3 = item.Properties
                         GetBindMatiere(Perso3, item.Properties)
                         GetBindTTS(Perso3, item.Properties)
                     Case 4 'DIM BRUT
-                        Perso4.Visibility = Visibility.Hidden
+                        Perso4.Visibility = GetVisu(item)
                         Perso4.Header = item.Properties
                         GetBindMatiere(Perso4, item.Properties)
                         GetBindTTS(Perso4, item.Properties)
                         nPerso4 = item.Properties
                     Case 5 'MASSE
-                        Perso5.Visibility = Visibility.Hidden
+                        Perso5.Visibility = GetVisu(item)
                         Perso5.Header = item.Properties
                         GetBindMatiere(Perso5, item.Properties)
                         GetBindTTS(Perso5, item.Properties)
                         nPerso5 = item.Properties
                     Case 6 'MATIERE
-                        Perso6.Visibility = Visibility.Visible
+                        Perso6.Visibility = GetVisu(item)
                         Perso6.Header = item.Properties
                         nPerso6 = item.Properties
                         GetBindMatiere(Perso6, item.Properties)
                         GetBindTTS(Perso6, item.Properties)
                     Case 7 'DESIGNATION
-                        Perso7.Visibility = Visibility.Hidden
+                        Perso7.Visibility = GetVisu(item)
                         Perso7.Header = item.Properties
                         nPerso7 = item.Properties
                         GetBindMatiere(Perso7, item.Properties)
                         GetBindTTS(Perso7, item.Properties)
                     Case 8 'INDICE
-                        Perso8.Visibility = Visibility.Hidden
+                        Perso8.Visibility = GetVisu(item)
                         Perso8.Header = item.Properties
                         nPerso8 = item.Properties
                         GetBindMatiere(Perso8, item.Properties)
                         GetBindTTS(Perso8, item.Properties)
                     Case 9 'PLANCHE
-                        Perso9.Visibility = Visibility.Visible
+                        Perso9.Visibility = GetVisu(item)
                         Perso9.Header = item.Properties
                         nPerso9 = item.Properties
                         GetBindMatiere(Perso9, item.Properties)
                         GetBindTTS(Perso9, item.Properties)
-                    Case 10
-                        Perso10.Visibility = Visibility.Visible
+                    Case 10 'NUM OUTILLAGE
+                        Perso10.Visibility = GetVisu(item)
                         Perso10.Header = item.Properties
                         nPerso10 = item.Properties
                         GetBindMatiere(Perso10, item.Properties)
@@ -841,116 +803,53 @@ Public Class MainV3
                 End Select
                 i = i + 1
             Next
-            CSym.Visibility = Visibility.Hidden
-            cMaterial.Visibility = Visibility.Hidden
-            CTTS.Visibility = Visibility.Hidden
-            CFour.Visibility = Visibility.Hidden
-            CRef.Visibility = Visibility.Hidden
-            CObservation.Visibility = Visibility.Hidden
-            CAnglais.Visibility = Visibility.Hidden
-            CRev.Visibility = Visibility.Visible
-            CDetailNumber.Visibility = Visibility.Hidden
-            CStockSize.Visibility = Visibility.Hidden
             ButtonSYM.Visibility = Visibility.Collapsed
             ButtonOBS.Visibility = Visibility.Collapsed
             ButtonBOM.Visibility = Visibility.Collapsed
             SeparatorToHide.Visibility = Visibility.Collapsed
-        Else
-            CBOM.Visibility = Visibility.Visible
-            Perso1.Visibility = Visibility.Hidden
-            Perso2.Visibility = Visibility.Hidden
-            Perso3.Visibility = Visibility.Hidden
-            Perso4.Visibility = Visibility.Hidden
-            Perso5.Visibility = Visibility.Hidden
-            Perso6.Visibility = Visibility.Hidden
-            Perso7.Visibility = Visibility.Hidden
-            Perso8.Visibility = Visibility.Hidden
-            Perso9.Visibility = Visibility.Hidden
-            Perso10.Visibility = Visibility.Hidden
-            Dim i As Integer = 1
-            For Each item As ItemProperties In DataGridProperties.Items
-                Select Case i
-                    Case 1
-                        Perso1.Visibility = Visibility.Visible
-                        Perso1.Header = item.Properties
-                        nPerso1 = item.Properties
-                        GetBindMatiere(Perso1, item.Properties)
-                        GetBindTTS(Perso1, item.Properties)
-                    Case 2
-                        Perso2.Visibility = Visibility.Visible
-                        Perso2.Header = item.Properties
-                        nPerso2 = item.Properties
-                        GetBindMatiere(Perso2, item.Properties)
-                        GetBindTTS(Perso2, item.Properties)
-                    Case 3
-                        Perso3.Visibility = Visibility.Visible
-                        Perso3.Header = item.Properties
-                        nPerso3 = item.Properties
-                        GetBindMatiere(Perso3, item.Properties)
-                        GetBindTTS(Perso3, item.Properties)
-                    Case 4
-                        Perso4.Visibility = Visibility.Visible
-                        Perso4.Header = item.Properties
-                        GetBindMatiere(Perso4, item.Properties)
-                        GetBindTTS(Perso4, item.Properties)
-                        nPerso4 = item.Properties
-                    Case 5
-                        Perso5.Visibility = Visibility.Visible
-                        Perso5.Header = item.Properties
-                        GetBindMatiere(Perso5, item.Properties)
-                        GetBindTTS(Perso5, item.Properties)
-                        nPerso5 = item.Properties
-                    Case 6
-                        Perso6.Visibility = Visibility.Visible
-                        Perso6.Header = item.Properties
-                        nPerso6 = item.Properties
-                        GetBindMatiere(Perso6, item.Properties)
-                        GetBindTTS(Perso6, item.Properties)
-                    Case 7
-                        Perso7.Visibility = Visibility.Visible
-                        Perso7.Header = item.Properties
-                        nPerso7 = item.Properties
-                        GetBindMatiere(Perso7, item.Properties)
-                        GetBindTTS(Perso7, item.Properties)
-                    Case 8
-                        Perso8.Visibility = Visibility.Visible
-                        Perso8.Header = item.Properties
-                        nPerso8 = item.Properties
-                        GetBindMatiere(Perso8, item.Properties)
-                        GetBindTTS(Perso8, item.Properties)
-                    Case 9
-                        Perso9.Visibility = Visibility.Visible
-                        Perso9.Header = item.Properties
-                        nPerso9 = item.Properties
-                        GetBindMatiere(Perso9, item.Properties)
-                        GetBindTTS(Perso9, item.Properties)
-                    Case 10
-                        Perso10.Visibility = Visibility.Visible
-                        Perso10.Header = item.Properties
-                        nPerso10 = item.Properties
-                        GetBindMatiere(Perso10, item.Properties)
-                        GetBindTTS(Perso10, item.Properties)
-                End Select
-                i = i + 1
-            Next
-            CSym.Visibility = Visibility.Hidden
-            cMaterial.Visibility = Visibility.Hidden
-            CTTS.Visibility = Visibility.Hidden
-            CFour.Visibility = Visibility.Hidden
-            CRef.Visibility = Visibility.Hidden
-            CObservation.Visibility = Visibility.Hidden
-            CAnglais.Visibility = Visibility.Hidden
-            CRev.Visibility = Visibility.Hidden
-            CDetailNumber.Visibility = Visibility.Hidden
-            CStockSize.Visibility = Visibility.Hidden
-            ButtonSYM.Visibility = Visibility.Collapsed
-            ButtonOBS.Visibility = Visibility.Collapsed
-            ButtonBOM.Visibility = Visibility.Collapsed
-            SeparatorToHide.Visibility = Visibility.Collapsed
+            CBOM.Width = 120
+            cPN.Width = 150
+            cDesignation.Width = 172
         End If
+
+        Dim l As New List(Of String)
+        l.Add("Qté")
+        l.Add("Type")
+        l.Add("Nomenclature")
+        l.Add("PartNumber")
+        l.Add("Source")
+        l.Add("Désignation")
+        l.Add("Rev")
+
+        For Each c As DataGridColumn In MaDataGrid.Columns
+            If l.Contains(c.Header) Then
+                c.Visibility = Visibility.Visible
+            Else
+                c.Visibility = Visibility.Collapsed
+            End If
+
+        Next
+
+        For Each item As ItemProperties In DataGridProperties.Items
+            For Each c As DataGridColumn In MaDataGrid.Columns
+                If c.Header = item.Properties Then
+                    c.Visibility = GetVisu(item)
+                End If
+            Next
+        Next
+
+        DataGridProperties.Items.Refresh()
 
     End Sub 'MAJ SPIRIT
 
+    Function GetVisu(item As ItemProperties) As Visibility
+
+        If item.Visible = True Then
+            Return Visibility.Visible
+        Else
+            Return Visibility.Hidden
+        End If
+    End Function
     Sub GetBindMatiere(c As DataGridTextColumn, s As String)
         If s = INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "") Then
             c.Binding = New Binding("Matiere")
@@ -1389,6 +1288,7 @@ Public Class MainV3
                         If ic.Type = "PART" Then
                             Dim str1 As String = Right(ic.PartNumber, 4)
                             Dim int1 As Integer = 0
+
                             Try
                                 int1 = str1
                             Catch ex As Exception
@@ -1751,8 +1651,10 @@ Public Class MainV3
         Else
             If ic.Type = "PRODUCT" Or ic.Type = "RACINE" Then
                 ButtonNomenclature.IsEnabled = True
+                SelCATIA_Grid.IsEnabled = False
             Else
                 ButtonNomenclature.IsEnabled = False
+                SelCATIA_Grid.IsEnabled = True
             End If
         End If
     End Sub
@@ -1779,6 +1681,7 @@ Public Class MainV3
             Try
 
                 FctionCATIA.OpenFile(ic.FileName)
+                ReloadSimple()
             Catch ex As Exception
                 Dim MsgErr As New MessageErreur("Impossible d'ouvrir le fichier demandé.", Notifications.Wpf.NotificationType.Error)
             End Try
@@ -1868,18 +1771,7 @@ Public Class MainV3
 
     End Sub
 
-    Private Sub Window_SizeChanged(sender As Object, e As SizeChangedEventArgs)
-        VerifFenetre()
 
-    End Sub
-    Sub VerifFenetre()
-        If Me.Width < 1400 Then
-            columnTV.Width = New GridLength(0)
-        Else
-            columnTV.Width = New GridLength(350)
-        End If
-        If Me.WindowState = WindowState.Maximized Then columnTV.Width = New GridLength(350)
-    End Sub
 
 
     '------------------- CLOWN PDF ---------------------------
@@ -2179,29 +2071,49 @@ Public Class MainV3
 
     Private Sub Button_Click_11(sender As Object, e As RoutedEventArgs)
 
-        Process.Start(DossierBase & "\Données\Environnements.ini")
+        Process.Start(DossierBase & "\Environnements.ini")
     End Sub
 
     Private Sub Button_Click_12(sender As Object, e As RoutedEventArgs)
 
+        Reload()
+
+    End Sub
+
+    Sub ReloadSimple()
+
+        Exit Sub
+
+        ButtonCatiaTest.Visibility = Visibility.Collapsed
+
+        PercentNbElements = 1
+        NbElements = 0
+
+        LoadProgressBar.Visibility = Visibility.Visible
+        LabelLoad.Visibility = Visibility.Visible
+        FctionLOAD.Main()
+
+        GridContentBDD.Visibility = Visibility.Collapsed
+        GridContentCATPART.Visibility = Visibility.Collapsed
+        GridLoaded.Visibility = Visibility.Visible
+
+        BadgeReload.Badge = ""
+        NeedReload = False
+
+    End Sub
+    Sub Reload()
         ButtonCatiaTest.Visibility = Visibility.Visible
         LoadProgressBar.Visibility = Visibility.Collapsed
         LabelLoad.Visibility = Visibility.Collapsed
 
         Go()
-
         GridContentBDD.Visibility = Visibility.Collapsed
         GridContentCATPART.Visibility = Visibility.Collapsed
-        GridContentCATPART.Visibility = Visibility.Collapsed
-
         GridLoaded.Visibility = Visibility.Visible
 
         BadgeReload.Badge = ""
         NeedReload = False
-        VerifFenetre()
-
     End Sub
-
     Private Sub MaDataGrid_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs)
 
         MaDataGrid.IsReadOnly = False
@@ -2318,6 +2230,7 @@ Public Class MainV3
                     Dim Splitligne() As String = Split(ligne, vbTab)
 
                     Dim i As New ItemProperties
+                    i.Visible = True
                     i.Properties = Splitligne(0)
                     Try
                         i.Valeur = Splitligne(1)
@@ -2337,6 +2250,74 @@ Public Class MainV3
 
         End If
 
+        If GetEnv() = "AIRBUS" Then
+            Dim i As Integer = 0
+            For Each item As ItemProperties In DataGridProperties.Items
+                Select Case i
+                    Case 0
+                        item.Visible = True 'Materila
+                    Case 1
+                        item.Visible = True 'Observation
+                    Case 2
+                        item.Visible = False 'Length
+                    Case 3
+                        item.Visible = False 'width
+                    Case 4
+                        item.Visible = False 'Diameter
+                    Case 5
+                        item.Visible = False 'Mass
+                    Case 6
+                        item.Visible = True 'Supplier
+                    Case 7
+                        item.Visible = True 'Ref
+                    Case 8
+                        item.Visible = True 'tts
+                    Case 9
+                        item.Visible = True 'sym
+                End Select
+                i += 1
+            Next
+        ElseIf GetEnv() = "SPIRIT AEROSYSTEMS" Then
+            Dim i As Integer = 0
+            For Each item As ItemProperties In DataGridProperties.Items
+                Select Case i
+                    Case 0
+                        item.Visible = True 'Material
+                    Case 1
+                        item.Visible = True 'DETAIL NUMBER
+                    Case 2
+                        item.Visible = True 'STOCK SIZE
+                End Select
+                i += 1
+            Next
+        ElseIf GetEnv() = "DASSAULT AVIATION" Then
+            Dim i As Integer = 0
+            For Each item As ItemProperties In DataGridProperties.Items
+                Select Case i
+                    Case 0
+                        item.Visible = False 'Marquage
+                    Case 1
+                        item.Visible = True 'traitement
+                    Case 2
+                        item.Visible = False 'protection
+                    Case 3
+                        item.Visible = True 'dim
+                    Case 4
+                        item.Visible = False 'mass
+                    Case 5
+                        item.Visible = True 'material
+                    Case 6
+                        item.Visible = False 'designation
+                    Case 7
+                        item.Visible = False 'indice
+                    Case 8
+                        item.Visible = True 'planche
+                    Case 9
+                        item.Visible = True 'num out
+                End Select
+                i += 1
+            Next
+        End If
         DataGridProperties.Items.Refresh()
 
 
@@ -2400,6 +2381,43 @@ Public Class MainV3
         FctionRenameDassault.Rename("test")
 
     End Sub
+
+
+    Private Sub DataGridProperties_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs)
+        Dim i As ItemProperties = DataGridProperties.SelectedItem
+        If i.Visible = True Then
+            i.Visible = False
+        Else
+            i.Visible = True
+        End If
+        DataGridProperties.Items.Refresh()
+        MajVisuColonnesTableau()
+    End Sub
+
+    Private Sub ButtonOpenDocClients_Click(sender As Object, e As RoutedEventArgs)
+
+        If GetEnv() = "DASSAULT AVIATION" Then
+            Process.Start("https://drive.google.com/drive/folders/1TatuY0jQLS-wed-vFEO2mr9QNbu3gznc")
+        ElseIf GetEnv() = "SPIRIT AEROSYSTEMS" Then
+            Process.Start("https://drive.google.com/drive/folders/17JjKkhdObkE8Bd4hEJgvo07VikjOi_EK")
+        ElseIf GetEnv() = "AIRBUS" Then
+            Process.Start("https://drive.google.com/drive/folders/1P2fN-kOd8aEvhp52ZojuIBei-rEsEHNa")
+        End If
+    End Sub
+
+    Private Sub ButtonHome_Click(sender As Object, e As RoutedEventArgs)
+
+
+        GridContentBDD.Visibility = Visibility.Visible
+        GridContentCATPART.Visibility = Visibility.Collapsed
+        GridLoaded.Visibility = Visibility.Collapsed
+        ColDoc = New ListCollectionView(ListDocuments)
+        MaDataGrid.Items.Refresh()
+
+
+    End Sub
+
+
 End Class
 
 Public Class ItemProperties
@@ -2407,6 +2425,7 @@ Public Class ItemProperties
     Public Property Properties As String
     Public Property Type As String
     Public Property Valeur As String
+    Public Property Visible As Boolean
 
 
 

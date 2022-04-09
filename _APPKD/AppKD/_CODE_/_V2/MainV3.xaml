@@ -19,8 +19,7 @@
         Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"  Closed="Window_Closed"
         Height="700" Width="1200"
         MouseMove="Window_MouseMove" WindowStyle="None" WindowState="Normal" 
-        MinWidth="1000" MinHeight="600"
-       SizeChanged="Window_SizeChanged"
+        MinWidth="1000" MinHeight="600" 
          MaxWidth="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}" 
         MaxHeight="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenHeightKey}}">
 
@@ -40,7 +39,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 5">
                     <TextBlock Text="AIRBUS"  x:Name="labelClient" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
                     <TextBlock Text="|"  Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                    <TextBlock Text="V3.0.16" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBlock Text="V3.0.17" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
                     <Button Width="30" Height="30" Padding="0" Background="{x:Null}" ToolTip="Options" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 0 0" Click="Button_Click_11">
                         <materialDesign:PackIcon Kind="Settings" />
                     </Button>
@@ -331,54 +330,7 @@
                             <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
                             <Setter Property="Foreground" Value="Black"/>
                             <EventSetter Event="UIElement.PreviewMouseRightButtonDown" Handler="TreeViewItem_PreviewMouseRightButtonDown" />
-                            <Setter Property="ContextMenu">
-                                <Setter.Value>
-                                    <ContextMenu  FontSize="11" >
-                                        <MenuItem x:Name="SelCATIA" Header="Chercher dans CATIA">
-                                            <MenuItem.Icon>
-                                                <Image Source="/Icons/SelectCATIA.png" Width="20" Height="20"/>
-                                            </MenuItem.Icon>
-                                            <MenuItem.Style>
-                                                <Style TargetType="{x:Type MenuItem}">
-                                                    <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click"/>
-                                                </Style>
-                                            </MenuItem.Style>
-                                        </MenuItem>
-                                        <MenuItem  Header="Ouvrir">
-                                            <MenuItem.Icon>
-                                                <Image Source="/Icons/Open.png" Width="20" Height="20"/>
-                                            </MenuItem.Icon>
-                                            <MenuItem.Style>
-                                                <Style TargetType="{x:Type MenuItem}">
-                                                    <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_1"/>
-                                                </Style>
-                                            </MenuItem.Style>
-                                        </MenuItem>
-                                        <MenuItem  Header="Créer une copie">
-                                            <MenuItem.Icon>
-                                                <Image Source="/Icons/COPY_.png" Width="20" Height="20"/>
-                                            </MenuItem.Icon>
-                                            <MenuItem.Style>
-                                                <Style TargetType="{x:Type MenuItem}">
-                                                    <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_2"/>
-                                                </Style>
-                                            </MenuItem.Style>
-                                        </MenuItem>
-                                        <Separator/>
-                                        <MenuItem Header="Creer plan">
-                                            <MenuItem.Icon>
-                                                <Image Source="/Icons/CATIADrawing.ico" Width="15" Height="15"/>
-                                            </MenuItem.Icon>
-                                            <MenuItem.Style>
-                                                <Style TargetType="{x:Type MenuItem}">
-                                                    <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click_3"/>
-                                                </Style>
-                                            </MenuItem.Style>
-                                        </MenuItem>
-
-                                    </ContextMenu>
-                                </Setter.Value>
-                            </Setter>
+                        
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="true">
                                     <Setter Property="Foreground" Value="White"/>
@@ -389,6 +341,10 @@
                     </TreeView.Resources>
                 </TreeView>
                 <ToolBar Style="{DynamicResource MaterialDesignToolBar}" Grid.Row="0" Grid.Column="1" MouseDown="Grid_MouseDown_1"  >
+
+                    <Button  VerticalAlignment="Center" Visibility="Collapsed" IsEnabled="False" HorizontalAlignment="Center" ToolTip="Retour au produit de tête" Name="ButtonHome" Click="ButtonHome_Click">
+                        <materialDesign:PackIcon Kind="SubdirectoryArrowLeft" Foreground="#0E1D31" />
+                    </Button>
                     <materialDesign:Badged BadgeBackground="#76C2AF" Name="BadgeReloadCATPART" BadgeForeground="White" BadgePlacementMode="Right" Badge="" CornerRadius="5">
                         <Button Click="Button_Click_12"
         ToolTip="Recharger"
@@ -434,7 +390,8 @@
                     </DataGrid.Resources>
                 </DataGrid>
 
-           
+                <GridSplitter Grid.Column="0"  Grid.RowSpan="4" Background="gray" Width="2" />
+
             </Grid>
         </Grid>
 
@@ -458,9 +415,9 @@
                     <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="350" x:Name="columnTV"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" MinWidth="20"/>
+                    <ColumnDefinition Width="*" MinWidth="20"/>
+                </Grid.ColumnDefinitions>
 
                     <TreeView x:Name="MonTV" Grid.Column="0" Grid.Row="1" SelectedItemChanged="MonTV_SelectedItemChanged"  FontSize="11" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0,0,1,0">
                         <TreeView.Resources>
@@ -479,18 +436,8 @@
                                 <EventSetter Event="UIElement.PreviewMouseRightButtonDown" Handler="TreeViewItem_PreviewMouseRightButtonDown" />
                                 <Setter Property="ContextMenu">
                                     <Setter.Value>
-                                        <ContextMenu x:Name="ContextTV" FontSize="11" >
-                                            <MenuItem x:Name="SelCATIA" Header="Chercher dans CATIA">
-                                                <MenuItem.Icon>
-                                                    <Image Source="/Icons/SelectCATIA.png" Width="20" Height="20"/>
-                                                </MenuItem.Icon>
-                                                <MenuItem.Style>
-                                                    <Style TargetType="{x:Type MenuItem}">
-                                                        <EventSetter Event="MenuItem.Click" Handler="MenuItem_Click"/>
-                                                    </Style>
-                                                </MenuItem.Style>
-                                            </MenuItem>
-                                            <MenuItem x:Name="ButtonTreeOpen" Header="Ouvrir">
+                                    <ContextMenu x:Name="ContextTV" FontSize="11">
+                                        <MenuItem x:Name="ButtonTreeOpen" Header="Ouvrir">
                                                 <MenuItem.Icon>
                                                     <Image Source="/Icons/Open.png" Width="20" Height="20"/>
                                                 </MenuItem.Icon>
@@ -521,8 +468,8 @@
                                                     </Style>
                                                 </MenuItem.Style>
                                             </MenuItem>
-
-                                        </ContextMenu>
+                                      
+                                    </ContextMenu>
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
@@ -580,14 +527,20 @@
                             <materialDesign:PackIcon Kind="LockReset" Foreground="#0E1D31" />
                         </Button>
                         <Separator/>
+                    
                         <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Renommage des instances" Click="Button_Click_2">
                             <materialDesign:PackIcon Kind="Rename" Foreground="#0E1D31" />
                         </Button>
+                    
+                 
+                  
                     <Button  VerticalAlignment="Center" Visibility="Collapsed" HorizontalAlignment="Center" ToolTip="Renommage automatique" Click="Button_Click_16">
                         <materialDesign:PackIcon Kind="Gyro" Foreground="#0E1D31" />
                     </Button>
                     <Separator/>
-
+                    <Button  VerticalAlignment="Center" Visibility="Visible" HorizontalAlignment="Center" ToolTip="Documents qualités client" Name="ButtonOpenDocClients" Click="ButtonOpenDocClients_Click">
+                        <materialDesign:PackIcon Kind="FolderEyeOutline" Foreground="#0E1D31" />
+                    </Button>
                     <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Ouvrir la bibliothèque de matériaux" Click="Button_Click_3">
                             <materialDesign:PackIcon Kind="HexagonSlice3" Foreground="#0E1D31" />
                         </Button>
@@ -625,9 +578,9 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Type" Width="85" IsReadOnly="true" Binding="{Binding Type}"/>
+                        <DataGridTextColumn Header="Type" Width="75" IsReadOnly="true" Binding="{Binding Type}"/>
                         <DataGridTextColumn x:Name="CBOM" Header="Nomenclature" Width="120" Binding="{Binding Nomenclature}"/>
-                        <DataGridTextColumn Header="PartNumber" Width="150" IsReadOnly="False" Binding="{Binding PartNumber}"/>
+                        <DataGridTextColumn Header="PartNumber" x:Name="cPN" Width="150" IsReadOnly="False" Binding="{Binding PartNumber}"/>
                         <DataGridTextColumn Header="Source" Width="75" IsReadOnly="true" Binding="{Binding Source}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
@@ -647,18 +600,17 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Désignation"  Width="172" Binding="{Binding DescriptionRef}"/>
-                        <DataGridTextColumn Header="Matière" x:Name="cMaterial" Width="100" IsReadOnly="True" Binding="{Binding Matiere}" />
+                        <DataGridTextColumn Header="Désignation" x:Name="cDesignation" Width="172" Binding="{Binding DescriptionRef}"/>
+                        <DataGridTextColumn Header="MATERIAL" x:Name="cMaterial" Width="100" IsReadOnly="True" Binding="{Binding Matiere}" />
+                        <DataGridTextColumn x:Name="CRev" Header="Rev" Width="60"  Binding="{Binding Revision}" Visibility="Visible"/>
+                        <DataGridTextColumn x:Name="CDetailNumber" Header="DETAIL NUMBER" Width="150"  Binding="{Binding DetailNumber}" Visibility="Collapsed"/>
+                        <DataGridTextColumn x:Name="CStockSize" Header="STOCK SIZE" Width="150"  Binding="{Binding StockSize}" Visibility="Collapsed"/>
 
-                        <DataGridTextColumn x:Name="CRev" Header="Rev" Width="60"  Binding="{Binding Revision}" Visibility="Collapsed"/>
-                        <DataGridTextColumn x:Name="CDetailNumber" Header="Detail Number" Width="150"  Binding="{Binding DetailNumber}" Visibility="Collapsed"/>
-                        <DataGridTextColumn x:Name="CStockSize" Header="Stock Size" Width="150"  Binding="{Binding StockSize}" Visibility="Collapsed"/>
-
-                        <DataGridTextColumn x:Name="CSym"  Header="Part Symétrique" Width="120" Binding="{Binding SymPart}"/>
-                        <DataGridTextColumn x:Name="CTTS" Header="Traitement/Aspect" Width="130" Binding="{Binding Traitement}"/>
-                        <DataGridTextColumn x:Name="CFour" Header="Fournisseur" Width="120" Binding="{Binding Fournisseur}"/>
-                        <DataGridTextColumn x:Name="CRef" Header="Référence" Width="120" Binding="{Binding Reference}"/>
-                        <DataGridTextColumn x:Name="CObservation" Header="Observations"  Width="250" Binding="{Binding Observation}"/>
+                        <DataGridTextColumn x:Name="CSym"  Header="SYM" Width="120" Binding="{Binding SymPart}"/>
+                        <DataGridTextColumn x:Name="CTTS" Header="TTS" Width="130" Binding="{Binding Traitement}"/>
+                        <DataGridTextColumn x:Name="CFour" Header="SUPPLIER" Width="120" Binding="{Binding Fournisseur}"/>
+                        <DataGridTextColumn x:Name="CRef" Header="REF" Width="120" Binding="{Binding Reference}"/>
+                        <DataGridTextColumn x:Name="CObservation" Header="OBSERVATIONS"  Width="220" Binding="{Binding Observation}"/>
                         <DataGridTextColumn x:Name="CAnglais" Header="Anglais" Width="110" Binding="{Binding Anglais}" Visibility="Hidden"/>
 
                         <DataGridTextColumn x:Name="Perso1" Header="Perso1" Visibility="Collapsed" Width="150" Binding="{Binding Perso1}"/>
@@ -822,8 +774,10 @@
                        
                         <TextBlock Margin="10" x:Name="TextNbElements" HorizontalAlignment="Right" Grid.Column="1"/>
                     </Grid>
-                </Grid>
-       
+
+                <GridSplitter Grid.Column="0"  Grid.RowSpan="4" Name="GridSplitTV1" Background="gray" Width="2" />
+            </Grid>
+
         </Grid>
 
         
@@ -869,7 +823,7 @@
                             <StackPanel Grid.Column="1" Margin="20" VerticalAlignment="Center">
                                 <TextBlock  Text="AppKD | Application gestion CATIA - 32 bits"/>
                                 <TextBlock Text="ID de produit : 495f60fe-4a76-4a61-9afb-3747e62eef89"/>
-                                <TextBlock Text="Mise à jour V3.0.16"/>
+                                <TextBlock Text="Mise à jour V3.0.17"/>
                                 <TextBlock Text="Date de la dernière Mise à Jour : Avril 2022"/>
                                 <TextBlock Text="Développé sous : Windows 10 et CATIA V5 R27 anglais"/>
                                 <TextBlock Text="_____"/>
@@ -882,55 +836,31 @@
 
                             <ScrollViewer Grid.Row="1" Width="900" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0">
                                 <StackPanel Width="auto" >
-                                    <TextBlock Text="V3.0.16 | Note de mise à jour" FontWeight="Bold" />
+                                    <TextBlock Text="V3.0.17 | Note de mise à jour" FontWeight="Bold" />
                                 <Separator/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[GENERAL]" Width="100"/>
-                                    <TextBlock Text="Correction d'un bug qui empêchait la prise en compte de la barre des tâches Windows"/>
+                                    <TextBlock Text="Corrections mineurs et optimisation du code permettant des calculs plus rapides"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[GENERAL]" Width="100"/>
-                                    <TextBlock Text="Mise à jour visuelle de certains éléments"/>
+                                    <TextBlock Text="Corrections d'un bug qui permet la bonne recherche d'un élément suite à un clic droit/rechercher dans CATIA"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[GENERAL]" Width="100"/>
-                                    <TextBlock Text="Compatibilité de l'application revue à la version R21 [A FAIRE]"/>
+                                    <TextBlock Text="[CATProduct]" Width="100"/>
+                                    <TextBlock Text="Ajout d'une icone qui renvoie les dossiers standards client"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[GENERAL]" Width="100"/>
-                                    <TextBlock Text="Ajout d'une mention qui indique l'utilisation de PDFClown"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[BOM]" Width="100"/>
-                                    <TextBlock Text="Il n'est plus nécéssaire de renommer les composantes en grp."/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
-                                    <TextBlock Text="Ajout de l'environnement Dassault et remplissage automatique du cartouche 2D"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
-                                    <TextBlock Text="Ajout de l'environnement Personnalisé"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
-                                    <TextBlock Text="Nouveau visuel si une Part est détectée, dans le but d'ajout de fonctios dans les prochains Patch"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
-                                    <TextBlock Text="Correction d'un bug qui affichait le tableau après calcul, malgré l'affichage d'une autre catégorie"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[PROPRIETES]" Width="100"/>
-                                    <TextBlock Text="Correction d'un bug qui empêchait l'affichage du TreeView arpès réduction de la fenêtre principale"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[PDF]" Width="100"/>
-                                    <TextBlock Text="Correction d'un bug mineur qui empêchait la détection de fichiers"/>
+                                    <TextBlock Text="[CATPart]" Width="100"/>
+                                    <TextBlock Text="Mise à jour visuelle de l'arbre"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[SETTINGS]" Width="100"/>
-                                    <TextBlock Text="Re-structuration des options et fichiers sources dans le but d'un déploiement simplifié"/>
+                                    <TextBlock Text="Ajout la possibilité de cacher ou afficher des colonnes via les settings"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[SETTINGS]" Width="100"/>
+                                    <TextBlock Text="Amélioration des calculs de switch entre environnements clients"/>
                                 </StackPanel>
                             </StackPanel>
                             </ScrollViewer>
@@ -1144,10 +1074,11 @@
                                 
                                 </ToolBar>
 
-                                <DataGrid Grid.Column="1" Grid.Row="1" SelectionMode="Single" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="true" Name="DataGridProperties">
+                                <DataGrid Grid.Column="1" Grid.Row="1" MouseDoubleClick="DataGridProperties_MouseDoubleClick" SelectionMode="Single" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="true" Name="DataGridProperties">
                                     <DataGrid.Columns>
+                                        <DataGridCheckBoxColumn Header="" Width="50" Binding="{Binding Visible}"/>
                                         <DataGridTextColumn Header="PROPRIETES" Binding="{Binding Properties}" Width="200" />
-                                        <DataGridTextColumn Header="TYPE" Width="200" Binding="{Binding Type}" />
+                                        <DataGridTextColumn Header="TYPE" Width="150" Binding="{Binding Type}" />
                                         <DataGridTextColumn Header="VALEUR PAR DEFAULT" Width="200" Binding="{Binding Valeur}" />
                                     </DataGrid.Columns>
                                 </DataGrid>

@@ -62,6 +62,8 @@ Public Class Load
             Catch ex As Exception
                 MsgBox("Erreur lors du listing des documents ouverts. " & ex.Message, vbCritical)
             End Try
+
+
         ElseIf TypeActiveDoc = "PART" Then
 
             ListPropertiesPart.Clear()
@@ -90,9 +92,6 @@ Public Class Load
             If TypeActiveDoc = "PRODUCT" Then
                 SHowFinal()
                 MonMainV3.MonTV.Visibility = Visibility.Visible
-
-
-
                 MonMainV3.ButtonCatiaTest.Visibility = Visibility.Visible
                 MonMainV3.LoadProgressBar.Visibility = Visibility.Hidden
 
@@ -100,14 +99,14 @@ Public Class Load
                     MonMainV3.GridContentBDD.Visibility = Visibility.Visible
                 End If
                 MonMainV3.GridLoaded.Visibility = Visibility.Collapsed
+                MonMainV3.ButtonHome.IsEnabled = True
+
             End If
             If TypeActiveDoc = "PART" Then
 
                 FctionCATIA.RemplirTVPart()
                 ColDoc = New ListCollectionView(ListPropertiesPart)
-                '  ColDoc.SortDescriptions.Add(New SortDescription("Type", ListSortDirection.Descending))
                 MonMainV3.DataGridPropertiesPart.ItemsSource = ColDoc
-
                 MonMainV3.TVCatpart.Visibility = Visibility.Visible
                 MonMainV3.GridContentBDD.Visibility = Visibility.Hidden
                 MonMainV3.ButtonCatiaTest.Visibility = Visibility.Visible
