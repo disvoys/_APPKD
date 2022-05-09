@@ -224,26 +224,21 @@ Public Class MainV3
 
         If CATIA Is Nothing Then
             LabelNameCatiaProduct.Content = "[Impossible de lier l'application avec CATIA]"
-            '   ButtonCatiaTest.IsEnabled = False
         Else
             Try
                 LabelNameCatiaProduct.Content = "[" & CATIA.ActiveDocument.Name & "]"
                 URLCatiaSTEP.Text = FctionCATIA.GetPathCATIA()
-
-                '     ButtonCatiaTest.IsEnabled = True
             Catch ex As Exception
                 LabelNameCatiaProduct.Content = "[Aucun élément ne semble ouvert dans CATIA]"
                 URLCatiaSTEP.Text = FctionCATIA.GetPathCATIA()
-
-                '       ButtonCatiaTest.IsEnabled = False
             End Try
 
 
-            Try
+            If ICRacine IsNot Nothing Then
+
                 If CATIA.ActiveDocument.Name <> ICRacine.Owner And GetPartOrProduct(CATIA.ActiveDocument.FullName) = True Then
                     TextProductActif.Text = ICRacine.Owner & " | [" & CATIA.ActiveDocument.Name & "]"
                     BadgeReload.Badge = "!"
-
                 Else
                     TextProductActif.Text = ICRacine.Owner
                     If NeedReload = True Then
@@ -252,10 +247,9 @@ Public Class MainV3
                         BadgeReload.Badge = ""
                     End If
                 End If
+            End If
 
-            Catch ex As Exception
 
-            End Try
         End If
 
 

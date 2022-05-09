@@ -800,9 +800,15 @@
                                 <TextBlock Text="Date de la dernière Mise à Jour : Avril 2022"/>
                                 <TextBlock Text="Développé sous : Windows 10 et CATIA V5 R27 anglais"/>
                                 <TextBlock Text="_____"/>
-                                <TextBlock Text="Application développée par DESVOIS Kévin"/>
-                                <TextBlock Text="ne peut être recopiée sans autorisation écrite de son propriétaire"/>
-                                <TextBlock Text="DESVOIS Kévin - desvoiskevin@gmail.com"/>
+                                <TextBlock Text="Application développée par DESVOIS Kévin,"/>
+                                <TextBlock Text="protégée par licence APACHE 2.0"/>
+                                <TextBlock Text="       "/>
+                                <TextBlock Text="©2022 DESVOIS Kevin"/>
+                                <TextBlock Text="       "/>
+                                <TextBlock Text="Toutes modifications du code source devra être clairement indiquées"/>
+                                <TextBlock Text="Le copyright doit être maintenu après modifications du code source"/>
+
+                                <TextBlock Text="contact : desvoisevin@gmail.com"/>
                             </StackPanel>
                         </Grid>
 

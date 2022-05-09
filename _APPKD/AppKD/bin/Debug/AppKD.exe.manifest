@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="AppKD.exe" version="3.0.0.86" publicKeyToken="0000000000000000" language="fr" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="AppKD.exe" version="3.0.0.87" publicKeyToken="0000000000000000" language="fr" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="Icons\AppKD.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AppKD.exe" size="572928">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AppKD.exe" size="573440">
       <assemblyIdentity name="AppKD" version="3.0.0.5" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iIVbfLxAuSD2NWvr6c9LgXDQV3CCvs596XUv5n80FZM=</dsig:DigestValue>
+        <dsig:DigestValue>psiZPjLADRBO6UvnNGIT52lYxpuBP6xNHOCkYULMVfg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -246,13 +246,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="AppKD.exe.config" size="2225">
+  <file name="AppKD.exe.config" size="2255">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>b2SRssPU7NPgvl4B8oUNMi1/J9fqpMeQYNAmveJtT/4=</dsig:DigestValue>
+      <dsig:DigestValue>Sv5XWM6fR300jgRJ12tAbCvqyQKAqiYZhmKzGn7g3n0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Données\envAIRBUS\A320-A0_TEMPLATE.CATDrawing" size="689651">
@@ -327,13 +327,13 @@
       <dsig:DigestValue>mLJs5T6g/GU9lT98xmAL9nJmwOuTk0Bb7oCYFJxIupE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Données\Environnements.ini" size="1079">
+  <file name="Données\Environnements.ini" size="1105">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>1SvzahJc/iA5jeuEI0agQoV5OwvocpJigkFOX7lr14Y=</dsig:DigestValue>
+      <dsig:DigestValue>wQGFaGdyWbv9mGr4ruz6ufaysYq4TvTY6lSSwCIHHUM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Données\envSPIRIT\SPIRIT_CATALOGUE MATIERES.CATMaterial" size="1936694">
