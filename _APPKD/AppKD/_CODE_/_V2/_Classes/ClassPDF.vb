@@ -11,6 +11,9 @@ Imports Org.pdfclown.tools
 Imports File = Org.pdfclown.files.File
 
 Public Class ClassPDF
+
+    'test123
+
     Sub split(Chemin As String, NameFile As String)
 
         Using f As New File(Chemin)
