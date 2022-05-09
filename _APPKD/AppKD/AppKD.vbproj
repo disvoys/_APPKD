@@ -25,13 +25,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>https://www.catiavb.net/</SupportUrl>
     <TargetCulture>fr</TargetCulture>
     <ProductName>APP-KD</ProductName>
-    <PublisherName>eXcent</PublisherName>
+    <PublisherName>DESVOIS</PublisherName>
     <SuiteName>APP-KD</SuiteName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>76</ApplicationRevision>
+    <ApplicationRevision>87</ApplicationRevision>
     <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -283,6 +284,15 @@
     <Resource Include="Icons\COPY_.png" />
     <Resource Include="Icons\DELETEBlanc.png" />
     <Resource Include="Icons\BOM.png" />
+    <Content Include="Données\envAIRBUS\AIRBUSproperties.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envDASSAULT\DASSAULTproperties.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envSPIRIT\SPIRITproperties.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\EXCEL.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -307,15 +317,42 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <Content Include="Bibliothèque\PROFILÉS\BOSCH\_TEMPLATE-PROFIL BOSCH_.CATPart">
+    <Content Include="Données\envAIRBUS\A320-A0_TEMPLATE.CATDrawing">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envAIRBUS\A320-A2_TEMPLATE.CATDrawing">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envAIRBUS\AIRBUS_CATALOGUE MATIERES.CATMaterial">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envDASSAULT\DASSAULT-A0_TEMPLATE.CATDrawing">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envDASSAULT\DASSAULT-A2_TEMPLATE.CATDrawing">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envDASSAULT\DASSAULT_CATALOGUE MATIERES.CATMaterial">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\Environnements.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envSPIRIT\SPIRIT-A0_TEMPLATE.CATDrawing">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envSPIRIT\SPIRIT-A2_TEMPLATE.CATDrawing">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\envSPIRIT\SPIRIT_CATALOGUE MATIERES.CATMaterial">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Données\Request.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="kdKeys.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="packages.config" />
-    <Resource Include="Fonts\fontawesome-webfont.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
@@ -359,24 +396,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bibliothèque\CHARIOT\BASE\" />
-    <Folder Include="Bibliothèque\CHARIOT\ROULETTES\" />
-    <Folder Include="Bibliothèque\GRILLES DE PERCAGES\AGRAFES\" />
-    <Folder Include="Bibliothèque\GRILLES DE PERCAGES\PIEDS\" />
-    <Folder Include="Bibliothèque\GRILLES DE PERCAGES\UPA\" />
-    <Folder Include="Bibliothèque\MOTIFS\" />
-    <Folder Include="Bibliothèque\PRATICABLE\ABATANT\" />
-    <Folder Include="Bibliothèque\PRATICABLE\ESCALIER\" />
-    <Folder Include="Bibliothèque\PRATICABLE\FIXATION SOL\" />
-    <Folder Include="Bibliothèque\PRATICABLE\GARDE-CORPS\" />
-    <Folder Include="Bibliothèque\PRATICABLE\LUMIERES\" />
-    <Folder Include="Bibliothèque\PRATICABLE\PORTILLON\" />
-    <Folder Include="Bibliothèque\PRATICABLE\SPRINKLAGE\" />
-    <Folder Include="Bibliothèque\PRATICABLE\TIROIR\" />
-    <Folder Include="Bibliothèque\PROFILÉS\ACIER\" />
-    <Folder Include="Bibliothèque\PROFILÉS\ALU\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <COMReference Include="AECRTypeLib">
       <Guid>{85CC1867-B083-0000-0280-020CC2000000}</Guid>

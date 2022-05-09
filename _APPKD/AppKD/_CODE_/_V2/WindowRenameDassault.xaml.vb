@@ -3,9 +3,9 @@
 
         Dim s As String = TextMA.Text
         If s = "" Then s = "-vide-"
-        If MonMainV3.GetEnv = "DASSAULT AVIATION" Then
+        If GetEnv() = "DASSAULT AVIATION" Then
             FctionCATIA.ArboDassault(s)
-        ElseIf MonMainV3.GetEnv = "AIRBUS" Then
+        ElseIf GetEnv = "AIRBUS" Then
             FctionCATIA.ArboAirbus(s)
         Else
             Dim m As New MessageErreur("La création d'arborescence n'est pas pris en charge avec l'environnement client sélectionné", Notifications.Wpf.NotificationType.Warning)

@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="Shutdown" Type="System.DateTime" Scope="Application">
-      <Value Profile="(Default)">2022-05-01</Value>
-    </Setting>
     <Setting Name="Client" Type="System.String" Scope="User">
       <Value Profile="(Default)">[DASSAULT AVIATION]</Value>
     </Setting>

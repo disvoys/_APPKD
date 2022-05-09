@@ -71,12 +71,12 @@ Public Class ClassRenameDassault
     Sub RenameItem(ic As ItemCatia, NumOutillage As String, indexIC As String)
 
 
-        ic.Perso9 = indexIC
+        ic.l(getItemListProperties("NomPuls_Planche")).Value = indexIC
         ic.PartNumber = NumOutillage & "_" & indexIC
         ic.ProductCATIA.PartNumber = NumOutillage & "_" & indexIC
         Dim p As Parameters = ic.ProductCATIA.UserRefProperties
         FctionCATIA.AddParamatres(ic.Owner, ic)
-        p.Item("NomPuls_Planche").value = ic.Perso9
+        p.Item("NomPuls_Planche").value = ic.l(getItemListProperties("NomPuls_Planche")).Value
 
 
 

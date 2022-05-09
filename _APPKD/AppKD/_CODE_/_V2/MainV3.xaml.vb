@@ -18,32 +18,27 @@ Public Class MainV3
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
 
 
+        Try
+            cSQL.ConnectionToDB()
+        Catch ex As Exception
+            MsgBox("Une erreur lié au reseau est intervenue. Vérifier la connexion internet ou bien votre pare-feu puis réessayer de lancer l'application", MsgBoxStyle.Critical)
+            End
+        End Try
         Getname()
+
 
         URLFolderSTEPReception.Text = Path.GetTempPath
         MonMainV3 = Me
-        GridContentBDD.Visibility = Visibility.Collapsed
-        GridChart.Visibility = Visibility.Collapsed
-        GridBibliotheque.Visibility = Visibility.Collapsed
-        GridAbout.Visibility = Visibility.Collapsed
-        GridLoaded.Visibility = Visibility.Visible
-        GridStep.Visibility = Visibility.Collapsed
-        GridContentCATPART.Visibility = Visibility.Collapsed
+        ResetonLoad()
         ListViewPDF.SelectedIndex = 0
 
-        VerifDroitUseApp()
-
         ListeEnvironements()
+        creerColonnes()
         CreerCheckBoxEnvironnementSettings()
+        INIFiles = New GestionINIFiles(DossierBase & "\Request.ini")
+        FichierTreeTxt = My.Computer.FileSystem.SpecialDirectories.Temp & "\CatiaTreeTxt.txt"
+        TreeSauv = My.Computer.FileSystem.SpecialDirectories.Temp & "\CatiaTreeSauv.txt"
 
-        Try
-            INIFiles = New GestionINIFiles(DossierBase & "\Request.ini")
-            FichierTreeTxt = My.Computer.FileSystem.SpecialDirectories.Temp & "\CatiaTreeTxt.txt"
-            TreeSauv = My.Computer.FileSystem.SpecialDirectories.Temp & "\CatiaTreeSauv.txt"
-            CatalogueMatieres = DossierBase & "\_CATALOGUE MATIERES_v2.CATMaterial"
-        Catch ex As Exception
-            Dim m As New MessageErreur("Des fichiers sont manquants pour que l'application fonctionne correctement. Réinstaller l'application.", Notifications.Wpf.NotificationType.Error)
-        End Try
 
         CheckLeToogleClient(My.Settings.Client.ToString)
 
@@ -74,40 +69,34 @@ Public Class MainV3
 
         aggrandirFenetre()
 
-        Exit Sub
 
     End Sub 'LOAD
 
-    Sub VerifDroitUseApp()
-        If FctionGetInfo.GetCarteMere() = "NBQ17110016440771E7200" Then
-            'PC KEVIN
-            DossierBase = "C:\Users\deske\OneDrive\Bureau\Donnees"
-            If File.Exists(DossierBase & "\Environnements.ini") Then
-            Else
-                MsgBox("Vous n'avez pas les droits pour utiliser l'application. Contacter l'administrateur.", MsgBoxStyle.Critical)
-                End
-            End If
-        Else
-                If File.Exists("\\multilauncher\AppKDData\_ne pas supprimer.txt") Then
-                'PC EXCENT CONNECTE AU RESEAU
-                DossierBase = "\\multilauncher\AppKDData"
-            Else
-                MsgBox("Vous n'avez pas les droits pour utiliser l'application. Contacter l'administrateur.", MsgBoxStyle.Critical)
-                End
-            End If
-        End If
+    Sub CreerColonnes()
 
-        If DateTime.Compare(My.Settings.Shutdown, DateTime.Now) < 0 Then
-            MsgBox("Vous n'avez plus l'autorisation d'utiliser l'application, contacter l'administrateur", MsgBoxStyle.Critical)
-            End
-        End If
+        Dim i As Integer = 0
+        For Each item In listPropertiesall
+            Dim c As New DataGridTextColumn
+            c.Header = item
+
+            '     Dim index As Integer = l.FindIndex(Function(x As String) x.Contains(c.Header))
+            '   c.Binding = New Binding("l[l.FindIndex(Function(x As itemCATIAProperties) x.Name =" & c.Header & ")].Value")
+
+            c.Binding = New Binding("l[" & i & "].Value")
+            MaDataGrid.Columns.Add(c)
+            i += 1
+        Next
     End Sub
-    Function GetEnv() As String
-        Dim n As String = Env
-        n = Strings.Replace(n, "[", "")
-        n = Strings.Replace(n, "]", "")
-        Return n
-    End Function
+    Sub ResetonLoad()
+        GridContentBDD.Visibility = Visibility.Collapsed
+        GridChart.Visibility = Visibility.Collapsed
+        GridBibliotheque.Visibility = Visibility.Collapsed
+        GridAbout.Visibility = Visibility.Collapsed
+        GridLoaded.Visibility = Visibility.Visible
+        GridStep.Visibility = Visibility.Collapsed
+        GridContentCATPART.Visibility = Visibility.Collapsed
+    End Sub
+
     Sub CheckLeToogleClient(s As String)
         For Each g As ToggleButton In ListToogleSettingsEnv
             If g.Tag = s Then
@@ -115,19 +104,33 @@ Public Class MainV3
                 Env = g.Tag
                 ToolbarPerso.IsEnabled = False
                 TabOptions.AllowDrop = False
-                Dim f As String = GetAs(INIProperties.GetString(GetEnv, "FichierProperties", ""))
+                Dim f As String = GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "FichierProperties", ""))
                 RemplirTableauEnvPerso(f)
                 labelClient.Text = GetEnv()
             End If
         Next
     End Sub
     Sub ListeEnvironements()
+        DossierBase = DossierBase & "\Données"
         INIProperties = New GestionINIFiles(DossierBase & "\Environnements.ini")
         Using sr As New StreamReader(INIProperties.FileName)
             While Not sr.EndOfStream
                 Dim l As String = sr.ReadLine
                 If Strings.Left(l, 1) = "[" And Strings.Right(l, 1) = "]" Then
                     ListEnvironnements.Add(l)
+                End If
+                If Strings.Left(l, 17) = "FichierProperties" Then
+                    Dim s() As String = Strings.Split(l, "=")
+                    Using sr_ As New StreamReader(DossierBase & "\" & s(1))
+                        While Not sr_.EndOfStream
+                            Dim l_() As String = Strings.Split(sr_.ReadLine, vbTab)
+                            Dim l__ As String = l_(0)
+                            If listPropertiesall.Contains(l__) Then
+                            Else
+                                listPropertiesall.Add(l__)
+                            End If
+                        End While
+                    End Using
                 End If
             End While
         End Using
@@ -146,7 +149,7 @@ Public Class MainV3
                 labelClient.Text = n
                 My.Settings.Client = g.Tag
                 My.Settings.Save()
-                Dim f As String = INIProperties.GetString(n, "FichierProperties", "")
+                Dim f As String = DossierBase & "\" & INIProperties.GetString(n, "FichierProperties", "")
                 If f = "" Then
                     DataGridProperties.Items.Clear()
                     DataGridProperties.Items.Refresh()
@@ -154,13 +157,10 @@ Public Class MainV3
                     f = GetAs(f)
                     RemplirTableauEnvPerso(f)
                 End If
-                If g.Tag = "[ENVIRONNEMENT PERSO]" Then
-                    ToolbarPerso.IsEnabled = True
-                    TabOptions.AllowDrop = True
-                Else
-                    ToolbarPerso.IsEnabled = False
+
+                ToolbarPerso.IsEnabled = False
                     TabOptions.AllowDrop = False
-                End If
+
 
             Else
                 g.IsChecked = False
@@ -212,6 +212,7 @@ Public Class MainV3
     End Sub
 
     Private Sub Window_Closed(sender As Object, e As EventArgs)
+        cSQL.CLoseConnexion()
         End
     End Sub 'CLOSE
     Private Sub Window_MouseMove(sender As Object, e As MouseEventArgs)
@@ -227,9 +228,13 @@ Public Class MainV3
         Else
             Try
                 LabelNameCatiaProduct.Content = "[" & CATIA.ActiveDocument.Name & "]"
+                URLCatiaSTEP.Text = FctionCATIA.GetPathCATIA()
+
                 '     ButtonCatiaTest.IsEnabled = True
             Catch ex As Exception
                 LabelNameCatiaProduct.Content = "[Aucun élément ne semble ouvert dans CATIA]"
+                URLCatiaSTEP.Text = FctionCATIA.GetPathCATIA()
+
                 '       ButtonCatiaTest.IsEnabled = False
             End Try
 
@@ -310,7 +315,7 @@ Public Class MainV3
                                 ic.ProductCATIA.UserRefProperties.Item(sm).ValuateFromString(ic.ProductCATIA.UserRefProperties.Item(sm).ValueAsString & " - " & MaMasse & " Kg")
                             End If
                         End Try
-                        ic.StockSize = ic.ProductCATIA.UserRefProperties.Item(sm).ValueAsString
+                        ic.l(getItemListProperties("STOCK SIZE")).Value = ic.ProductCATIA.UserRefProperties.Item(sm).ValueAsString
                     End If
                 Else
                     Try
@@ -321,7 +326,7 @@ Public Class MainV3
                     End Try
                     If Env = "[DASSAULT AVIATION]" Then
                         'ERREUR KEVIN ic.pers5 =>>>> chercher la variable ic correspondante à l'id colonne
-                        ic.Perso5 = MaMasse
+                        ic.l(getItemListProperties("NomPuls_Masse")).Value = MaMasse
                     End If
                 End If
 
@@ -715,19 +720,16 @@ Public Class MainV3
 
 
 
-        If GetEnv() = "SPIRIT AEROSYSTEMS" Then
 
+        If GetEnv() = "SPIRIT AEROSYSTEMS" Then
             ButtonSYM.Visibility = Visibility.Collapsed
             ButtonOBS.Visibility = Visibility.Collapsed
             ButtonBOM.Visibility = Visibility.Collapsed
             SeparatorToHide.Visibility = Visibility.Collapsed
-            cMaterial.Header = INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "Matière")
             CBOM.Width = 220
             cPN.Width = 270
             cDesignation.Width = 330
         ElseIf GetEnv() = "AIRBUS" Then
-            cMaterial.Header = INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "Matière")
-            CTTS.Header = INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")
             ButtonSYM.Visibility = Visibility.Visible
             ButtonOBS.Visibility = Visibility.Visible
             ButtonBOM.Visibility = Visibility.Visible
@@ -736,73 +738,6 @@ Public Class MainV3
             cPN.Width = 150
             cDesignation.Width = 172
         ElseIf GetEnv() = "DASSAULT AVIATION" Then
-
-            Dim i As Integer = 1
-            For Each item As ItemProperties In DataGridProperties.Items
-                Select Case i
-                    Case 1 'MARQUAGE
-                        Perso1.Visibility = GetVisu(item)
-                        Perso1.Header = item.Properties
-                        nPerso1 = item.Properties
-                        GetBindMatiere(Perso1, item.Properties)
-                        GetBindTTS(Perso1, item.Properties)
-                    Case 2 'TRAITEMENT
-                        Perso2.Visibility = GetVisu(item)
-                        Perso2.Header = item.Properties
-                        nPerso2 = item.Properties
-                        GetBindMatiere(Perso2, item.Properties)
-                        GetBindTTS(Perso2, item.Properties)
-                    Case 3 'PROTECTION
-                        Perso3.Visibility = GetVisu(item)
-                        Perso3.Header = item.Properties
-                        nPerso3 = item.Properties
-                        GetBindMatiere(Perso3, item.Properties)
-                        GetBindTTS(Perso3, item.Properties)
-                    Case 4 'DIM BRUT
-                        Perso4.Visibility = GetVisu(item)
-                        Perso4.Header = item.Properties
-                        GetBindMatiere(Perso4, item.Properties)
-                        GetBindTTS(Perso4, item.Properties)
-                        nPerso4 = item.Properties
-                    Case 5 'MASSE
-                        Perso5.Visibility = GetVisu(item)
-                        Perso5.Header = item.Properties
-                        GetBindMatiere(Perso5, item.Properties)
-                        GetBindTTS(Perso5, item.Properties)
-                        nPerso5 = item.Properties
-                    Case 6 'MATIERE
-                        Perso6.Visibility = GetVisu(item)
-                        Perso6.Header = item.Properties
-                        nPerso6 = item.Properties
-                        GetBindMatiere(Perso6, item.Properties)
-                        GetBindTTS(Perso6, item.Properties)
-                    Case 7 'DESIGNATION
-                        Perso7.Visibility = GetVisu(item)
-                        Perso7.Header = item.Properties
-                        nPerso7 = item.Properties
-                        GetBindMatiere(Perso7, item.Properties)
-                        GetBindTTS(Perso7, item.Properties)
-                    Case 8 'INDICE
-                        Perso8.Visibility = GetVisu(item)
-                        Perso8.Header = item.Properties
-                        nPerso8 = item.Properties
-                        GetBindMatiere(Perso8, item.Properties)
-                        GetBindTTS(Perso8, item.Properties)
-                    Case 9 'PLANCHE
-                        Perso9.Visibility = GetVisu(item)
-                        Perso9.Header = item.Properties
-                        nPerso9 = item.Properties
-                        GetBindMatiere(Perso9, item.Properties)
-                        GetBindTTS(Perso9, item.Properties)
-                    Case 10 'NUM OUTILLAGE
-                        Perso10.Visibility = GetVisu(item)
-                        Perso10.Header = item.Properties
-                        nPerso10 = item.Properties
-                        GetBindMatiere(Perso10, item.Properties)
-                        GetBindTTS(Perso10, item.Properties)
-                End Select
-                i = i + 1
-            Next
             ButtonSYM.Visibility = Visibility.Collapsed
             ButtonOBS.Visibility = Visibility.Collapsed
             ButtonBOM.Visibility = Visibility.Collapsed
@@ -811,7 +746,6 @@ Public Class MainV3
             cPN.Width = 150
             cDesignation.Width = 172
         End If
-
         Dim l As New List(Of String)
         l.Add("Qté")
         l.Add("Type")
@@ -839,9 +773,9 @@ Public Class MainV3
         Next
 
         DataGridProperties.Items.Refresh()
+        DataGridProperties.Items.Refresh()
 
     End Sub 'MAJ SPIRIT
-
     Function GetVisu(item As ItemProperties) As Visibility
 
         If item.Visible = True Then
@@ -850,7 +784,10 @@ Public Class MainV3
             Return Visibility.Hidden
         End If
     End Function
+
     Sub GetBindMatiere(c As DataGridTextColumn, s As String)
+
+
         If s = INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "") Then
             c.Binding = New Binding("Matiere")
         End If
@@ -869,218 +806,78 @@ Public Class MainV3
             Dim macolonne As String = e.Column.Header
 
             FctionCATIA.AddParamatres(ic.Owner, ic)
+            'UserRefProperties
 
-            Select Case macolonne
-                Case Perso1.Header
-                    Dim t As TextBox = e.EditingElement
-                    ic.Perso1 = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(Perso1.Header).value = ic.Perso1
-                    Catch ex As Exception
-                    End Try
-                Case Perso2.Header
-                    Dim t As TextBox = e.EditingElement
-                    ic.Perso2 = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(Perso2.Header).value = ic.Perso2
-                    Catch ex As Exception
-                    End Try
-                Case Perso3.Header
-                    Dim t As TextBox = e.EditingElement
-                    ic.Perso3 = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(Perso3.Header).value = ic.Perso3
-                    Catch ex As Exception
-                    End Try
-                Case Perso4.Header
-                    Dim t As TextBox = e.EditingElement
-                    ic.Perso4 = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(Perso4.Header).value = ic.Perso4
-                    Catch ex As Exception
-                    End Try
-                Case Perso5.Header
-                    Dim t As TextBox = e.EditingElement
-                    ic.Perso5 = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(Perso5.Header).value = ic.Perso5
-                    Catch ex As Exception
-                    End Try
-                Case Perso6.Header
-                    Dim t As TextBox = e.EditingElement
-                    ic.Perso6 = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(Perso6.Header).value = ic.Perso6
-                    Catch ex As Exception
-                    End Try
-                Case Perso7.Header
-                    Dim t As TextBox = e.EditingElement
-                    ic.Perso7 = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(Perso7.Header).value = ic.Perso7
-                    Catch ex As Exception
-                    End Try
-                Case Perso8.Header
-                    Dim t As TextBox = e.EditingElement
-                    ic.Perso8 = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(Perso8.Header).value = ic.Perso8
-                    Catch ex As Exception
-                    End Try
-                Case Perso9.Header
-                    Dim t As TextBox = e.EditingElement
-                    ic.Perso9 = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(Perso9.Header).value = ic.Perso9
-                    Catch ex As Exception
-                    End Try
+            Dim l_ As New List(Of itemCATIAProperties)
+            For Each item As Parameter In ic.ProductCATIA.UserRefProperties
+                Dim myP As New itemCATIAProperties(item.Name, item.ValueAsString)
+                l_.Add(myP)
+            Next
+            For Each item In l_
+                For j = 0 To listPropertiesall.Count - 1
+                    If item.Name = listPropertiesall(j) Then
+                        ic.l(j) = item
+                        Exit For
+                    End If
+                Next
+            Next
+            Dim t As TextBox = e.EditingElement
+            Dim p As Parameters = ic.ProductCATIA.UserRefProperties
+            For Each item In ic.l
+                If item Is Nothing Then
+                    p.Item(e.Column.Header).value = t.Text
+                Else
+                    If item.Name = e.Column.Header Then
+                        item.Value = t.Text
+                        p.Item(e.Column.Header).value = item.Value
+                    End If
+                End If
+            Next
 
-                Case Perso10.Header
-                    Dim t As TextBox = e.EditingElement
-                    ic.Perso10 = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(Perso10.Header).value = ic.Perso10
-                    Catch ex As Exception
-                    End Try
-
-                Case "Detail Number"
-                    Dim t As TextBox = e.EditingElement
-                    ic.DetailNumber = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item("DETAIL NUMBER").value = ic.DetailNumber
-                    Catch ex As Exception
-                    End Try
-                Case "Stock Size"
-                    Dim t As TextBox = e.EditingElement
-                    ic.StockSize = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item("STOCK SIZE").value = ic.StockSize
-                    Catch ex As Exception
-                    End Try
+            Select Case e.Column.Header
                 Case "Nomenclature"
-                    Dim t As TextBox = e.EditingElement
-                    ic.Nomenclature = t.Text
+                    Dim te As TextBox = e.EditingElement
+                    ic.Nomenclature = te.Text
                     ic.ProductCATIA.Nomenclature = ic.Nomenclature
                 Case "Désignation"
-                    Dim t As TextBox = e.EditingElement
-                    ic.DescriptionRef = t.Text
-                    ic.Anglais = ic.Anglais
-                    If ic.Anglais <> "" Then
-                        ic.ProductCATIA.DescriptionRef = ic.DescriptionRef & vbNewLine & ic.Anglais
-                    Else
-                        ic.ProductCATIA.DescriptionRef = ic.DescriptionRef
-                    End If
+                    Dim te As TextBox = e.EditingElement
+                    ic.DescriptionRef = te.Text
+                    ic.ProductCATIA.DescriptionRef = ic.DescriptionRef
                     If Env = "[DASSAULT AVIATION]" Then
-                        ic.Perso7 = ic.DescriptionRef
-                        Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                        Try
-                            p.Item(Perso7.Header).value = ic.Perso7
-                        Catch ex As Exception
-                        End Try
-                        ' FctionCATIA.SaveIC(ic)
+                        ic.l(getItemListProperties("NomPuls_Designation")).Value = ic.DescriptionRef
+                        p.Item(e.Column.Header).value = ic.l(getItemListProperties("NomPuls_Designation")).Value
                     End If
                 Case "PartNumber"
                     'MA55800Z00-PIECE_500006
-                    Dim t As TextBox = e.EditingElement
-                    If ListPartNumber.Contains(t.Text) And ic.PartNumber.Length > 0 Then
-                        t.Text = ic.PartNumber
+                    Dim te As TextBox = e.EditingElement
+                    If ListPartNumber.Contains(te.Text) And ic.PartNumber.Length > 0 Then
+                        te.Text = ic.PartNumber
                     Else
-                        ic.PartNumber = t.Text
+                        ic.PartNumber = te.Text
                         ic.ProductCATIA.PartNumber = ic.PartNumber
                         FctionCATIA.SaveIC(ic)
                         ListPartNumber.Add(ic.PartNumber)
                         If Env = "[DASSAULT AVIATION]" Then
                             If ic.PartNumber Like "??#####?##-*_######" Then
                                 Dim ss() As String = Strings.Split(ic.PartNumber, "_")
-                                Dim p As Parameters = ic.ProductCATIA.UserRefProperties
                                 Try
-                                    p.Item(Perso9.Header).value = ss(1)
+                                    p.Item(e.Column.Header).value = ss(1)
                                 Catch ex As Exception
                                 End Try
-                                ic.Perso9 = ss(1)
+                                ic.l(getItemListProperties("NomPuls_Dlanche")).Value = ss(1)
                                 BoolHaveTORefresh = True
                             End If
                         End If
                     End If
 
                 Case "Rev"
-                    Dim t As TextBox = e.EditingElement
-                    ic.Indice = t.Text
-                    ic.Revision = ic.Indice
-                    ic.ProductCATIA.Revision = ic.Indice
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item("ISSUE").Value = ic.Indice
-                    Catch ex As Exception
-                    End Try
+                    ic.Revision = t.Text
+                    ic.ProductCATIA.Revision = ic.Revision
                     If Env = "[DASSAULT AVIATION]" Then
-                        ic.Perso8 = ic.Indice
-                        p.Item("NomPuls_Indice").Value = ic.Indice
+                        ic.l(getItemListProperties("NomPuls_Indice")).Value = ic.Revision
+                        p.Item(e.Column.Header).Value = ic.Revision
                     End If
 
-                Case "Anglais"
-                    Dim t As TextBox = e.EditingElement
-                    ic.Anglais = t.Text
-                    ic.DescriptionRef = ic.DescriptionRef
-                    Dim str As String = ic.DescriptionRef & vbNewLine & ic.Anglais
-                    If ic.Anglais <> "" Then
-                        ic.ProductCATIA.DescriptionRef = str
-                    Else
-                        ic.ProductCATIA.DescriptionRef = ic.DescriptionRef
-                    End If
-                Case "Part Symétrique"
-                    Dim t As TextBox = e.EditingElement
-                    ic.SymPart = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item("SYM").value = ic.SymPart
-                    Catch ex As Exception
-                    End Try
-                Case "Traitement/Aspect"
-                    Dim t As TextBox = e.EditingElement
-                    ic.Traitement = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).value = ic.Traitement
-                    Catch ex As Exception
-                    End Try
-                Case "Fournisseur"
-                    Dim t As TextBox = e.EditingElement
-                    ic.Fournisseur = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item("SUPPLIER").value = ic.Fournisseur
-                    Catch ex As Exception
-                    End Try
-                Case "Référence"
-                    Dim t As TextBox = e.EditingElement
-                    ic.Reference = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item("REF").value = ic.Reference
-                    Catch ex As Exception
-                    End Try
-
-                Case "Observations"
-                    Dim t As TextBox = e.EditingElement
-                    ic.Observation = t.Text
-                    Dim p As Parameters = ic.ProductCATIA.UserRefProperties
-                    Try
-                        p.Item("OBSERVATIONS").value = ic.Observation
-                    Catch ex As Exception
-                    End Try
 
             End Select
 
@@ -1091,6 +888,8 @@ Public Class MainV3
         Next
 
         MaDataGrid.IsReadOnly = True
+
+
     End Sub
 
 
@@ -1235,7 +1034,7 @@ Public Class MainV3
     End Sub
 
     Private Sub Button_Click_3(sender As Object, e As RoutedEventArgs)
-        Dim c As String = INIProperties.GetString(GetEnv, "BibliothequeMaterial", "")
+        Dim c As String = DossierBase & "\" & INIProperties.GetString(GetEnv, "BibliothequeMaterial", "")
         c = GetAs(c)
         Process.Start(c)
     End Sub
@@ -1305,21 +1104,21 @@ Public Class MainV3
                                     End Try
                                     If IsPair(int1) = True Then
                                         If int1 = int2 - 1 Then
-                                            ic.SymPart = ic_.PartNumber
-                                            ic_.SymPart = ic.PartNumber
+                                            ic.l(getItemListProperties("SYM")).Value = ic_.PartNumber
+                                            ic_.l(getItemListProperties("SYM")).Value = ic.PartNumber
                                             ListICOKSym.Add(ic)
                                             ListICOKSym.Add(ic_)
                                             Try
-                                                ic.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic.SymPart)
+                                                ic.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic.l(getItemListProperties("SYM")).Value)
                                             Catch ex As Exception
                                                 FctionCATIA.AddParamatres(ic.Owner, ic)
-                                                ic.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic.SymPart)
+                                                ic.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic.l(getItemListProperties("SYM")).Value)
                                             End Try
                                             Try
-                                                ic_.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic_.SymPart)
+                                                ic_.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic_.l(getItemListProperties("SYM")).Value)
                                             Catch ex As Exception
                                                 FctionCATIA.AddParamatres(ic_.Owner, ic_)
-                                                ic_.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic_.SymPart)
+                                                ic_.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic_.l(getItemListProperties("SYM")).Value)
                                             End Try
                                         End If
                                     End If
@@ -1351,21 +1150,21 @@ Public Class MainV3
                                     End Try
                                     If IsPair(int1) = True Then
                                         If int1 = int2 - 1 And MaLettre1 = MaLettre2 Then
-                                            ic.SymPart = ic_.PartNumber
-                                            ic_.SymPart = ic.PartNumber
+                                            ic.l(getItemListProperties("SYM")).Value = ic_.PartNumber
+                                            ic_.l(getItemListProperties("SYM")).Value = ic.PartNumber
                                             ListICOKSym.Add(ic)
                                             ListICOKSym.Add(ic_)
                                             Try
-                                                ic.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic.SymPart)
+                                                ic.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic.l(getItemListProperties("SYM")).Value)
                                             Catch ex As Exception
                                                 FctionCATIA.AddParamatres(ic.Owner, ic)
-                                                ic.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic.SymPart)
+                                                ic.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic.l(getItemListProperties("SYM")).Value)
                                             End Try
                                             Try
-                                                ic_.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic_.SymPart)
+                                                ic_.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic_.l(getItemListProperties("SYM")).Value)
                                             Catch ex As Exception
                                                 FctionCATIA.AddParamatres(ic_.Owner, ic_)
-                                                ic_.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic_.SymPart)
+                                                ic_.ProductCATIA.UserRefProperties.Item("SYM").ValuateFromString(ic_.l(getItemListProperties("SYM")).Value)
                                             End Try
                                         End If
                                     End If
@@ -1380,6 +1179,7 @@ Public Class MainV3
             Dim m As New MessageErreur("Fonction inutile dans un environnement autre que AIRBUS", Notifications.Wpf.NotificationType.Warning)
         End If
     End Sub
+
 
     Private Sub Button_Click_7(sender As Object, e As RoutedEventArgs)
         If MsgBox("Vous êtes sur le point de fixer l'assemblage ouvert. Quelques minutes peuvent être nécéssaires. Continuer ?", vbInformation + vbYesNo) = MsgBoxResult.No Then
@@ -1400,17 +1200,17 @@ Public Class MainV3
 
         If Env = "[AIRBUS]" Then
             For Each ic As ItemCatia In ListDocuments
-                If ic.Reference <> "" Then
-                    ic.Observation = ic.Fournisseur & " '" & ic.Reference
-                ElseIf ic.Traitement <> "" Then
-                    ic.Observation = ic.Traitement
+                If ic.l(getItemListProperties("REF")).Value <> "" Then
+                    ic.l(getItemListProperties("OBSERVATIONS")).Value = ic.l(getItemListProperties("SUPPLIER")).Value & " '" & ic.l(getItemListProperties("REF")).Value
+                ElseIf ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteTTS", ""))).Value <> "" Then
+                    ic.l(getItemListProperties("OBSERVATIONS")).Value = ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteTTS", ""))).Value
                 End If
 
                 Try
-                    ic.ProductCATIA.UserRefProperties.Item("OBSERVATIONS").ValuateFromString(ic.Observation)
+                    ic.ProductCATIA.UserRefProperties.Item("OBSERVATIONS").ValuateFromString(ic.l(getItemListProperties("OBSERVATIONS")).Value)
                 Catch ex As Exception
                     FctionCATIA.AddParamatres(ic.Owner, ic)
-                    ic.ProductCATIA.UserRefProperties.Item("OBSERVATIONS").ValuateFromString(ic.Observation)
+                    ic.ProductCATIA.UserRefProperties.Item("OBSERVATIONS").ValuateFromString(ic.l(getItemListProperties("OBSERVATIONS")).Value)
                 End Try
 
             Next
@@ -1479,12 +1279,12 @@ Public Class MainV3
                     Dim a() As String = Strings.Split(ic.PartNumber, "_")
                     Nber = a(1)
                     Nber = Replace(Nber, "_", "")
-                    ic.DetailNumber = Nber
+                    ic.l(getItemListProperties("DETAIL NUMBER")).Value = Nber
                     Try
-                        ic.ProductCATIA.UserRefProperties.Item("DETAIL NUMBER").ValuateFromString(ic.DetailNumber)
+                        ic.ProductCATIA.UserRefProperties.Item("DETAIL NUMBER").ValuateFromString(ic.l(getItemListProperties("DETAIL NUMBER")).Value)
                     Catch ex As Exception
                         FctionCATIA.AddParamatres(ic.Owner, ic)
-                        ic.ProductCATIA.UserRefProperties.Item("DETAIL NUMBER").ValuateFromString(ic.DetailNumber)
+                        ic.ProductCATIA.UserRefProperties.Item("DETAIL NUMBER").ValuateFromString(ic.l(getItemListProperties("DETAIL NUMBER")).Value)
                     End Try
 
                 End If
@@ -1533,14 +1333,14 @@ Public Class MainV3
         For Each ic As ItemCatia In Me.MaDataGrid.SelectedItems
             If ic.Type = "PART" Then
                 If t = "Aucun" Then t = ""
-                ic.Traitement = t
+                ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteTTS", ""))).Value = t
                 Dim p As Parameters = ic.ProductCATIA.UserRefProperties
                 Try
-                    p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = ic.Traitement
+                    p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteTTS", ""))).Value
                 Catch ex As Exception
                     FctionCATIA.AddParamatres(ic.Owner, ic)
                     Try
-                        p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = ic.Traitement
+                        p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteTTS", ""))).Value
                     Catch ex_ As Exception
                     End Try
                 End Try
@@ -1558,7 +1358,7 @@ Public Class MainV3
 
         For Each ic As ItemCatia In Me.MaDataGrid.SelectedItems
             If ic.Type = "PART" Then
-                ic.Matiere = t
+                ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", ""))).Value = t
                 FctionCATIA.AddParamatres(ic.Owner, ic)
                 FctionCATIA.AppliqueMaterial(t, ic.Owner, ic)
             End If
@@ -1946,7 +1746,7 @@ Public Class MainV3
     End Sub
 
     Private Sub reportBUGbutton_Click(sender As Object, e As RoutedEventArgs)
-        Process.Start("https://docs.google.com/spreadsheets/d/1IKvGSCUcCIcX1kBaWi9LIOPTso6A1NBqbHrjCPkLREU/edit#gid=0")
+        Process.Start("https://www.catiavb.net/")
     End Sub
 
 
@@ -2069,11 +1869,6 @@ Public Class MainV3
     End Sub
 
 
-    Private Sub Button_Click_11(sender As Object, e As RoutedEventArgs)
-
-        Process.Start(DossierBase & "\Environnements.ini")
-    End Sub
-
     Private Sub Button_Click_12(sender As Object, e As RoutedEventArgs)
 
         Reload()
@@ -2171,11 +1966,7 @@ Public Class MainV3
     End Sub
     Sub Getname()
 
-        Dim name = System.Security.Principal.WindowsIdentity.GetCurrent().Name
-        name = Strings.Replace(name, "EXCENT", "")
-        name = Strings.Replace(name, "\", "")
-        name = Strings.Replace(name, ".", " ")
-        textNameUser.Text = name
+        textNameUser.Text = "Kévin DESVOIS"
 
     End Sub
 
@@ -2200,7 +1991,7 @@ Public Class MainV3
             If UCase(Right(NomFichier, 3)) = "TXT" Then
 
                 RemplirTableauEnvPerso(f(0))
-                Dim sr As New StreamWriter(GetAs(INIProperties.GetString(GetEnv, "FichierProperties", "PersoProperties.txt")))
+                Dim sr As New StreamWriter(GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "FichierProperties", "PersoProperties.txt")))
 
                 Using reader As StreamReader = New StreamReader(f(0))
                     While Not reader.EndOfStream
@@ -2221,7 +2012,6 @@ Public Class MainV3
 
 
         DataGridProperties.Items.Clear()
-
         If File.Exists(f) Then
 
             Using reader As StreamReader = New StreamReader(f)
@@ -2330,7 +2120,7 @@ Public Class MainV3
         Dim result As System.Nullable(Of Boolean) = dlg.ShowDialog()
         If result = True Then
             RemplirTableauEnvPerso(dlg.FileName)
-            Dim sr As New StreamWriter(GetAs(INIProperties.GetString(GetEnv, "FichierProperties", "PersoProperties.txt")))
+            Dim sr As New StreamWriter(GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "FichierProperties", "PersoProperties.txt")))
 
             Using reader As StreamReader = New StreamReader(dlg.FileName)
                 While Not reader.EndOfStream
@@ -2352,7 +2142,7 @@ Public Class MainV3
     End Sub
 
     Private Sub Button_Click_14(sender As Object, e As RoutedEventArgs)
-        Process.Start(GetAs(INIProperties.GetString(GetEnv, "FichierProperties", "PersoProperties.txt")))
+        Process.Start(GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "FichierProperties", "PersoProperties.txt")))
         Dim m As New MessageErreur("Il est conseillé de redemarrer l'application après modification du fichier", Notifications.Wpf.NotificationType.Information)
     End Sub
 
@@ -2395,14 +2185,8 @@ Public Class MainV3
     End Sub
 
     Private Sub ButtonOpenDocClients_Click(sender As Object, e As RoutedEventArgs)
+        Process.Start(ICRacine.Doc.Path)
 
-        If GetEnv() = "DASSAULT AVIATION" Then
-            Process.Start("https://drive.google.com/drive/folders/1TatuY0jQLS-wed-vFEO2mr9QNbu3gznc")
-        ElseIf GetEnv() = "SPIRIT AEROSYSTEMS" Then
-            Process.Start("https://drive.google.com/drive/folders/17JjKkhdObkE8Bd4hEJgvo07VikjOi_EK")
-        ElseIf GetEnv() = "AIRBUS" Then
-            Process.Start("https://drive.google.com/drive/folders/1P2fN-kOd8aEvhp52ZojuIBei-rEsEHNa")
-        End If
     End Sub
 
     Private Sub ButtonHome_Click(sender As Object, e As RoutedEventArgs)

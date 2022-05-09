@@ -12,6 +12,13 @@ Imports ProductStructureTypeLib
 
 Public Class CatiaClass
 
+
+    Function GetPathCATIA() As String
+
+        Return CATIA.SystemService.Environ("CATDLLPath")
+
+    End Function
+
 #Region "Renommage"
     Private Declare Function FindWindow Lib "user32.dll" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
     Private Declare Function FindWindowEx Lib "user32.dll" Alias "FindWindowExA" (ByVal hwndParent As Long, ByVal hwndChildAfter As Long, ByVal lpszClass As Long, ByVal lpszWindow As String) As Long
@@ -19,67 +26,6 @@ Public Class CatiaClass
     Private Const BM_CLICK = &HF5
 
 
-    Sub RenameAirbus() '<=== ce n'est pas finit KD
-
-        Dim NumOutillage As String = InputBox("Numéro outillage : ", "Renommage AIRBUS")
-        Dim ListIndicePris As New List(Of String)
-        Dim ListNameRenamed As New List(Of String)
-
-        For Each ic As ItemCatia In ListItemCatia
-            If ic.PartNumber Like NumOutillage & "*" Then
-                ListIndicePris.Add(Strings.Right(ic.PartNumber, 4))
-            End If
-        Next
-
-        For Each ic As ItemCatia In ListItemCatia
-            If Not ic.PartNumber Like NumOutillage & "*" And Not ListNameRenamed.Contains(ic.FileName) Then
-                If ic.Type = "PART" Then
-                    Select Case ic.Source
-                        Case "Acheté"
-                            Dim MonIndice As String = GetIndice("Acheté", ListIndicePris)
-                            ic.PartNumber = NumOutillage & MonIndice
-                            ListIndicePris.Add(MonIndice)
-                            ListNameRenamed.Add(ic.FileName)
-                        Case "Fabriqué"
-                            Dim MonIndice As String = GetIndice("Fabriqué", ListIndicePris)
-                            ic.PartNumber = NumOutillage & MonIndice
-                            ListIndicePris.Add(MonIndice)
-                            ListNameRenamed.Add(ic.FileName)
-                        Case "Inconnu"
-                            Dim MonIndice As String = GetIndice("Acheté", ListIndicePris)
-                            ic.PartNumber = NumOutillage & MonIndice
-                            ListIndicePris.Add(MonIndice)
-                            ListNameRenamed.Add(ic.FileName)
-                    End Select
-                End If
-                If ic.Type = "PRODUCT" Then
-                    '  Dim MonIndice As String = GetIndice("Product", ListIndicePris)
-                    ' ic.PartNumber = NumOutillage & MonIndice
-                    'ListIndicePris.Add(MonIndice)
-                    'istNameRenamed.Add(ic.FileName)
-                End If
-            End If
-        Next
-
-    End Sub
-    Function GetIndice(Name As String, listIndices As List(Of String))
-        Dim MonIndice As Integer = 0
-        Select Case Name
-            Case "Acheté"
-                MonIndice = 9999
-                Do While listIndices.Contains(MonIndice)
-                    MonIndice = MonIndice - 1
-                Loop
-            Case "Fabriqué"
-                MonIndice = 1
-                Do While listIndices.Contains(MonIndice)
-                    MonIndice = MonIndice + 1
-                Loop
-            Case "Product"
-
-        End Select
-        Return MonIndice
-    End Function
     Private Sub ClickOk()
         Try
             Dim lSaveAll As Long
@@ -224,249 +170,6 @@ Public Class CatiaClass
         Next
         On Error GoTo 0
     End Sub
-    Public Sub ResetPropertiesSTELIAMirabel()
-
-        GetParamStdPartStelia()
-
-        For Each ic In ListDocuments
-            Dim P As Parameters = ic.ProductCATIA.UserRefProperties
-            Dim i As Integer = 1
-            For n = 1 To P.Count
-                If P.Item(i).UserAccessMode = 2 Then
-                    P.Remove(i)
-                Else
-                    P.Item(i).Hidden = True
-                    If Not P.Item(i).ReadOnly Then
-                        P.Item(i).ValuateFromString("")
-                        i = i + 1
-                    End If
-                End If
-            Next
-
-            P.CreateString("Title", "FINAL REQUIREMENT")
-            P.CreateString("Defining Part", "")
-
-            Dim k As StrParam
-            If ic.Type = "Product" Or ic.Type = "Racine" Then
-                k = P.CreateString("Dataset Type", "ASSEMBLY")
-            Else
-                k = P.CreateString("Dataset Type", "DETAIL")
-            End If
-            k.SetEnumerateValues(ArrayDataSetType)
-
-            k = P.CreateString("MFG Process", "-")
-            k.SetEnumerateValues(ArrayMfgProcess)
-
-            k = P.CreateString("Design Autority Program", "-")
-            k.SetEnumerateValues(ArrayDesignAutority)
-
-            k = P.CreateString("Supplier Name And CAGE Code", "AIRBUS CANADA LIMITED PARTNERSHIP")
-            k.SetEnumerateValues(ArraySupplierName)
-
-            k = P.CreateString("Major Supplier Code", "-")
-            k.SetEnumerateValues(ArrayMajorSupplierCode)
-
-            k = P.CreateString("3D Only", "N")
-            k.SetEnumerateValues(Array3donly)
-
-
-            P.CreateString("Dimensions", "DIMENSIONS ARE IN INCHES")
-
-            k = P.CreateString("Color Coded", "N")
-            k.SetEnumerateValues(ArrayColorCoded)
-
-
-
-            P.CreateString("Roughness", "ALL MACHINED SURFACES 125 Ra MAX")
-            P.CreateString("Eng. Tolerances", "LINEAR .XX= +/-.03; .XXX= +/-.010; ANGULAR= +/-0.5 DEG")
-            P.CreateString("Tool Design Tolerances", "LINEAR .X= +/-.06; .XX= +/-.015; .XXX= +/-.005; .XXXX= +/-.001; ANGULAR= +/-0.5 DEG")
-            P.CreateString("Material Specifications", "")
-            P.CreateString("Material Description", "")
-            P.CreateString("Material Type", "")
-
-            k = P.CreateString("Material Form", "-")
-            k.SetEnumerateValues(ArrayMaterialForm)
-
-            P.CreateString("Size", "")
-
-            k = P.CreateString("Finish Code", "N/A")
-            k.SetEnumerateValues(ArrayFinishCode)
-
-            P.CreateString("Length", "0")
-            P.CreateString("Width", "0")
-            P.CreateString("Inside Diameter", "0")
-            P.CreateString("Outisde Diameter", "0")
-            P.CreateString("Wall", "0")
-            P.CreateString("Thickness", "0")
-
-            k = P.CreateString("Wire Gauge", "-")
-            k.SetEnumerateValues(ArrayWireGauge)
-
-            k = P.CreateString("Form", "-")
-            k.SetEnumerateValues(ArrayForm)
-
-            k = P.CreateString("Type", "-")
-            k.SetEnumerateValues(ArrayType)
-
-            k = P.CreateString("Style", "-")
-            k.SetEnumerateValues(ArrayStyle)
-
-            k = P.CreateString("Density", "-")
-            k.SetEnumerateValues(ArrayDensity)
-
-            P.CreateString("Eng. Make From", "")
-
-            k = P.CreateString("Material Specification Production", "-")
-            k.SetEnumerateValues(ArrayMaterialSpec)
-
-            k = P.CreateString("Material Descirption Production", "-")
-            k.SetEnumerateValues(ArrayMaterialDescription)
-
-            k = P.CreateString("Alloy", "-")
-            k.SetEnumerateValues(ArrayAllow)
-
-            k = P.CreateString("Material Class", "-")
-            k.SetEnumerateValues(ArrayMaterialClass)
-
-            k = P.CreateString("Grade/Composition", "-")
-            k.SetEnumerateValues(ArrayGrade)
-
-            k = P.CreateString("Final Condition", "-")
-            k.SetEnumerateValues(ArrayFinalCondition)
-
-            k = P.CreateString("Standard Spec Die", "N/A")
-            k.SetEnumerateValues(ArrayFinalCondition)
-
-            k = P.CreateString("Mesh Cell Size", "-")
-            k.SetEnumerateValues(ArrayMesh)
-
-            k = P.CreateString("PCCN", "N/A")
-            k.SetEnumerateValues(ArrayPCCN)
-
-            P.CreateString("TD Material Code", "-")
-            P.CreateString("Organization", "TOOLDESIGN")
-
-            k = P.CreateString("Project", "-")
-            k.SetEnumerateValues(ArrayProject)
-
-        Next
-
-        Dim m As New MessageErreur("Les propriétés STELIA ont été générées avec succès", Notifications.Wpf.NotificationType.Information)
-
-    End Sub
-
-    Public Sub GetParamStdPartStelia()
-
-        Dim MaPart As PartDocument = CATIA.Documents.Open(DossierBase & "\TD_TEMPLATE_CATPART-FR01.CATPart")
-        Dim MaP As Part = MaPart.Part
-        Dim MonProduct As Product = MaPart.Product
-
-        For Each p As Parameter In MonProduct.UserRefProperties
-            Dim str() As String = Strings.Split(p.Name, "\")
-            Select Case str(2)
-                Case "Dataset Type"
-                    Dim k As StrParam = p
-                    ReDim ArrayDataSetType(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayDataSetType)
-                Case "MFG Process"
-                    Dim k As StrParam = p
-                    ReDim ArrayMfgProcess(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayMfgProcess)
-                Case "Design Authority Program"
-                    Dim k As StrParam = p
-                    ReDim ArrayDesignAutority(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayDesignAutority)
-                Case "Supplier Name And CAGE Code"
-                    Dim k As StrParam = p
-                    ReDim ArraySupplierName(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArraySupplierName)
-                Case "Major Supplier Code"
-                    Dim k As StrParam = p
-                    ReDim ArrayMajorSupplierCode(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayMajorSupplierCode)
-                Case "3D Only"
-                    Dim k As StrParam = p
-                    ReDim Array3donly(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(Array3donly)
-                Case "Color Coded"
-                    Dim k As StrParam = p
-                    ReDim ArrayColorCoded(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayColorCoded)
-                Case "Material Form"
-                    Dim k As StrParam = p
-                    ReDim ArrayMaterialForm(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayMaterialForm)
-                Case "Finish Code"
-                    Dim k As StrParam = p
-                    ReDim ArrayFinishCode(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayFinishCode)
-                Case "Wire Gauge"
-                    Dim k As StrParam = p
-                    ReDim ArrayWireGauge(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayWireGauge)
-                Case "Form"
-                    Dim k As StrParam = p
-                    ReDim ArrayForm(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayForm)
-                Case "Type"
-                    Dim k As StrParam = p
-                    ReDim ArrayType(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayType)
-                Case "Style"
-                    Dim k As StrParam = p
-                    ReDim ArrayStyle(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayStyle)
-                Case "Density"
-                    Dim k As StrParam = p
-                    ReDim ArrayDensity(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayDensity)
-                Case "Material Specification Production"
-                    Dim k As StrParam = p
-                    ReDim ArrayMaterialSpec(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayMaterialSpec)
-                Case "Material Description Production"
-                    Dim k As StrParam = p
-                    ReDim ArrayMaterialDescription(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayMaterialDescription)
-                Case "Alloy"
-                    Dim k As StrParam = p
-                    ReDim ArrayAllow(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayAllow)
-                Case "Material Class"
-                    Dim k As StrParam = p
-                    ReDim ArrayMaterialClass(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayMaterialClass)
-                Case "Grade/Composition"
-                    Dim k As StrParam = p
-                    ReDim ArrayGrade(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayGrade)
-                Case "Final Condition"
-                    Dim k As StrParam = p
-                    ReDim ArrayFinalCondition(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayFinalCondition)
-                Case "Standard Spec Die"
-                    Dim k As StrParam = p
-                    ReDim ArrayStandardSpecDie(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayStandardSpecDie)
-                Case "Mesh Cell Size"
-                    Dim k As StrParam = p
-                    ReDim ArrayMesh(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayMesh)
-                Case "PCCN"
-                    Dim k As StrParam = p
-                    ReDim ArrayPCCN(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayPCCN)
-                Case "Project"
-                    Dim k As StrParam = p
-                    ReDim ArrayProject(k.GetEnumerateValuesSize - 1)
-                    k.GetEnumerateValues(ArrayProject)
-            End Select
-        Next
-
-
-        MaPart.Close()
-    End Sub
-
 
     Function GetStringFromText(Text As String, v As DrawingView)
 
@@ -793,7 +496,7 @@ Boucle:
                     Dim MaPartDoc As PartDocument = d
                     Dim MaPart As Part = MaPartDoc.Part
                     Dim MonMateriau As Material = Nothing
-                    Dim c As String = INIProperties.GetString(MonMainV3.GetEnv, "BibliothequeMaterial", "")
+                    Dim c As String = DossierBase & "\" & INIProperties.GetString(GetEnv, "BibliothequeMaterial", "")
                     c = MonMainV3.GetAs(c)
                     Try
                         Dim MonDocMaterial = CATIA.Documents.Read(c)
@@ -816,7 +519,7 @@ Boucle:
         Dim d As Document = CATIA.Documents.Item(MyOwner)
         Dim MaPartDoc As PartDocument = d
         Dim MaPart As Part = MaPartDoc.Part
-        Dim c As String = INIProperties.GetString(MonMainV3.GetEnv, "BibliothequeMaterial", "")
+        Dim c As String = DossierBase & "\" & INIProperties.GetString(GetEnv, "BibliothequeMaterial", "")
         c = MonMainV3.GetAs(c)
 
         Dim MonDocMaterial
@@ -842,7 +545,7 @@ Boucle:
 
         Dim p As Parameters = ic.ProductCATIA.UserRefProperties
         Try
-            Dim test As String = p.Item(INIProperties.GetString(MonMainV3.GetEnv, "ProprieteMATERIAL", "")).ValueAsString
+            Dim test As String = p.Item(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "")).ValueAsString
         Catch ex As Exception
             FctionCATIA.AddParamatres(ic.Owner, ic)
         End Try
@@ -853,7 +556,7 @@ Boucle:
             MonMateriau = MonDocMaterial.Families.Item(MonItemMaterial.Famille).Materials.Item(MonItemMaterial.Name)
             MaPart.GetItem("CATMatManagerVBExt").ApplyMaterialOnPart(MaPart, MonMateriau, 0)
             Try
-                p.Item(INIProperties.GetString(MonMainV3.GetEnv, "ProprieteMATERIAL", "")).Value = MonItemMaterial.Name
+                p.Item(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "")).Value = MonItemMaterial.Name
             Catch ex As Exception
                 Dim merr As New MessageErreur("Une erreur s'est produite lors du remplissable du paramètre MATERIAL. Vérifier le fichier Environnments.ini", Notifications.Wpf.NotificationType.Error)
             End Try
@@ -864,7 +567,7 @@ Boucle:
 
     Sub getMATERIAL()
 
-        Dim c As String = INIProperties.GetString(MonMainV3.GetEnv, "BibliothequeMaterial", "")
+        Dim c As String = DossierBase & "\" & INIProperties.GetString(GetEnv, "BibliothequeMaterial", "")
         c = MonMainV3.GetAs(c)
 
         Dim MonDocMatariel
@@ -1260,9 +963,9 @@ Boucle:
         If k = Forms.DialogResult.OK Then
             Dim Draw As DrawingDocument = Nothing
             If DialogPlanA320.RadioA0.Checked = True Then
-                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(INIProperties.GetString(MonMainV3.GetEnv, "Template2DPetitFormat", "")))
+                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DPetitFormat", "")))
             ElseIf DialogPlanA320.RadioA2.Checked = True Then
-                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(INIProperties.GetString(MonMainV3.GetEnv, "Template2DGrandFormat", "")))
+                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DGrandFormat", "")))
             End If
             Dim MaSheet As DrawingSheet = Draw.Sheets.ActiveSheet
             Dim Da As String = ""
@@ -1335,14 +1038,14 @@ Boucle:
                 End If
 
                 If T.Name = "TitleBlock_Data_Tableau_1_0" Then
-                    T.Text = ic.Perso9
+                    T.Text = ic.l(getItemListProperties("NomPuls_Planche")).Value
                 End If
 
                 If T.Name = "TitleBlock_Data_Tableau_3_0" Then
                     T.Text = ic.DescriptionRef
                 End If
                 If T.Name = "TitleBlock_Data_Tableau_4_0" Then
-                    T.Text = ic.Matiere
+                    T.Text = ic.l(getItemListProperties("NomPuls_Matiere")).Value
                 End If
 
                 If T.Name = "TitleBlock_Data_Tableau_5_0" Then
@@ -1357,10 +1060,10 @@ Boucle:
 
                 End If
                 If T.Name = "TitleBlock_Data_Tableau_6_0" Then
-                    T.Text = ic.Perso5 & " Kg"
+                    T.Text = ic.l(getItemListProperties("NomPuls_Masse")).Value & " Kg"
                 End If
                 If T.Name = "TitleBlock_Data_Tableau_7_0" Then
-                    T.Text = ic.Traitement
+                    T.Text = ic.l(getItemListProperties("NomPuls_Traitement")).Value
                 End If
 
 
@@ -1395,9 +1098,9 @@ Boucle:
             Dim Draw As DrawingDocument
 
             If DialogPlanA320.RadioA0.Checked = True Then
-                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(INIProperties.GetString(MonMainV3.GetEnv, "Template2DPetitFormat", "")))
+                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DPetitFormat", "")))
             ElseIf DialogPlanA320.RadioA2.Checked = True Then
-                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(INIProperties.GetString(MonMainV3.GetEnv, "Template2DGrandFormat", "")))
+                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DGrandFormat", "")))
             End If
 
 #Disable Warning BC42104 ' La variable 'Draw' est utilisée avant qu'une valeur ne lui ait été assignée. Une exception de référence null peut se produire au moment de l'exécution.
@@ -1427,8 +1130,8 @@ Boucle:
                 End If
                 If T.Name = "AUKTbkText_JAT_AIF_STRUCTURE_DETAIL_L4" Then
                     Dim str As String = ""
-                    If Not ic.SymPart Is Nothing Then
-                        str = ic.SymPart.ToString
+                    If Not ic.l(getItemListProperties("SYM")).Value Is Nothing Then
+                        str = ic.l(getItemListProperties("SYM")).Value.ToString
                     End If
                     If str <> "" Then
                         T.Text = str & " (SYM)"
@@ -1521,10 +1224,10 @@ Boucle:
             Dim Draw As DrawingDocument
 
             If DialogPlanA320.RadioA0.Checked = True Then
-                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(INIProperties.GetString(MonMainV3.GetEnv, "Template2DPetitFormat", "")))
+                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DPetitFormat", "")))
                 textSheet = False
             ElseIf DialogPlanA320.RadioA2.Checked = True Then
-                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(INIProperties.GetString(MonMainV3.GetEnv, "Template2DPetitFormat", "")))
+                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DPetitFormat", "")))
                 textSheet = True
 
             End If
@@ -1569,13 +1272,13 @@ Boucle:
                 End If
                 If T.Name = "TextSHEET" Then
                     If textSheet = False Then
-                        T.Text = ic.DetailNumber & " Of " & "_"
+                        T.Text = ic.l(getItemListProperties("DETAIL NUMBER")).Value & " Of " & "_"
                     Else
-                        T.Text = "SD" & ic.DetailNumber
+                        T.Text = "SD" & ic.l(getItemListProperties("DETAIL NUMBER")).Value
                     End If
                 End If
                 If T.Name = "TextDetailNb" Then
-                    T.Text = ic.DetailNumber
+                    T.Text = ic.l(getItemListProperties("DETAIL NUMBER")).Value
                 End If
                 If T.Name = "TextMAT-TTS-POIDS" Then
                     T.Text = Strings.UCase(ic.ProductCATIA.UserRefProperties.GetItem("MATERIAL").valueasstring) & " - " & ic.DescriptionRef & Chr(10) & Strings.UCase(ic.ProductCATIA.UserRefProperties.GetItem("STOCK SIZE").valueasstring)
@@ -1589,9 +1292,9 @@ Boucle:
             s1 = Replace(s1, "_", "")
 
             If textSheet = True Then
-                s1 = s1 & "_SD" & ic.DetailNumber & "_" & ic.Revision
+                s1 = s1 & "_SD" & ic.l(getItemListProperties("DETAIL NUMBER")).Value & "_" & ic.Revision
             Else
-                s1 = s1 & "_SHT" & ic.DetailNumber & "_" & ic.Revision
+                s1 = s1 & "_SHT" & ic.l(getItemListProperties("DETAIL NUMBER")).Value & "_" & ic.Revision
             End If
 
             Dim NFichier As String = ic.Doc.Path & "\" & s1 & ".CATDrawing"
@@ -1749,14 +1452,14 @@ Boucle:
             End If
 
             If T.Name = "TitleBlock_Data_Tableau_1_0" Then
-                T.Text = MonIC.Perso9
+                T.Text = MonIC.l(getItemListProperties("NomPuls_Planche")).Value
             End If
 
             If T.Name = "TitleBlock_Data_Tableau_3_0" Then
                 T.Text = MonIC.DescriptionRef
             End If
             If T.Name = "TitleBlock_Data_Tableau_4_0" Then
-                T.Text = MonIC.Matiere
+                T.Text = MonIC.l(getItemListProperties("NomPuls_Matiere")).Value
             End If
 
             If T.Name = "TitleBlock_Data_Tableau_5_0" Then
@@ -1771,10 +1474,10 @@ Boucle:
 
             End If
             If T.Name = "TitleBlock_Data_Tableau_6_0" Then
-                T.Text = MonIC.Perso5 & " Kg"
+                T.Text = MonIC.l(getItemListProperties("NomPuls_Masse")).Value & " Kg"
             End If
             If T.Name = "TitleBlock_Data_Tableau_7_0" Then
-                T.Text = MonIC.Traitement
+                T.Text = MonIC.l(getItemListProperties("NomPuls_Traitement")).Value
             End If
 
 
@@ -2187,7 +1890,7 @@ Boucle:
                     T.SetFontSize(0, 0, 2)
                     T.Name = "NomenclatureText_PartNumber_" & i
 
-                    T = mestexts.Add(CheckSiTextVide(ic.Matiere), X + 115, Y + (5 * i))
+                    T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", ""))).Value), X + 115, Y + (5 * i))
                     T.AnchorPosition = CatTextAnchorPosition.catTopLeft
                     T.SetFontSize(0, 0, 2)
                     T.Name = "NomenclatureText_matiere_" & i
@@ -2211,7 +1914,7 @@ Boucle:
                     T.SetFontSize(0, 0, 2)
                     T.Name = "NomenclatureText_dimensions_brutes_" & i
 
-                    T = mestexts.Add(CheckSiTextVide(ic.Observation), X + 161, Y + (5 * i))
+                    T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties("OBSERVATIONS")).Value), X + 161, Y + (5 * i))
                     T.AnchorPosition = CatTextAnchorPosition.catTopLeft
                     T.SetFontSize(0, 0, 2)
                     T.Name = "NomenclatureText_observations_" & i
@@ -2278,7 +1981,7 @@ Boucle:
                     T.SetFontSize(0, 0, 4)
                     T.Name = "TitleBlock_Text_Tableau_1_" & i - 1
 
-                    T = mestexts.Add(CheckSiTextVide(ic.Perso9), X + 24.5, Y + 2.5 + (6 * (i - 1)))
+                    T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties("NomPuls_Planche")).Value), X + 24.5, Y + 2.5 + (6 * (i - 1)))
                     T.WrappingWidth = 25
                     T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                     T.TextProperties.Justification = CatJustification.catCenter
@@ -2294,14 +1997,14 @@ Boucle:
 
                     Dim strDescription As String = ic.ProductCATIA.DescriptionRef
                     If strDescription.Contains(vbCrLf) Then
-                        T = mestexts.Add(CheckSiTextVide(ic.Perso7), X + 97, Y + 2.5 + (6 * (i - 1)))
+                        T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties("NomPuls_Designation")).Value), X + 97, Y + 2.5 + (6 * (i - 1)))
                         T.WrappingWidth = 93
                         T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                         T.TextProperties.Justification = CatJustification.catCenter
                         T.SetFontSize(0, 0, 1.5)
                         T.Name = "TitleBlock_Data_Tableau_3_" & i - 1
                     Else
-                        T = mestexts.Add(CheckSiTextVide(ic.Perso7), X + 97, Y + 2.5 + (6 * (i - 1)))
+                        T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties("NomPuls_Designation")).Value), X + 97, Y + 2.5 + (6 * (i - 1)))
                         T.WrappingWidth = 93
                         T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                         T.TextProperties.Justification = CatJustification.catCenter
@@ -2310,7 +2013,7 @@ Boucle:
                     End If
 
 
-                    T = mestexts.Add(CheckSiTextVide(ic.Matiere), X + 159, Y + 2.5 + (6 * (i - 1)))
+                    T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", ""))).Value), X + 159, Y + 2.5 + (6 * (i - 1)))
                     T.WrappingWidth = 30
                     T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                     T.TextProperties.Justification = CatJustification.catCenter
@@ -2335,8 +2038,8 @@ Boucle:
                     T.SetFontSize(0, 0, 2.5)
                     T.Name = "TitleBlock_Data_Tableau_5_" & i - 1
 
-                    Dim s As String = ic.Perso4
-                    If s = "" And ic.Perso5 <> "" Then s = ic.Perso5 & " Kg"
+                    Dim s As String = ic.l(getItemListProperties("NomPuls_Dim_Brutes")).Value
+                    If s = "" And ic.l(getItemListProperties("NomPuls_Masse")).Value <> "" Then s = ic.l(getItemListProperties("NomPuls_Masse")).Value & " Kg"
                     T = mestexts.Add(CheckSiTextVide(s), X + 205, Y + 2.5 + (6 * (i - 1))) 'dim brutes
                     T.WrappingWidth = 30
                     T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
@@ -2344,7 +2047,7 @@ Boucle:
                     T.SetFontSize(0, 0, 2.5)
                     T.Name = "TitleBlock_Data_Tableau_6_" & i - 1
 
-                    T = mestexts.Add(CheckSiTextVide(ic.Traitement), X + 235, Y + 2.5 + (6 * (i - 1)))
+                    T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteTTS", ""))).Value), X + 235, Y + 2.5 + (6 * (i - 1)))
                     T.WrappingWidth = 30
                     T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                     T.TextProperties.Justification = CatJustification.catCenter
@@ -2451,54 +2154,40 @@ Public Class ItemCatia
 
 #Region "Properties"
     Implements INotifyPropertyChanged
+    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+    Private Sub NotifyPropertyChanged(ByVal info As String)
+        RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(info))
+    End Sub
+
+
 
     Public Property ListTVItem As New List(Of ItemTV)
     Public Property ListTVitem_ As New List(Of TreeViewItem)
+
     Public Property Type As String
     Public Property PartNumber As String
     Public Property FileName As String
     Public Property Owner As String
-
     Public Property Doc As Document
     Public Property ProductCATIA As Product
 
     Public Property ID As Integer
     Public Property Level As Integer
 
+    Public Property Qte As String
     Public Property Nomenclature As String
     Public Property DescriptionRef As String
     Public Property Defintion As String
     Public Property Revision As String
-    Public Property StockSize As String
-    Public Property DetailNumber As String
     Public Property Source As String
-    Public Property SymPart As String
-    Public Property Matiere As String
-    Public Property Traitement As String
-    Public Property Fournisseur As String
-    Public Property Reference As String
-    Public Property Observation As String
-    Public Property Indice As String
-    Public Property Qte As String
-    Public Property Anglais As String
 
     Public Property IsSelected As Integer
-
     Private Property _enfants As New List(Of ItemCatia)
-
     Public Property Visible As Boolean = True
 
-    Public Property lPerso As New List(Of String)
-    Public Property Perso1 As String
-    Public Property Perso2 As String
-    Public Property Perso3 As String
-    Public Property Perso4 As String
-    Public Property Perso5 As String
-    Public Property Perso6 As String
-    Public Property Perso7 As String
-    Public Property Perso8 As String
-    Public Property Perso9 As String
-    Public Property Perso10 As String
+
+    Property l As New List(Of itemCATIAProperties)
+
 
 
 
@@ -2509,25 +2198,6 @@ Public Class ItemCatia
     End Property
 #End Region
 
-
-
-
-
-
-    Public Event PropertyChanged(sender As Object, e As System.ComponentModel.PropertyChangedEventArgs) Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-    Private Sub OnPropertyChanged(ByVal info As String)
-        RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(info))
-    End Sub
-
-    Sub MAJTV()
-
-        For Each item In ListTVItem
-            item.TextTV = PartNumber & " | " & DescriptionRef
-        Next
-
-    End Sub
-
-
     Sub New(d As Document)
 
         If d Is Nothing Then
@@ -2535,32 +2205,25 @@ Public Class ItemCatia
         Else
             If Right(d.FullName, 4) = "Part" Or Right(d.FullName, 7) = "Product" Then
 
-                Dim p As Product = d.product
-                PartNumber = p.PartNumber
 
+                ProductCATIA = d.product
+                PartNumber = ProductCATIA.PartNumber
+                Doc = d
+                PartNumber = ProductCATIA.PartNumber
+                Owner = d.Name
+                FileName = d.FullName
+                Nomenclature = ProductCATIA.Nomenclature
+                Defintion = ProductCATIA.Definition
+                Revision = ProductCATIA.Revision
+                DescriptionRef = ProductCATIA.DescriptionRef
 
 
                 If Right(d.FullName, 4) = "Part" Then Type = "PART"
                 If Right(d.FullName, 7) = "Product" Then Type = "PRODUCT"
                 If Right(d.FullName, 7) = "Drawing" Then Type = "DRAWING"
-                If Type = "" Then Type = "INCONNU"
-                ProductCATIA = p
-                Doc = d
-                PartNumber = p.PartNumber
-                Owner = d.Name
-                FileName = d.FullName
-                Nomenclature = p.Nomenclature
+                If Right(d.FullName, 7) = "Product" And PartNumber = CATIA.ActiveDocument.product.Partnumber Then Type = "RACINE"
 
-                Dim sd() As String = Strings.Split(p.DescriptionRef, Chr(13))
-                Dim kd As String = sd(0)
-                kd = Replace(kd, Chr(13), "")
-                DescriptionRef = kd
-
-
-                Defintion = p.Definition
-                Revision = p.Revision
-
-                Select Case p.Source
+                Select Case ProductCATIA.Source
                     Case 0
                         Source = "Inconnu"
                     Case 1
@@ -2569,128 +2232,24 @@ Public Class ItemCatia
                         Source = "Acheté"
                 End Select
 
-                If Env = "[AIRBUS]" Then
-                    Try
-                        Matiere = p.UserRefProperties.Item(INIProperties.GetString(MonMainV3.GetEnv, "ProprieteMATERIAL", "MATERIAL")).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Observation = p.UserRefProperties.Item("OBSERVATIONS").ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Fournisseur = p.UserRefProperties.Item("SUPPLIER").ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Traitement = p.UserRefProperties.Item(INIProperties.GetString(MonMainV3.GetEnv, "ProprieteTTS", "TTS")).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        SymPart = p.UserRefProperties.Item("SYM").ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Reference = p.UserRefProperties.Item("REF").ValueAsString
-                    Catch ex As Exception
-                    End Try
+                'UserRefProperties
+                Dim l_ As New List(Of itemCATIAProperties)
+                For Each item As Parameter In ProductCATIA.UserRefProperties
+                    Dim myP As New itemCATIAProperties(item.Name, item.ValueAsString)
+                    l_.Add(myP)
+                Next
 
-                    Try
-                        Indice = p.Revision
-
-                    Catch ex As Exception
-                    End Try
-
-                ElseIf Env = "[SPIRIT AEROSYSTEMS]" Then
-                    Try
-                        StockSize = p.UserRefProperties.Item("STOCK SIZE").ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        DetailNumber = p.UserRefProperties.Item("DETAIL NUMBER").ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Matiere = p.UserRefProperties.Item(INIProperties.GetString(MonMainV3.GetEnv, "ProprieteMATERIAL", "MATERIAL")).ValueAsString
-                    Catch ex As Exception
-                    End Try
-
-                    Try
-                        Indice = p.Revision
-
-                    Catch ex As Exception
-                    End Try
-                Else
-                    Try
-                        Matiere = p.UserRefProperties.Item(INIProperties.GetString(MonMainV3.GetEnv, "ProprieteMATERIAL", "MATERIAL")).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Traitement = p.UserRefProperties.Item(INIProperties.GetString(MonMainV3.GetEnv, "ProprieteTTS", "TTS")).ValueAsString
-                    Catch ex As Exception
-                    End Try
-
-
-
-                    Try
-                        Perso1 = p.UserRefProperties.Item(nPerso1).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Perso2 = p.UserRefProperties.Item(nPerso2).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Perso3 = p.UserRefProperties.Item(nPerso3).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Perso4 = p.UserRefProperties.Item(nPerso4).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Perso5 = p.UserRefProperties.Item(nPerso5).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Perso6 = p.UserRefProperties.Item(nPerso6).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Perso7 = p.UserRefProperties.Item(nPerso7).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Perso8 = p.UserRefProperties.Item(nPerso8).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Perso9 = p.UserRefProperties.Item(nPerso9).ValueAsString
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        Perso10 = p.UserRefProperties.Item(nPerso10).ValueAsString
-                    Catch ex As Exception
-                    End Try
-
-                    Try
-                        Indice = p.Revision
-
-                    Catch ex As Exception
-                    End Try
-                End If
-
-
-
-                Try
-                    Dim s() As String = Strings.Split(p.DescriptionRef, Chr(13))
-                    Dim k As String = s(1)
-                    k = Replace(k, Chr(13), "")
-                    k = Right(k, Len(k) - 1)
-                    Anglais = k
-                Catch ex As Exception
-                End Try
-
+                For i = 1 To listPropertiesall.Count
+                    l.Add(New itemCATIAProperties("", ""))
+                Next
+                For Each item In l_
+                    For j = 0 To listPropertiesall.Count - 1
+                        If item.Name = listPropertiesall(j) Then
+                            l(j) = item
+                            Exit For
+                        End If
+                    Next
+                Next
 
                 ListDocuments.Add(Me)
 
@@ -2704,7 +2263,14 @@ Public Class ItemCatia
             End If
         End If
 
+    End Sub
 
+
+    Sub MAJTV()
+
+        For Each item In ListTVItem
+            item.TextTV = PartNumber & " | " & DescriptionRef
+        Next
 
     End Sub
 
@@ -2712,34 +2278,20 @@ Public Class ItemCatia
 
 
 
+
 End Class
 
-Public Class ItemFamille
+Public Class itemCATIAProperties
 
-    Public Property Name As String
-    Public Property Materials As New List(Of ItemMaterial)
-    Sub New(NomFamille As String)
-        Name = NomFamille
-        ListFamilleMaterials.Add(Me)
+    Property Name As String
+    Property Value As String
+
+    Sub New(item As String, _value As String)
+        Dim s() As String = Strings.Split(item, "\")
+        Name = s(UBound(s))
+        Value = _value
     End Sub
 End Class
-
-Public Class ItemMaterial
-
-    Public Property Famille As String
-    Public Property Name As String
-
-
-    Sub New(NomMaterial As String, FamilleMaterial As String)
-
-        Famille = FamilleMaterial
-        Name = NomMaterial
-        ListMaterials.Add(Me)
-    End Sub
-
-
-End Class
-
 Public Class PropertiesPart
 
     Public Property Properties As String
@@ -2765,6 +2317,7 @@ Public Class PropertiesPart
         Next
     End Sub
 End Class
+
 Public Class ItemTV
 
 
@@ -2773,12 +2326,8 @@ Public Class ItemTV
     Public Property PartNumber As String
     Public Property Descritpion As String
     Public Property TVitem As TreeViewItem
-
     Public Property Level As Integer
-
     Public Property Type As String
-
-
 
 
     Sub New(name As String)
@@ -2882,6 +2431,20 @@ Public Class ItemTV
     End Function
 
 End Class 'Item TreeView
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Module FixAll
@@ -3064,7 +2627,7 @@ Public Module ExportPDFDXF
 
     End Sub
 
-End Module
+End Module 'export PDF vers DXF
 
 Public Module GoRelinkDraw
     Sub RelinkDoc()
@@ -3629,3 +3192,33 @@ Public Module ChangeUnitsDrawing 'Change les unités d'un Draw
 End Module
 
 
+
+
+
+
+'------- MATERIAL POPUP --------
+Public Class ItemFamille
+
+    Public Property Name As String
+    Public Property Materials As New List(Of ItemMaterial)
+    Sub New(NomFamille As String)
+        Name = NomFamille
+        ListFamilleMaterials.Add(Me)
+    End Sub
+End Class
+
+Public Class ItemMaterial
+
+    Public Property Famille As String
+    Public Property Name As String
+
+
+    Sub New(NomMaterial As String, FamilleMaterial As String)
+
+        Famille = FamilleMaterial
+        Name = NomMaterial
+        ListMaterials.Add(Me)
+    End Sub
+
+
+End Class

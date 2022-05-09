@@ -40,9 +40,6 @@
                     <TextBlock Text="AIRBUS"  x:Name="labelClient" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
                     <TextBlock Text="|"  Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
                     <TextBlock Text="V3.0.17" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                    <Button Width="30" Height="30" Padding="0" Background="{x:Null}" ToolTip="Options" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 0 0" Click="Button_Click_11">
-                        <materialDesign:PackIcon Kind="Settings" />
-                    </Button>
                     <Button Width="30" Height="30" x:Name="reportBUGbutton" Click="reportBUGbutton_Click" Padding="0" Background="{x:Null}" ToolTip="Rapporter un bug ou une idée d'amélioration" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 30 0">
                         <materialDesign:PackIcon Kind="EmailAlertOutline" />
                     </Button>
@@ -110,7 +107,7 @@
                                 <TextBlock Text="Outil PDF" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem ToolTip="Convertir des fichiers CATIA en STEP et inversement" IsEnabled="False">
+                        <ListViewItem ToolTip="Convertir des fichiers CATIA en STEP et inversement">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="FileSwap" VerticalAlignment="Center"/>
                                 <TextBlock Text="Convertir STEP" VerticalAlignment="Center" Margin="20 0"/>
@@ -301,8 +298,8 @@
                 </StackPanel>
             </materialDesign:TransitioningContent>
         </ScrollViewer>
-        
-        <Grid  Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"   x:Name="GridContentCATPART"  Visibility="Visible" >
+
+        <Grid  Grid.Column="1" Grid.Row="2" Margin="10 0 10 0"   x:Name="GridContentCATPART"  Visibility="Collapsed" >
 
             <Grid >
                 <Grid.RowDefinitions>
@@ -538,7 +535,7 @@
                         <materialDesign:PackIcon Kind="Gyro" Foreground="#0E1D31" />
                     </Button>
                     <Separator/>
-                    <Button  VerticalAlignment="Center" Visibility="Visible" HorizontalAlignment="Center" ToolTip="Documents qualités client" Name="ButtonOpenDocClients" Click="ButtonOpenDocClients_Click">
+                    <Button  VerticalAlignment="Center" Visibility="Visible" HorizontalAlignment="Center" ToolTip="Ouvrir l'emplacement de la racine" Name="ButtonOpenDocClients" Click="ButtonOpenDocClients_Click">
                         <materialDesign:PackIcon Kind="FolderEyeOutline" Foreground="#0E1D31" />
                     </Button>
                     <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Ouvrir la bibliothèque de matériaux" Click="Button_Click_3">
@@ -564,12 +561,10 @@
                             HorizontalAlignment="Right" x:Name="ComboBOM" Width="180" SelectionChanged="ComboBOM_SelectionChanged"/>
                     </ToolBar>
 
-                <DataGrid x:Name="MaDataGrid" IsReadOnly="true" PreviewKeyDown="MaDataGrid_PreviewKeyDown" MouseDoubleClick="MaDataGrid_MouseDoubleClick" SelectionChanged="MaDataGrid_SelectionChanged" CurrentCellChanged="MaDataGrid_CurrentCellChanged"  CellEditEnding="MaDataGrid_CellEditEnding"  Grid.Row="1" Grid.Column="1" FontSize="11" VerticalAlignment="Stretch" 
+                <DataGrid x:Name="MaDataGrid" IsReadOnly="true"  PreviewKeyDown="MaDataGrid_PreviewKeyDown" MouseDoubleClick="MaDataGrid_MouseDoubleClick" SelectionChanged="MaDataGrid_SelectionChanged" CurrentCellChanged="MaDataGrid_CurrentCellChanged"  CellEditEnding="MaDataGrid_CellEditEnding"  Grid.Row="1" Grid.Column="1" FontSize="11" VerticalAlignment="Stretch" 
                               Background="#F9F9F9" FrozenColumnCount="6" Focusable="True"  AlternatingRowBackground="#f5f5f5" CanUserAddRows="false" HeadersVisibility="Column" CanUserSortColumns="True" CanUserReorderColumns="True"
                               CanUserDeleteRows="false" CanUserResizeColumns="True" CanUserResizeRows="false" BorderThickness="0.5" BorderBrush="Gray" AutoGenerateColumns="false"
-                              GridLinesVisibility="Vertical" VerticalGridLinesBrush="Gray" SelectionMode="Extended"  IsTextSearchCaseSensitive="False">
-
-
+                              GridLinesVisibility="Vertical" VerticalGridLinesBrush="Gray" SelectionMode="Extended"  IsTextSearchCaseSensitive="False"  ItemsSource="{Binding Path=., Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged }">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header ="Qté" Width="53" IsReadOnly="true" Binding="{Binding Qte}">
                             <DataGridTextColumn.ElementStyle>
@@ -601,29 +596,7 @@
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Désignation" x:Name="cDesignation" Width="172" Binding="{Binding DescriptionRef}"/>
-                        <DataGridTextColumn Header="MATERIAL" x:Name="cMaterial" Width="100" IsReadOnly="True" Binding="{Binding Matiere}" />
-                        <DataGridTextColumn x:Name="CRev" Header="Rev" Width="60"  Binding="{Binding Revision}" Visibility="Visible"/>
-                        <DataGridTextColumn x:Name="CDetailNumber" Header="DETAIL NUMBER" Width="150"  Binding="{Binding DetailNumber}" Visibility="Collapsed"/>
-                        <DataGridTextColumn x:Name="CStockSize" Header="STOCK SIZE" Width="150"  Binding="{Binding StockSize}" Visibility="Collapsed"/>
-
-                        <DataGridTextColumn x:Name="CSym"  Header="SYM" Width="120" Binding="{Binding SymPart}"/>
-                        <DataGridTextColumn x:Name="CTTS" Header="TTS" Width="130" Binding="{Binding Traitement}"/>
-                        <DataGridTextColumn x:Name="CFour" Header="SUPPLIER" Width="120" Binding="{Binding Fournisseur}"/>
-                        <DataGridTextColumn x:Name="CRef" Header="REF" Width="120" Binding="{Binding Reference}"/>
-                        <DataGridTextColumn x:Name="CObservation" Header="OBSERVATIONS"  Width="220" Binding="{Binding Observation}"/>
-                        <DataGridTextColumn x:Name="CAnglais" Header="Anglais" Width="110" Binding="{Binding Anglais}" Visibility="Hidden"/>
-
-                        <DataGridTextColumn x:Name="Perso1" Header="Perso1" Visibility="Collapsed" Width="150" Binding="{Binding Perso1}"/>
-                        <DataGridTextColumn x:Name="Perso2" Header="Perso2" Visibility="Collapsed" Width="150" Binding="{Binding Perso2}"/>
-                        <DataGridTextColumn x:Name="Perso3" Header="Perso3" Visibility="Collapsed" Width="150" Binding="{Binding Perso3}"/>
-                        <DataGridTextColumn x:Name="Perso4" Header="Perso4" Visibility="Collapsed" Width="150" Binding="{Binding Perso4}"/>
-                        <DataGridTextColumn x:Name="Perso5" Header="Perso5" Visibility="Collapsed" Width="150" Binding="{Binding Perso5}"/>
-                        <DataGridTextColumn x:Name="Perso6" Header="Perso6" Visibility="Collapsed" Width="150" Binding="{Binding Perso6}"/>
-                        <DataGridTextColumn x:Name="Perso7" Header="Perso7" Visibility="Collapsed" Width="150" Binding="{Binding Perso7}"/>
-                        <DataGridTextColumn x:Name="Perso8" Header="Perso8" Visibility="Collapsed" Width="150" Binding="{Binding Perso8}"/>
-                        <DataGridTextColumn x:Name="Perso9" Header="Perso9" Visibility="Collapsed" Width="150" Binding="{Binding Perso9}"/>
-                        <DataGridTextColumn x:Name="Perso10" Header="Perso10" Visibility="Collapsed" Width="150" Binding="{Binding Perso10}"/>
-
+                        <DataGridTextColumn x:Name="CRev" Header="Rev" Width="60"  Binding="{Binding Revision}"/>
                     </DataGrid.Columns>
                    
                     <DataGrid.ContextMenu >
@@ -1376,7 +1349,7 @@
                               Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                               VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
-                                Text="C:\Users\deske\OneDrive\Bureau\RECEPTION"
+                                Text="-"
                                 Width="380"
                             x:Name="URLFolderSTEPReception" 
                                FontSize="11"

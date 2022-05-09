@@ -116,36 +116,36 @@ Module Variables
     Public ListUsersstr As New List(Of String)
     Public cSQLUsers As New LoadDTUsers
 
+    'LANGUE
     Public MaLangue As String = "Anglais"
 
+    'ENVIRONNMENTS
     Public ListEnvironnements As New List(Of String)
     Public ListToogleSettingsEnv As New List(Of ToggleButton)
     Public Env As String = ""
 
     Public ListPropertiesPartEnCours As New List(Of String)
-    Public nperso(100) As String
 
-    Public nPerso1 As String
+    Public listPropertiesall As New List(Of String)
 
-    Public nPerso2 As String
 
-    Public nPerso3 As String
-
-    Public nPerso4 As String
-
-    Public nPerso5 As String
-
-    Public nPerso6 As String
-
-    Public nPerso7 As String
-
-    Public nPerso8 As String
-
-    Public nPerso9 As String
-
-    Public nPerso10 As String
 
 
     Public BoolStartBOM As Boolean = False
 
+    Function getItemListProperties(s As String)
+        Dim i As Integer = 0
+        For Each item In listPropertiesall
+            If item = s Then
+                Return i
+            End If
+        Next
+        Return Nothing
+    End Function
+    Function GetEnv() As String
+        Dim n As String = Env
+        n = Strings.Replace(n, "[", "")
+        n = Strings.Replace(n, "]", "")
+        Return n
+    End Function
 End Module

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>\\multilauncher\Install_AppKD\|C:\Users\Kevin.DESVOIS\Desktop\_APPKD-master\_APPKD\AppKD_Publication\|C:\Users\deske\OneDrive\Bureau\|C:\Users\deske\Google Drive\TAFF\_APPKD\AppKD_Publication\|C:\Users\deske\OneDrive\Bureau\appkd\</PublishUrlHistory>
+    <PublishUrlHistory>C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD_Publication\|\\multilauncher\Install_AppKD\|C:\Users\Kevin.DESVOIS\Desktop\_APPKD-master\_APPKD\AppKD_Publication\|C:\Users\deske\OneDrive\Bureau\|C:\Users\deske\Google Drive\TAFF\_APPKD\AppKD_Publication\</PublishUrlHistory>
     <InstallUrlHistory />
     <SupportUrlHistory>https://www.catiavb.net/</SupportUrlHistory>
     <UpdateUrlHistory>https://drive.google.com/drive/folders/1FMVdjYjeTzOHrIIkFFQscVWMZECDhDDf%3fusp=sharing/</UpdateUrlHistory>
