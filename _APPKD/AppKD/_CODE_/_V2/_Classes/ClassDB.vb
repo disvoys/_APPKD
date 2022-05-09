@@ -15,7 +15,7 @@ Public Class ClassDB
     Public cmd As New MySqlCommand("", cn)
 
     Sub ConnectionToDB()
-
+        'test
         With cn
             .ConnectionString = "server=thanos.o2switch.net;user id=xtzg8344_root;password=MProot@123;database=xtzg8344_mabdd"
             .Open()
