@@ -12,7 +12,7 @@ Imports File = Org.pdfclown.files.File
 
 Public Class ClassPDF
 
-    'kevin desvois
+    'kevin desvoiss
 
     Sub split(Chemin As String, NameFile As String)
 
