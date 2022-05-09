@@ -13,6 +13,7 @@ Imports MySqlConnector
 Public Class ClassDB
 
     Public cmd As New MySqlCommand("", cn)
+
     Sub ConnectionToDB()
 
         With cn
