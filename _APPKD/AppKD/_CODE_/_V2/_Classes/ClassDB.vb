@@ -17,7 +17,7 @@ Public Class ClassDB
     Sub ConnectionToDB()
         'test
         With cn
-            .ConnectionString = "server=thanos.o2switch.net;user id=xtzg8344_root;password=MProot@123;database=xtzg8344_mabdd"
+            .ConnectionString = "server=*****;user id=*****;password=*****;database=*****"
             .Open()
         End With
 
