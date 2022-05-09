@@ -22,7 +22,7 @@ Public Class ClassDB
         End With
 
         CheckVersion()
-            CheckSiFullban()
+        CheckSiFullban()
         CheckUser()
 
         'cn.Close()
