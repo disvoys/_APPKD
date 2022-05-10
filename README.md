@@ -1,42 +1,40 @@
 # App|KD
- ## _Une application connectée à CATIA V5_
+ ## _An application connected to CATIA V5_
 
 [![N|Solid](https://static.wixstatic.com/media/3e5db5_ce10d9fe62134bf498197a0517ddf50f~mv2.png/v1/fill/w_50,h_50,al_c,lg_1,enc_auto/AppKD.png)](https://www.catiavb.net/)
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://github.com/disvoys/_APPKD/blob/master/LICENSE)  [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://www.catiavb.net/)
 
-App|KD vous permettra de renouer avec la technique. Les tâches répétitives seront réalisées par l'ordinateur. Les gains en productivité sont nombreux :
+App|KD will allow you to reconnect with the technique. Repetitive tasks will be performed by the computer. The productivity gains are numerous:
 
-- Renommage automatique 
-- Gestion des propriétés 3D simplifiée
-- Création et remplissage des cartouches 2D
-- Automatisation de la conception 3D et 2D
-    - Fixation de l'arborescence
-    - Calcul des masses 
-    - Génération de PDF à partir de Drawings
+- Automatic renaming
+- Simplified 3D properties management
+- Creation and filling of 2D cartridges
+- Automation of 3D and 2D design
+    - Fixing the tree
+    - Mass calculation
+    - Generation of PDF from Drawings
 
-## Dernières Mises à Jour
+## Latest Updates
 
-- Application utilisatble pour plusieurs environnements client :
+- Application usable for several client environments:
     - Dassault Aviation
     - Airbus A320
     - Spirit Aerosystems
 
 
-
-> La dernière mise à jour date de 05/2022,
-> L'application est continuellement mise à jour.
-
+> The last update dates from 05/2022,
+> The application is continuously updated.
 
 
-## Installation et code source
+## Installation and source code
 
-La dernière publication est disponible ici :
+The latest publication is available here:
 ```sh
 _AppKD\AppKD_Publication\Setup.exe
 ```
 
-Le code source en VB.net est disponible ici :
+The source code in VB.net is available here:
 ```sh
 _AppKD\AppKD.sln
 ```
