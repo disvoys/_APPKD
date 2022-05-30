@@ -143,3 +143,8 @@ C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Données\envSPIRI
 C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Données\envSPIRIT\SPIRIT-A2_TEMPLATE.CATDrawing
 C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Données\envSPIRIT\SPIRIT_CATALOGUE MATIERES.CATMaterial
 C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Données\Request.ini
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\obj\Debug\Interop.PROCESSITF.dll
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Données\envDASSAULT\arboDassault\MA00001Z00-REFBE_000000.CATProduct
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Données\envDASSAULT\arboDassault\MA00001Z00-REFBE_010000.CATProduct
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Données\envDASSAULT\arboDassault\MA00001Z00-REFBE_999999.CATPart
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Données\envDASSAULT\arboDassault\MA00001Z00-REFBE_CTR001.CATPart

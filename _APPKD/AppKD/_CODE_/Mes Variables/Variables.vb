@@ -139,6 +139,7 @@ Module Variables
             If item = s Then
                 Return i
             End If
+            i = i + 1
         Next
         Return Nothing
     End Function

@@ -79,7 +79,7 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("EXCENT")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("DESVOIS")>  _
     Public Property DRN() As String
         Get
             Return CType(Me("DRN"),String)

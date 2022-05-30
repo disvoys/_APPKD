@@ -39,9 +39,13 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 5">
                     <TextBlock Text="AIRBUS"  x:Name="labelClient" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
                     <TextBlock Text="|"  Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                    <TextBlock Text="V3.0.17" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                    <Button Width="30" Height="30" x:Name="reportBUGbutton" Click="reportBUGbutton_Click" Padding="0" Background="{x:Null}" ToolTip="Rapporter un bug ou une idée d'amélioration" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 30 0">
+                    <TextBlock Text="V3.0.19" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                   
+                    <Button Width="30" Height="30" x:Name="reportBUGbutton" Click="reportBUGbutton_Click" Padding="0" Background="{x:Null}" ToolTip="Rapporter un bug ou une idée d'amélioration" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 0 0">
                         <materialDesign:PackIcon Kind="EmailAlertOutline" />
+                    </Button>
+                    <Button Width="30" Height="30" x:Name="SettingsButtonGen" Click="SettingsButtonGen_Click"  Padding="0" Background="{x:Null}" ToolTip="Paramètres environnements" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 30 0">
+                        <materialDesign:PackIcon Kind="Settings" />
                     </Button>
                     <Button Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="Gray" x:Name="ButtonMinimize" Click="ButtonMinimize_Click">
                         <materialDesign:PackIcon Kind="WindowMinimize"/>
@@ -501,7 +505,7 @@
                         <materialDesign:PackIcon Kind="AutoDownload" Foreground="#0E1D31" />
                     </Button>
                     <Separator/>
-                        <Button Name="ButtonBOM"  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Nommenclature" Click="Button_Click_10">
+                        <Button Name="ButtonBOM"  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Nomenclature" Click="Button_Click_10">
                             <materialDesign:PackIcon Kind="Edit" Foreground="#0E1D31" />
                         </Button>
                         <Button Name="ButtonOBS" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Observations" Click="Button_Click_8">
@@ -642,7 +646,7 @@
                                     </Style>
                                 </MenuItem.Style>
                             </MenuItem>
-                            <MenuItem x:Name="ButtonNomenclature" Header="Nommenclature"  IsEnabled="false">
+                            <MenuItem x:Name="ButtonNomenclature" Header="Nomenclature"  IsEnabled="false">
                                 <MenuItem.Icon>
                                     <Image Source="/Icons/BOM.png" Width="15" Height="15"/>
                                 </MenuItem.Icon>
@@ -796,7 +800,7 @@
                             <StackPanel Grid.Column="1" Margin="20" VerticalAlignment="Center">
                                 <TextBlock  Text="AppKD | Application gestion CATIA - 32 bits"/>
                                 <TextBlock Text="ID de produit : 495f60fe-4a76-4a61-9afb-3747e62eef89"/>
-                                <TextBlock Text="Mise à jour V3.0.17"/>
+                                <TextBlock Text="Mise à jour V3.0.19"/>
                                 <TextBlock Text="Date de la dernière Mise à Jour : Avril 2022"/>
                                 <TextBlock Text="Développé sous : Windows 10 et CATIA V5 R27 anglais"/>
                                 <TextBlock Text="_____"/>
@@ -815,32 +819,37 @@
 
                             <ScrollViewer Grid.Row="1" Width="900" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0">
                                 <StackPanel Width="auto" >
-                                    <TextBlock Text="V3.0.17 | Note de mise à jour" FontWeight="Bold" />
+                                    <TextBlock Text="V3.0.19 | Note de mise à jour" FontWeight="Bold" />
                                 <Separator/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[GENERAL]" Width="100"/>
-                                    <TextBlock Text="Corrections mineurs et optimisation du code permettant des calculs plus rapides"/>
+                                    <TextBlock Text="Correction MAJEURE d'un bug empêchant le bon remplissage du tableau après selection d'une matière ou tts"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[GENERAL]" Width="100"/>
-                                    <TextBlock Text="Corrections d'un bug qui permet la bonne recherche d'un élément suite à un clic droit/rechercher dans CATIA"/>
+                                    <TextBlock Text="Correction d'un bug majeur empêchant la création de nouvelle arborescence"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[CATProduct]" Width="100"/>
-                                    <TextBlock Text="Ajout d'une icone qui renvoie les dossiers standards client"/>
+                                    <TextBlock Text="[DRAWINGS]" Width="100"/>
+                                    <TextBlock Text="Correction majeure d'un bug qui empêcher la bonne rentrée des données dans le cartouche"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[CATPart]" Width="100"/>
-                                    <TextBlock Text="Mise à jour visuelle de l'arbre"/>
+                                    <TextBlock Text="[DRAWINGS]" Width="100"/>
+                                    <TextBlock Text="Modifications mineures dans les templates de cartouches"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[SETTINGS]" Width="100"/>
-                                    <TextBlock Text="Ajout la possibilité de cacher ou afficher des colonnes via les settings"/>
+                                    <TextBlock Text="[BOM]" Width="100"/>
+                                    <TextBlock Text="Correction d'un bug mineur empêchant la prise en compte d'éléments cachés dans la BOM"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[SETTINGS]" Width="100"/>
-                                    <TextBlock Text="Amélioration des calculs de switch entre environnements clients"/>
+                                    <TextBlock Text="[DASSAULT]" Width="100"/>
+                                    <TextBlock Text="Correction d'un bug qui empêchait l'écriture de DESCRIPTION"/>
                                 </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="[DASSAULT]" Width="100"/>
+                                    <TextBlock Text="Correction d'un bug qui empêchait l'écriture de REVISION"/>
+                                </StackPanel>
+
                             </StackPanel>
                             </ScrollViewer>
 

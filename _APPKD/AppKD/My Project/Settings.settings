@@ -9,7 +9,7 @@
       <Value Profile="(Default)">SAINT-NAZAIRE</Value>
     </Setting>
     <Setting Name="DRN" Type="System.String" Scope="User">
-      <Value Profile="(Default)">EXCENT</Value>
+      <Value Profile="(Default)">DESVOIS</Value>
     </Setting>
     <Setting Name="TITLE1" Type="System.String" Scope="User">
       <Value Profile="(Default)">OUTILLAGE DE FORMAGE</Value>

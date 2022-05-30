@@ -12,7 +12,6 @@ Imports ProductStructureTypeLib
 
 Public Class CatiaClass
 
-
     Function GetPathCATIA() As String
 
         Return CATIA.SystemService.Environ("CATDLLPath")
@@ -321,7 +320,7 @@ Public Class CatiaClass
 
         CATIA.DisplayFileAlerts = False
 
-        Dim pr As ProductDocument = CATIA.Documents.Open("\\multilauncher\AppKDData\envDASSAULT\ArboType\MA00001Z00-REFBE_000000.CATProduct")
+        Dim pr As ProductDocument = CATIA.Documents.Open(DossierBase & "\" & INIProperties.GetString(GetEnv, "TemplateARBORESCENCE", ""))
 
         'produit de tete
         Dim p As Product = pr.Product
@@ -1027,7 +1026,7 @@ Boucle:
                     If T.Name = "TitleBlock_Data_Rights17" Then
                         Dim f() As String = Strings.Split(n, "_")
                         Dim ss As String = f(0)
-                        ss = Strings.Right(ss, ss.Length - 11)
+                        If ss.Length > 12 Then ss = Strings.Right(ss, ss.Length - 11)
                         T.Text = ss
                     End If
                 Else
@@ -1038,14 +1037,14 @@ Boucle:
                 End If
 
                 If T.Name = "TitleBlock_Data_Tableau_1_0" Then
-                    T.Text = ic.l(getItemListProperties("NomPuls_Planche")).Value
+                    T.Text = ic.ProductCATIA.UserRefProperties.Item("NomPuls_Planche").Value
                 End If
 
                 If T.Name = "TitleBlock_Data_Tableau_3_0" Then
                     T.Text = ic.DescriptionRef
                 End If
                 If T.Name = "TitleBlock_Data_Tableau_4_0" Then
-                    T.Text = ic.l(getItemListProperties("NomPuls_Matiere")).Value
+                    T.Text = ic.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "")).Value
                 End If
 
                 If T.Name = "TitleBlock_Data_Tableau_5_0" Then
@@ -1060,10 +1059,10 @@ Boucle:
 
                 End If
                 If T.Name = "TitleBlock_Data_Tableau_6_0" Then
-                    T.Text = ic.l(getItemListProperties("NomPuls_Masse")).Value & " Kg"
+                    T.Text = ic.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteMASSE", "")).Value & " Kg"
                 End If
                 If T.Name = "TitleBlock_Data_Tableau_7_0" Then
-                    T.Text = ic.l(getItemListProperties("NomPuls_Traitement")).Value
+                    T.Text = ic.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "")).Value
                 End If
 
 
@@ -1130,8 +1129,8 @@ Boucle:
                 End If
                 If T.Name = "AUKTbkText_JAT_AIF_STRUCTURE_DETAIL_L4" Then
                     Dim str As String = ""
-                    If Not ic.l(getItemListProperties("SYM")).Value Is Nothing Then
-                        str = ic.l(getItemListProperties("SYM")).Value.ToString
+                    If Not ic.ProductCATIA.UserRefProperties.Item("SYM").Value Is Nothing Then
+                        str = ic.ProductCATIA.UserRefProperties.Item("SYM").Value.ToString
                     End If
                     If str <> "" Then
                         T.Text = str & " (SYM)"
@@ -1145,13 +1144,13 @@ Boucle:
                     T.Text = ic.DescriptionRef
                 End If
                 If T.Name = "AUKTbkText_JAT_AIF_TOOL_MASS" Then
-                    T.Text = ic.ProductCATIA.UserRefProperties.GetItem("MASS").valueasstring
+                    T.Text = ic.ProductCATIA.UserRefProperties.GetItem(INIProperties.GetString(GetEnv, "ProprieteMASSE", "")).valueasstring
                 End If
                 If T.Name = "AUKTbkText_JAT_ALL_PAINT_PROTECTION_L1" Then
-                    T.Text = ic.ProductCATIA.UserRefProperties.GetItem("TTS").valueasstring
+                    T.Text = ic.ProductCATIA.UserRefProperties.GetItem(INIProperties.GetString(GetEnv, "ProprieteTTS", "")).valueasstring
                 End If
                 If T.Name = "AUKTbkText_JAT_ALL_PAINT_PROTECTION_L2" Then
-                    If Strings.UCase(ic.ProductCATIA.UserRefProperties.GetItem("TTS").valueasstring) = "PEINTURE" Then
+                    If Strings.UCase(ic.ProductCATIA.UserRefProperties.GetItem(INIProperties.GetString(GetEnv, "ProprieteTTS", "")).valueasstring) = "PEINTURE" Then
                         T.Text = "RAL " & "XXXX"
                     End If
                 End If
@@ -1160,12 +1159,12 @@ Boucle:
                 End If
                 If T.Name = "AUKTbkText_JAT_ALL_REMARK_L2" Then
 
-                    T.Text = ic.ProductCATIA.UserRefProperties.GetItem("TTS").valueasstring
+                    T.Text = ic.ProductCATIA.UserRefProperties.GetItem(INIProperties.GetString(GetEnv, "ProprieteTTS", "")).valueasstring
 
                 End If
                 If T.Name = "AUKTbkText_JAT_AIF_AFFECTATION_MAT" Then
 
-                    T.Text = ic.ProductCATIA.UserRefProperties.GetItem("MATERIAL").valueasstring
+                    T.Text = ic.ProductCATIA.UserRefProperties.GetItem(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "")).valueasstring
 
                 End If
                 If T.Name = "AUKTbkText_JAT_ALL_SCALE" Then
@@ -1191,6 +1190,10 @@ Boucle:
                 End If
                 If T.Name = "AUKTbkText_JAT_AIF_PROGRAM_L3" Then
                     T.Text = My.Settings.PROGRAM.ToString
+                End If
+
+                If T.Name = "DA_SOC" Then
+                    T.Text = My.Settings.DRN.ToString
                 End If
             Next
 
@@ -1272,16 +1275,16 @@ Boucle:
                 End If
                 If T.Name = "TextSHEET" Then
                     If textSheet = False Then
-                        T.Text = ic.l(getItemListProperties("DETAIL NUMBER")).Value & " Of " & "_"
+                        T.Text = ic.ProductCATIA.UserRefProperties.Item("DETAIL NUMBER").Value & " Of " & "_"
                     Else
-                        T.Text = "SD" & ic.l(getItemListProperties("DETAIL NUMBER")).Value
+                        T.Text = "SD" & ic.ProductCATIA.UserRefProperties.Item("DETAIL NUMBER").Value
                     End If
                 End If
                 If T.Name = "TextDetailNb" Then
-                    T.Text = ic.l(getItemListProperties("DETAIL NUMBER")).Value
+                    T.Text = ic.ProductCATIA.UserRefProperties.Item("DETAIL NUMBER").Value
                 End If
                 If T.Name = "TextMAT-TTS-POIDS" Then
-                    T.Text = Strings.UCase(ic.ProductCATIA.UserRefProperties.GetItem("MATERIAL").valueasstring) & " - " & ic.DescriptionRef & Chr(10) & Strings.UCase(ic.ProductCATIA.UserRefProperties.GetItem("STOCK SIZE").valueasstring)
+                    T.Text = Strings.UCase(ic.ProductCATIA.UserRefProperties.GetItem(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "")).valueasstring) & " - " & ic.DescriptionRef & Chr(10) & Strings.UCase(ic.ProductCATIA.UserRefProperties.GetItem("STOCK SIZE").valueasstring)
                 End If
             Next
 
@@ -1292,9 +1295,9 @@ Boucle:
             s1 = Replace(s1, "_", "")
 
             If textSheet = True Then
-                s1 = s1 & "_SD" & ic.l(getItemListProperties("DETAIL NUMBER")).Value & "_" & ic.Revision
+                s1 = s1 & "_SD" & ic.ProductCATIA.UserRefProperties.Item("DETAIL NUMBER").Value & "_" & ic.Revision
             Else
-                s1 = s1 & "_SHT" & ic.l(getItemListProperties("DETAIL NUMBER")).Value & "_" & ic.Revision
+                s1 = s1 & "_SHT" & ic.ProductCATIA.UserRefProperties.Item("DETAIL NUMBER").Value & "_" & ic.Revision
             End If
 
             Dim NFichier As String = ic.Doc.Path & "\" & s1 & ".CATDrawing"
@@ -1452,14 +1455,14 @@ Boucle:
             End If
 
             If T.Name = "TitleBlock_Data_Tableau_1_0" Then
-                T.Text = MonIC.l(getItemListProperties("NomPuls_Planche")).Value
+                T.Text = MonIC.ProductCATIA.UserRefProperties.Item("NomPuls_Planche").Value
             End If
 
             If T.Name = "TitleBlock_Data_Tableau_3_0" Then
                 T.Text = MonIC.DescriptionRef
             End If
             If T.Name = "TitleBlock_Data_Tableau_4_0" Then
-                T.Text = MonIC.l(getItemListProperties("NomPuls_Matiere")).Value
+                T.Text = MonIC.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "")).Value
             End If
 
             If T.Name = "TitleBlock_Data_Tableau_5_0" Then
@@ -1474,10 +1477,10 @@ Boucle:
 
             End If
             If T.Name = "TitleBlock_Data_Tableau_6_0" Then
-                T.Text = MonIC.l(getItemListProperties("NomPuls_Masse")).Value & " Kg"
+                T.Text = MonIC.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteMASSE", "")).Value & " Kg"
             End If
             If T.Name = "TitleBlock_Data_Tableau_7_0" Then
-                T.Text = MonIC.l(getItemListProperties("NomPuls_Traitement")).Value
+                T.Text = MonIC.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "")).Value
             End If
 
 
@@ -1561,7 +1564,7 @@ Boucle:
         Next
 
         If BoolMessWarningComponents = True Then
-            Dim m As New MessageErreur("Des composants ont été détéctés lors de la génération de la nommenclature. Assurez-vous d'avoir un nom différent pour chaque composant afin de ne pas fausser le calcul des quantités de pièces", Notifications.Wpf.NotificationType.Warning)
+            Dim m As New MessageErreur("Des composants ont été détéctés lors de la génération de la nomenclature. Assurez-vous d'avoir un nom différent pour chaque composant afin de ne pas fausser le calcul des quantités de pièces", Notifications.Wpf.NotificationType.Warning)
         End If
 
 
@@ -1615,11 +1618,11 @@ Boucle:
         listIc = listIc.OrderBy(Function(x) x.Nomenclature).ToList()
         Try
             If CheckSi2D(CATIA.ActiveDocument) = False Then
-                Dim MsgErr As New MessageErreur("Un Drawing doit être ouvert pour pouvoir générer la nommenclature", Notifications.Wpf.NotificationType.Error)
+                Dim MsgErr As New MessageErreur("Un Drawing doit être ouvert pour pouvoir générer la nomenclature", Notifications.Wpf.NotificationType.Error)
                 Exit Sub
             End If
         Catch ex As Exception
-            Dim MsgErr As New MessageErreur("Impossible de générer une nommenclature", Notifications.Wpf.NotificationType.Error)
+            Dim MsgErr As New MessageErreur("Impossible de générer une nomenclature", Notifications.Wpf.NotificationType.Error)
             Exit Sub
         End Try
 
@@ -1890,7 +1893,7 @@ Boucle:
                     T.SetFontSize(0, 0, 2)
                     T.Name = "NomenclatureText_PartNumber_" & i
 
-                    T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", ""))).Value), X + 115, Y + (5 * i))
+                    T = mestexts.Add(CheckSiTextVide(ic.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "")).Value), X + 115, Y + (5 * i))
                     T.AnchorPosition = CatTextAnchorPosition.catTopLeft
                     T.SetFontSize(0, 0, 2)
                     T.Name = "NomenclatureText_matiere_" & i
@@ -1914,7 +1917,7 @@ Boucle:
                     T.SetFontSize(0, 0, 2)
                     T.Name = "NomenclatureText_dimensions_brutes_" & i
 
-                    T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties("OBSERVATIONS")).Value), X + 161, Y + (5 * i))
+                    T = mestexts.Add(CheckSiTextVide(ic.ProductCATIA.UserRefProperties.Item("OBSERVATIONS").Value), X + 161, Y + (5 * i))
                     T.AnchorPosition = CatTextAnchorPosition.catTopLeft
                     T.SetFontSize(0, 0, 2)
                     T.Name = "NomenclatureText_observations_" & i
@@ -1981,7 +1984,7 @@ Boucle:
                     T.SetFontSize(0, 0, 4)
                     T.Name = "TitleBlock_Text_Tableau_1_" & i - 1
 
-                    T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties("NomPuls_Planche")).Value), X + 24.5, Y + 2.5 + (6 * (i - 1)))
+                    T = mestexts.Add(CheckSiTextVide(ic.ProductCATIA.UserRefProperties.Item("NomPuls_Planche").Value), X + 24.5, Y + 2.5 + (6 * (i - 1)))
                     T.WrappingWidth = 25
                     T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                     T.TextProperties.Justification = CatJustification.catCenter
@@ -1997,14 +2000,14 @@ Boucle:
 
                     Dim strDescription As String = ic.ProductCATIA.DescriptionRef
                     If strDescription.Contains(vbCrLf) Then
-                        T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties("NomPuls_Designation")).Value), X + 97, Y + 2.5 + (6 * (i - 1)))
+                        T = mestexts.Add(CheckSiTextVide(ic.ProductCATIA.UserRefProperties.Item("NomPuls_Designation").Value), X + 97, Y + 2.5 + (6 * (i - 1)))
                         T.WrappingWidth = 93
                         T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                         T.TextProperties.Justification = CatJustification.catCenter
                         T.SetFontSize(0, 0, 1.5)
                         T.Name = "TitleBlock_Data_Tableau_3_" & i - 1
                     Else
-                        T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties("NomPuls_Designation")).Value), X + 97, Y + 2.5 + (6 * (i - 1)))
+                        T = mestexts.Add(CheckSiTextVide(ic.ProductCATIA.UserRefProperties.Item("NomPuls_Designation").Value), X + 97, Y + 2.5 + (6 * (i - 1)))
                         T.WrappingWidth = 93
                         T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                         T.TextProperties.Justification = CatJustification.catCenter
@@ -2013,7 +2016,7 @@ Boucle:
                     End If
 
 
-                    T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", ""))).Value), X + 159, Y + 2.5 + (6 * (i - 1)))
+                    T = mestexts.Add(CheckSiTextVide(ic.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "")).Value), X + 159, Y + 2.5 + (6 * (i - 1)))
                     T.WrappingWidth = 30
                     T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                     T.TextProperties.Justification = CatJustification.catCenter
@@ -2038,8 +2041,8 @@ Boucle:
                     T.SetFontSize(0, 0, 2.5)
                     T.Name = "TitleBlock_Data_Tableau_5_" & i - 1
 
-                    Dim s As String = ic.l(getItemListProperties("NomPuls_Dim_Brutes")).Value
-                    If s = "" And ic.l(getItemListProperties("NomPuls_Masse")).Value <> "" Then s = ic.l(getItemListProperties("NomPuls_Masse")).Value & " Kg"
+                    Dim s As String = ic.ProductCATIA.UserRefProperties.Item("NomPuls_Dim_Brutes").Value
+                    If s = "" And ic.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteMASSE", "")).Value <> "" Then s = ic.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteMASSE", "")).Value & " Kg"
                     T = mestexts.Add(CheckSiTextVide(s), X + 205, Y + 2.5 + (6 * (i - 1))) 'dim brutes
                     T.WrappingWidth = 30
                     T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
@@ -2047,7 +2050,7 @@ Boucle:
                     T.SetFontSize(0, 0, 2.5)
                     T.Name = "TitleBlock_Data_Tableau_6_" & i - 1
 
-                    T = mestexts.Add(CheckSiTextVide(ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteTTS", ""))).Value), X + 235, Y + 2.5 + (6 * (i - 1)))
+                    T = mestexts.Add(CheckSiTextVide(ic.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "")).Value), X + 235, Y + 2.5 + (6 * (i - 1)))
                     T.WrappingWidth = 30
                     T.AnchorPosition = CatTextAnchorPosition.catMiddleCenter
                     T.TextProperties.Justification = CatJustification.catCenter
@@ -3032,7 +3035,7 @@ Public Module ModifPlan
                     End If
 
                     If GoDessinateur = True Then
-                        If T.Name = "AUKTbkText_JAT_ALL_DRN" Or T.Name = "AUKTbkText_JAT_ALL_CHKD" Or T.Name = "AUKTbkText_JAT_ALL_APPD" Then
+                        If T.Name = "AUKTbkText_JAT_ALL_DRN" Or T.Name = "AUKTbkText_JAT_ALL_CHKD" Or T.Name = "AUKTbkText_JAT_ALL_APPD" Or T.Name = "DA_SOC" Then
                             T.Text = dessinateur
                         End If
                     End If

@@ -28,6 +28,10 @@ Option Explicit On
  Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("donn%c3%a9es/envspirit/spirit-a2_template.catdrawing"),  _
  Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("donn%c3%a9es/envspirit/spirit_catalogue%20matieres.catmaterial"),  _
  Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("donn%c3%a9es/request.ini"),  _
+ Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("donn%c3%a9es/envdassault/arbodassault/ma00001z00-refbe_000000.catproduct"),  _
+ Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("donn%c3%a9es/envdassault/arbodassault/ma00001z00-refbe_010000.catproduct"),  _
+ Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("donn%c3%a9es/envdassault/arbodassault/ma00001z00-refbe_999999.catpart"),  _
+ Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("donn%c3%a9es/envdassault/arbodassault/ma00001z00-refbe_ctr001.catpart"),  _
  Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/catiapart.ico"),  _
  Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/catiaproduct.ico"),  _
  Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/catiacomposants.bmp")> 

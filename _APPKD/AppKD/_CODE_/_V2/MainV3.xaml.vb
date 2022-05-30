@@ -26,7 +26,6 @@ Public Class MainV3
         End Try
         Getname()
 
-
         URLFolderSTEPReception.Text = Path.GetTempPath
         MonMainV3 = Me
         ResetonLoad()
@@ -78,10 +77,6 @@ Public Class MainV3
         For Each item In listPropertiesall
             Dim c As New DataGridTextColumn
             c.Header = item
-
-            '     Dim index As Integer = l.FindIndex(Function(x As String) x.Contains(c.Header))
-            '   c.Binding = New Binding("l[l.FindIndex(Function(x As itemCATIAProperties) x.Name =" & c.Header & ")].Value")
-
             c.Binding = New Binding("l[" & i & "].Value")
             MaDataGrid.Columns.Add(c)
             i += 1
@@ -798,7 +793,6 @@ Public Class MainV3
         Else
 
             Dim macolonne As String = e.Column.Header
-
             FctionCATIA.AddParamatres(ic.Owner, ic)
             'UserRefProperties
 
@@ -839,7 +833,7 @@ Public Class MainV3
                     ic.ProductCATIA.DescriptionRef = ic.DescriptionRef
                     If Env = "[DASSAULT AVIATION]" Then
                         ic.l(getItemListProperties("NomPuls_Designation")).Value = ic.DescriptionRef
-                        p.Item(e.Column.Header).value = ic.l(getItemListProperties("NomPuls_Designation")).Value
+                        p.Item("NomPuls_Designation").value = ic.DescriptionRef
                     End If
                 Case "PartNumber"
                     'MA55800Z00-PIECE_500006
@@ -869,7 +863,7 @@ Public Class MainV3
                     ic.ProductCATIA.Revision = ic.Revision
                     If Env = "[DASSAULT AVIATION]" Then
                         ic.l(getItemListProperties("NomPuls_Indice")).Value = ic.Revision
-                        p.Item(e.Column.Header).Value = ic.Revision
+                        p.Item("NomPuls_Indice").Value = ic.Revision
                     End If
 
 
@@ -1081,7 +1075,6 @@ Public Class MainV3
                         If ic.Type = "PART" Then
                             Dim str1 As String = Right(ic.PartNumber, 4)
                             Dim int1 As Integer = 0
-
                             Try
                                 int1 = str1
                             Catch ex As Exception
@@ -1212,8 +1205,9 @@ Public Class MainV3
             Dim m As New MessageErreur("Fonction inutile pour un sous-ensemble en dehors de l'envrionnement AIRBUS", Notifications.Wpf.NotificationType.Warning)
         End If
 
+        RefreshTable()
 
-        MaDataGrid.Items.Refresh()
+
     End Sub
 
     Private Sub Button_Click_9(sender As Object, e As RoutedEventArgs)
@@ -1288,8 +1282,16 @@ Public Class MainV3
             Dim m As New MessageErreur("Inutile en dehors des environnements AIRBUS et SPIRIT", Notifications.Wpf.NotificationType.Error)
         End If
 
-        MaDataGrid.Items.Refresh()
+        RefreshTable()
 
+
+
+
+    End Sub
+
+    Sub RefreshTable()
+        MaDataGrid.IsReadOnly = True
+        MaDataGrid.Items.Refresh()
     End Sub
 
     Private Sub ComboBOM_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
@@ -1330,11 +1332,11 @@ Public Class MainV3
                 ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteTTS", ""))).Value = t
                 Dim p As Parameters = ic.ProductCATIA.UserRefProperties
                 Try
-                    p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteTTS", ""))).Value
+                    p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = t
                 Catch ex As Exception
                     FctionCATIA.AddParamatres(ic.Owner, ic)
                     Try
-                        p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = ic.l(getItemListProperties(INIProperties.GetString(GetEnv, "ProprieteTTS", ""))).Value
+                        p.Item(INIProperties.GetString(GetEnv, "ProprieteTTS", "TTS")).Value = t
                     Catch ex_ As Exception
                     End Try
                 End Try
@@ -2190,12 +2192,15 @@ Public Class MainV3
         GridContentCATPART.Visibility = Visibility.Collapsed
         GridLoaded.Visibility = Visibility.Collapsed
         ColDoc = New ListCollectionView(ListDocuments)
-        MaDataGrid.Items.Refresh()
+        RefreshTable()
+
 
 
     End Sub
 
-
+    Private Sub SettingsButtonGen_Click(sender As Object, e As RoutedEventArgs)
+        Process.Start(DossierBase & "\Environnements.ini")
+    End Sub
 End Class
 
 Public Class ItemProperties

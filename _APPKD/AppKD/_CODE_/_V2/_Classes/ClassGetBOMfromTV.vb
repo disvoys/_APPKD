@@ -141,7 +141,11 @@ Public Class ClassGetBOMfromTV
         End If
 
         For Each d As ItemCatia In ListDocuments
-            If d.Qte = 0 Then d.Qte = ""
+            Try
+                If d.Qte = 0 Then d.Qte = ""
+            Catch ex As Exception
+                d.Qte = ""
+            End Try
         Next
 
     End Sub
