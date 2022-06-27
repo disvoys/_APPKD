@@ -68,6 +68,9 @@ Public Class MainV3
 
         aggrandirFenetre()
 
+        'Exit sub
+        '  FctionCATIA.test()
+
 
     End Sub 'LOAD
 

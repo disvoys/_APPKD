@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD_Publication\|\\multilauncher\Install_AppKD\|C:\Users\Kevin.DESVOIS\Desktop\_APPKD-master\_APPKD\AppKD_Publication\|C:\Users\deske\OneDrive\Bureau\|C:\Users\deske\Google Drive\TAFF\_APPKD\AppKD_Publication\</PublishUrlHistory>
-    <InstallUrlHistory />
+    <PublishUrlHistory>ftp://thanos.o2switch.net/public_html/appKD/|C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD_Publication\|\\multilauncher\Install_AppKD\|C:\Users\Kevin.DESVOIS\Desktop\_APPKD-master\_APPKD\AppKD_Publication\|C:\Users\deske\OneDrive\Bureau\</PublishUrlHistory>
+    <InstallUrlHistory>https://www.catiavb.net/appKD/|https://catiavb.net/appKD/</InstallUrlHistory>
     <SupportUrlHistory>https://www.catiavb.net/</SupportUrlHistory>
-    <UpdateUrlHistory>https://drive.google.com/drive/folders/1FMVdjYjeTzOHrIIkFFQscVWMZECDhDDf%3fusp=sharing/</UpdateUrlHistory>
+    <UpdateUrlHistory>http://localhost/AppKD/|https://drive.google.com/drive/folders/1FMVdjYjeTzOHrIIkFFQscVWMZECDhDDf%3fusp=sharing/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory>https://www.catiavb.net/</ErrorReportUrlHistory>
     <FallbackCulture>fr-FR</FallbackCulture>

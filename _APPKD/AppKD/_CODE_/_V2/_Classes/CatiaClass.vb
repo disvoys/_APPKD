@@ -12,6 +12,29 @@ Imports ProductStructureTypeLib
 
 Public Class CatiaClass
 
+
+
+    Sub test()
+
+        Dim d As DrawingDocument = CATIA.ActiveDocument 'need to be a CATDrawing opened
+        Dim t As DrawingTable = d.Sheets.ActiveSheet.Views.ActiveView.Tables.Item(1)
+
+        Dim i As Integer = 1
+        Dim p As Product = CATIA.Documents.Item("Part1.CATPart").product 'i let you find your Part
+
+        For Each MyParam As Parameter In p.Parameters
+            If MyParam.Name Like "*Angle.*" Then 'i let you find a way to get your names
+                t.SetCellString(i, 1, MyParam.ValueAsString)
+                i += 1
+            End If
+        Next
+
+
+
+    End Sub
+
+
+
     Function GetPathCATIA() As String
 
         Return CATIA.SystemService.Environ("CATDLLPath")
