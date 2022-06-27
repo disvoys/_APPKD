@@ -21,7 +21,7 @@ Public Class MainV3
         Try
             cSQL.ConnectionToDB()
         Catch ex As Exception
-            MsgBox("Une erreur lié au reseau est intervenue. Vérifier la connexion internet ou bien votre pare-feu puis réessayer de lancer l'application", MsgBoxStyle.Critical)
+            MsgBox("Une erreur lié au reseau est intervenue. Vérifier la connexion internet ou bien ajouter l'application en liste blanche à votre pare-feu (entrées / sorties) puis réessayer de lancer l'application", MsgBoxStyle.Critical)
             End
         End Try
         Getname()
