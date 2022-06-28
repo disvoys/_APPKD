@@ -43,14 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AppKD.exe" size="576000">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AppKD.exe" size="579584">
       <assemblyIdentity name="AppKD" version="3.0.0.5" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/a0i9ELfI7x6/O3qPsYk72qENHt/9zk3M0ev3IkDeUg=</dsig:DigestValue>
+        <dsig:DigestValue>9Ek24Tl7/u1URkk7TjsWCHwCJhyNg1dhZdnunUJubnU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BootstrapperCore.dll" size="90032">
+      <assemblyIdentity name="BootstrapperCore" version="3.0.0.0" publicKeyToken="CE35F76FCDA82BAD" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>8sKzzi33CjIG8xETkf/Ht5GzJQX6l67yLAwtv287BCY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -99,6 +111,18 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
         <dsig:DigestValue>JtrXjae/sk0gRvOqhvb+d5hE+zaBuq7soIQE9Kuf2/A=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Deployment.WindowsInstaller.dll" size="184240">
+      <assemblyIdentity name="Microsoft.Deployment.WindowsInstaller" version="3.0.0.0" publicKeyToken="CE35F76FCDA82BAD" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>zwbU7UqLr4jILWya4O/IHEad5tqHiKs183OzUKS0zco=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -235,6 +259,42 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WixSharp.dll" size="435712">
+      <assemblyIdentity name="WixSharp" version="1.20.1.0" publicKeyToken="3775EDD25ACC43C2" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>fuphbqiGFFkTwT0jnz4OrVis46Im5aozDme73RZnNRA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WixSharp.Msi.dll" size="31744">
+      <assemblyIdentity name="WixSharp.Msi" version="1.20.1.0" publicKeyToken="3775EDD25ACC43C2" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>5wF3023tDH+i0qMOlMcm9dMaVWJM899GAOdsn6Kh/EY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WixSharp.UI.dll" size="244736">
+      <assemblyIdentity name="WixSharp.UI" version="1.20.1.0" publicKeyToken="3775EDD25ACC43C2" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>W/a8HuwjxENMN+MnB7E4lGEGuOcC+Y4fnK5eJJ2oOGM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WpfAnimatedGif.dll" size="42496">
       <assemblyIdentity name="WpfAnimatedGif" version="2.0.0.0" publicKeyToken="9E7CD3B544A090DC" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -246,13 +306,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="AppKD.exe.config" size="2200">
+  <file name="AppKD.exe.config" size="2199">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>9pz9ZkWgD3yFiaIKjlQ9G2RjCZGHL94k4xsAENU6HnM=</dsig:DigestValue>
+      <dsig:DigestValue>5stBOjcvzohdv7Y7EwlDTgYpe/11vyTzHhdeOgCstdE=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Données\envAIRBUS\A320-A0_TEMPLATE.CATDrawing" size="689651">

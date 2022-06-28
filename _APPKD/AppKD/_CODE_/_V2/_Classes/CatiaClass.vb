@@ -977,7 +977,7 @@ Boucle:
         Dim m As New MessageErreur("Plans indisponibles", Notifications.Wpf.NotificationType.Error)
     End Sub
     Sub CreerPlanDassault(ic As ItemCatia)
-        '   On Error Resume Next
+        On Error Resume Next
 
 
         Dim k = DialogPlanA320.ShowDialog()
@@ -1679,6 +1679,15 @@ Boucle:
                 End If
 
             Next
+            Try
+                Dim se As Selection = CATIA.ActiveDocument.Selection
+                se.Clear()
+                se.Search("Name='" & "NomenclatureText_LinkPartNumber_*" & "';all")
+                se.VisProperties.SetShow(CatVisPropertyShow.catVisPropertyNoShowAttr)
+                se.Clear()
+            Catch ex As Exception
+
+            End Try
             Dim MsgErr As New MessageErreur("La nomenclature a été générée avec succès", Notifications.Wpf.NotificationType.Information)
         Else
             Dim MsgErr As New MessageErreur("Aucun item dans le tableau : la nomenclature a été supprimée avec succès", Notifications.Wpf.NotificationType.Information)
@@ -1809,6 +1818,7 @@ Boucle:
             sel.Add(T)
             sel.VisProperties.SetShow(1)
             sel.Clear()
+
         ElseIf Env = "[DASSAULT AVIATION" Then
             Dim X, Y As Integer
             Select Case TYPEPlan
@@ -1837,6 +1847,8 @@ Boucle:
 
     End Sub
     Sub CreerLignesBOM(v As DrawingView, mestexts As DrawingTexts, ic As ItemCatia, i As Integer, TYPEPlan As String, LineB As LineBOM)
+
+        On Error Resume Next
 
         If Env = "[AIRBUS]" Then
             Dim X, Y As Integer
@@ -1916,6 +1928,7 @@ Boucle:
                     T.SetFontSize(0, 0, 2)
                     T.Name = "NomenclatureText_PartNumber_" & i
 
+
                     T = mestexts.Add(CheckSiTextVide(ic.ProductCATIA.UserRefProperties.Item(INIProperties.GetString(GetEnv, "ProprieteMATERIAL", "")).Value), X + 115, Y + (5 * i))
                     T.AnchorPosition = CatTextAnchorPosition.catTopLeft
                     T.SetFontSize(0, 0, 2)
@@ -1952,6 +1965,9 @@ Boucle:
                 End If
 
             End If
+
+
+
         End If
 
 
@@ -2093,6 +2109,7 @@ Boucle:
         End If
 
 
+        On Error GoTo 0
 
 
 

@@ -39,7 +39,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 5">
                     <TextBlock Text="AIRBUS"  x:Name="labelClient" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
                     <TextBlock Text="|"  Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                    <TextBlock Text="V3.0.19" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBlock Text="V3.0.20" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
                    
                     <Button Width="30" Height="30" x:Name="reportBUGbutton" Click="reportBUGbutton_Click" Padding="0" Background="{x:Null}" ToolTip="Rapporter un bug ou une idée d'amélioration" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 0 0">
                         <materialDesign:PackIcon Kind="EmailAlertOutline" />
@@ -800,8 +800,8 @@
                             <StackPanel Grid.Column="1" Margin="20" VerticalAlignment="Center">
                                 <TextBlock  Text="AppKD | Application gestion CATIA - 32 bits"/>
                                 <TextBlock Text="ID de produit : 495f60fe-4a76-4a61-9afb-3747e62eef89"/>
-                                <TextBlock Text="Mise à jour V3.0.19"/>
-                                <TextBlock Text="Date de la dernière Mise à Jour : Avril 2022"/>
+                                <TextBlock Text="Mise à jour V3.0.20"/>
+                                <TextBlock Text="Date de la dernière Mise à Jour : Juin 2022"/>
                                 <TextBlock Text="Développé sous : Windows 10 et CATIA V5 R27 anglais"/>
                                 <TextBlock Text="_____"/>
                                 <TextBlock Text="Application développée par DESVOIS Kévin,"/>
@@ -819,7 +819,7 @@
 
                             <ScrollViewer Grid.Row="1" Width="900" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0">
                                 <StackPanel Width="auto" >
-                                    <TextBlock Text="V3.0.19 | Note de mise à jour" FontWeight="Bold" />
+                                    <TextBlock Text="V3.0.20 | Note de mise à jour" FontWeight="Bold" />
                                 <Separator/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[GENERAL]" Width="100"/>

@@ -14,14 +14,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="AppKD.exe.manifest" size="26295">
+    <dependentAssembly dependencyType="install" codebase="AppKD.exe.manifest" size="29729">
       <assemblyIdentity name="AppKD.exe" version="3.0.0.93" publicKeyToken="0000000000000000" language="fr" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>geggeaVnUVBmUTuH4V3FMklKWnkGSaQX03dJVMhFJWI=</dsig:DigestValue>
+        <dsig:DigestValue>OYAiMYHu2e1AfM4qDMbLOHZUKaxH+GgSXg6/LNvXbGU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
