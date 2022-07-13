@@ -39,12 +39,12 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 5">
                     <TextBlock Text="AIRBUS"  x:Name="labelClient" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
                     <TextBlock Text="|"  Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                    <TextBlock Text="V3.0.20" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                   
-                    <Button Width="30" Height="30" x:Name="reportBUGbutton" Click="reportBUGbutton_Click" Padding="0" Background="{x:Null}" ToolTip="Rapporter un bug ou une idée d'amélioration" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 0 0">
+                    <TextBlock Text="V3.0.21" x:Name="labelVersio" Foreground="Gray" TextAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0"/>
+
+                    <Button Width="30" Height="30" x:Name="reportBUGbutton" Click="reportBUGbutton_Click" Padding="0" Background="{x:Null}" ToolTip="Report a bug or an idea for improvement" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 0 0">
                         <materialDesign:PackIcon Kind="EmailAlertOutline" />
                     </Button>
-                    <Button Width="30" Height="30" x:Name="SettingsButtonGen" Click="SettingsButtonGen_Click"  Padding="0" Background="{x:Null}" ToolTip="Paramètres environnements" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 30 0">
+                    <Button Width="30" Height="30" x:Name="SettingsButtonGen" Click="SettingsButtonGen_Click"  Padding="0" Background="{x:Null}" ToolTip="Environment settings" BorderBrush="{x:Null}"  Foreground="Gray" Margin="0 0 30 0">
                         <materialDesign:PackIcon Kind="Settings" />
                     </Button>
                     <Button Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="Gray" x:Name="ButtonMinimize" Click="ButtonMinimize_Click">
@@ -60,7 +60,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 0">
                     <TextBlock Text="appKD"   VerticalAlignment="Center" />
                     <TextBlock Text=" | "   VerticalAlignment="Center" Foreground="#76C2AF"/>
-                    <TextBlock Text="Automatisation de la CAO sous CATIA V5" VerticalAlignment="Center" />
+                    <TextBlock Text="CAD automation with CATIA V5" VerticalAlignment="Center" />
                 </StackPanel>
             </Grid>
         </StackPanel>
@@ -86,10 +86,10 @@
                         <Grid x:Name="GridTOMove" Margin="0 0 0 0" Background="#76C2AF" Width="3" VerticalAlignment="top" HorizontalAlignment="Left" Height="32" />
                     </materialDesign:TransitioningContent>
                     <ListView  Foreground="#F9F9F9" x:Name="MaListView"  SelectionChanged="MaListView_SelectionChanged" >
-                        <ListViewItem  ToolTip="Gestion du CATIA ouvert">
+                        <ListViewItem  ToolTip="Management of opened session of CATIA">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Blur" VerticalAlignment="Center"/>
-                                <TextBlock Text="Utilitaire CATIA" VerticalAlignment="Center" Margin="20 0"/>
+                                <TextBlock Text="CATIA Management" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
                         <ListViewItem ToolTip="Macros" IsEnabled="False">
@@ -98,36 +98,36 @@
                                 <TextBlock Text="Macros" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem ToolTip="Bibliothèque de CAO" IsEnabled="false">
+                        <ListViewItem ToolTip="CAD Library" IsEnabled="false">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Library" VerticalAlignment="Center"/>
                                 <TextBlock Text="Bibliothèque" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
                         <Separator Height="11" />
-                        <ListViewItem ToolTip="Fusionne ou fractionne un ensemble de PDF">
+                        <ListViewItem ToolTip="Merge or split a set of PDF files">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="FilePdf" VerticalAlignment="Center"/>
-                                <TextBlock Text="Outil PDF" VerticalAlignment="Center" Margin="20 0"/>
+                                <TextBlock Text="PDF Tool" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem ToolTip="Convertir des fichiers CATIA en STEP et inversement">
+                        <ListViewItem ToolTip="Convert CATIA files to STEP and vice versa">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="FileSwap" VerticalAlignment="Center"/>
-                                <TextBlock Text="Convertir STEP" VerticalAlignment="Center" Margin="20 0"/>
+                                <TextBlock Text="Convert STEP" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
                         <Separator Height="11" />
-                        <ListViewItem ToolTip="Options">
+                        <ListViewItem ToolTip="Settings">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Tools" VerticalAlignment="Center"/>
-                                <TextBlock Text="Options" VerticalAlignment="Center" Margin="20 0"/>
+                                <TextBlock Text="Settings" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem ToolTip="À propos">
+                        <ListViewItem ToolTip="About">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="AboutVariant" VerticalAlignment="Center"/>
-                                <TextBlock Text="À propos" VerticalAlignment="Center" Margin="20 0"/>
+                                <TextBlock Text="About" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
                         
@@ -348,18 +348,18 @@
                     </Button>
                     <materialDesign:Badged BadgeBackground="#76C2AF" Name="BadgeReloadCATPART" BadgeForeground="White" BadgePlacementMode="Right" Badge="" CornerRadius="5">
                         <Button Click="Button_Click_12"
-        ToolTip="Recharger"
+        ToolTip="Reload"
         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
         Content="{materialDesign:PackIcon Kind=Reload}" />
                     </materialDesign:Badged>
                     <Separator Margin="10 0 0 0"/>
                     <materialDesign:Badged BadgeBackground="#76C2AF"  BadgeForeground="White" BadgePlacementMode="Right" CornerRadius="5">
                         <Button Click="Button_Click_9"
-       ToolTip="Calculer la masse"
+       ToolTip="Calculate the mass"
         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
         Content="{materialDesign:PackIcon Kind=ScaleBalance}" />
                     </materialDesign:Badged>
-                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Supprimer les propriétés 3D de l'ensemble des éléments" Click="Button_Click">
+                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remove all the 3D properties" Click="Button_Click">
                         <materialDesign:PackIcon Kind="LockReset" Foreground="#0E1D31" />
                     </Button>
 
@@ -412,13 +412,15 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="*"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="40"/>
+                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="350" MinWidth="20"/>
                     <ColumnDefinition Width="*" MinWidth="20"/>
                 </Grid.ColumnDefinitions>
+                    
 
                     <TreeView x:Name="MonTV" Grid.Column="0" Grid.Row="1" SelectedItemChanged="MonTV_SelectedItemChanged"  FontSize="11" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0,0,1,0">
                         <TreeView.Resources>
@@ -483,39 +485,45 @@
                         </TreeView.Resources>
                     </TreeView>
 
+                <Border Background="#353365"  Grid.Row="2" Grid.RowSpan="3" Margin="0 10 10 10">
+                    <Image Name="imgSource" Width="150" Height="200">
+
+                    </Image>
+                </Border>
+               
 
                 <ToolBar Style="{DynamicResource MaterialDesignToolBar}" Grid.Row="0" Grid.Column="1" MouseDown="Grid_MouseDown_1"  >
                     <materialDesign:Badged BadgeBackground="#76C2AF" Name="BadgeReload" BadgeForeground="White" BadgePlacementMode="Right" Badge="!" CornerRadius="5">
                         <Button Click="Button_Click_12"
-        ToolTip="Recharger"
+        ToolTip="Reload"
         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
         Content="{materialDesign:PackIcon Kind=Reload}" />
                     </materialDesign:Badged>
                     
                     <Separator Margin="10 0 0 0"/>
-                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Nouvelle arborescence" Click="Button_Click_1">
+                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="New product" Click="Button_Click_1">
                             <materialDesign:PackIcon Kind="FileTree" Foreground="#0E1D31" />
                         </Button>
                        
                     <Separator />
-                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" Click="ExportDrawing_Click" ToolTip="Générer la nomenclature sur un CATDrawing">
+                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" Click="ExportDrawing_Click" ToolTip="Generate BOM on a CATDrawing">
                             <materialDesign:PackIcon Kind="ViewListOutline" Foreground="#0E1D31" />
                         </Button>
-                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click_15"  ToolTip="Mise à jour du cartouche">
+                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click_15"  ToolTip="Update the CATDrawing">
                         <materialDesign:PackIcon Kind="AutoDownload" Foreground="#0E1D31" />
                     </Button>
                     <Separator/>
-                        <Button Name="ButtonBOM"  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Nomenclature" Click="Button_Click_10">
+                    <Button Name="ButtonBOM"  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Filling the BOM property" Click="Button_Click_10">
                             <materialDesign:PackIcon Kind="Edit" Foreground="#0E1D31" />
                         </Button>
-                        <Button Name="ButtonOBS" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Observations" Click="Button_Click_8">
+                        <Button Name="ButtonOBS" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Filling the Observations property" Click="Button_Click_8">
                             <materialDesign:PackIcon Kind="Glasses" Foreground="#0E1D31" />
                         </Button>
-                        <Button Name="ButtonSYM" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remplissage de la propriété Symétrie" Click="Button_Click_6">
+                        <Button Name="ButtonSYM" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Filling the Sym propertiy" Click="Button_Click_6">
                             <materialDesign:PackIcon Kind="CodeParentheses" Foreground="#0E1D31" />
                         </Button>
                         <Separator Name="SeparatorToHide"/>
-                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Fixer les éléments" Click="Button_Click_7">
+                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Fix all the elements" Click="Button_Click_7">
                             <materialDesign:PackIcon Kind="Webhook" Foreground="#0E1D31" />
                         </Button>
                     <materialDesign:Badged BadgeBackground="#76C2AF" Name="BadgeReloadMass" BadgeForeground="White" BadgePlacementMode="Right" CornerRadius="5">
@@ -524,30 +532,30 @@
         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
         Content="{materialDesign:PackIcon Kind=ScaleBalance}" />
                     </materialDesign:Badged>
-                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Supprimer les propriétés 3D de l'ensemble des éléments" Click="Button_Click">
+                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Remove all the 3D properties" Click="Button_Click">
                             <materialDesign:PackIcon Kind="LockReset" Foreground="#0E1D31" />
                         </Button>
                         <Separator/>
                     
-                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Renommage des instances" Click="Button_Click_2">
+                        <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Rename partnames" Click="Button_Click_2">
                             <materialDesign:PackIcon Kind="Rename" Foreground="#0E1D31" />
                         </Button>
                     
                  
                   
-                    <Button  VerticalAlignment="Center" Visibility="Collapsed" HorizontalAlignment="Center" ToolTip="Renommage automatique" Click="Button_Click_16">
+                    <Button  VerticalAlignment="Center" Visibility="Collapsed" HorizontalAlignment="Center" ToolTip="Renaming" Click="Button_Click_16">
                         <materialDesign:PackIcon Kind="Gyro" Foreground="#0E1D31" />
                     </Button>
                     <Separator/>
-                    <Button  VerticalAlignment="Center" Visibility="Visible" HorizontalAlignment="Center" ToolTip="Ouvrir l'emplacement de la racine" Name="ButtonOpenDocClients" Click="ButtonOpenDocClients_Click">
+                    <Button  VerticalAlignment="Center" Visibility="Visible" HorizontalAlignment="Center" ToolTip="Open the main folder" Name="ButtonOpenDocClients" Click="ButtonOpenDocClients_Click">
                         <materialDesign:PackIcon Kind="FolderEyeOutline" Foreground="#0E1D31" />
                     </Button>
-                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Ouvrir la bibliothèque de matériaux" Click="Button_Click_3">
+                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Open the material library" Click="Button_Click_3">
                             <materialDesign:PackIcon Kind="HexagonSlice3" Foreground="#0E1D31" />
                         </Button>
                         <Separator />
                         <TextBox
-                              materialDesign:HintAssist.Hint="Recherche d'un élément ?"
+                              materialDesign:HintAssist.Hint="Do you need something?"
                               Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                               VerticalAlignment="Center"
                             Width="200"
@@ -565,7 +573,7 @@
                             HorizontalAlignment="Right" x:Name="ComboBOM" Width="180" SelectionChanged="ComboBOM_SelectionChanged"/>
                     </ToolBar>
 
-                <DataGrid x:Name="MaDataGrid" IsReadOnly="true"  PreviewKeyDown="MaDataGrid_PreviewKeyDown" MouseDoubleClick="MaDataGrid_MouseDoubleClick" SelectionChanged="MaDataGrid_SelectionChanged" CurrentCellChanged="MaDataGrid_CurrentCellChanged"  CellEditEnding="MaDataGrid_CellEditEnding"  Grid.Row="1" Grid.Column="1" FontSize="11" VerticalAlignment="Stretch" 
+                <DataGrid x:Name="MaDataGrid" IsReadOnly="true" Grid.RowSpan="2"  PreviewKeyDown="MaDataGrid_PreviewKeyDown" MouseDoubleClick="MaDataGrid_MouseDoubleClick" SelectionChanged="MaDataGrid_SelectionChanged" CurrentCellChanged="MaDataGrid_CurrentCellChanged"  CellEditEnding="MaDataGrid_CellEditEnding"  Grid.Row="1" Grid.Column="1" FontSize="11" VerticalAlignment="Stretch" 
                               Background="#F9F9F9" FrozenColumnCount="6" Focusable="True"  AlternatingRowBackground="#f5f5f5" CanUserAddRows="false" HeadersVisibility="Column" CanUserSortColumns="True" CanUserReorderColumns="True"
                               CanUserDeleteRows="false" CanUserResizeColumns="True" CanUserResizeRows="false" BorderThickness="0.5" BorderBrush="Gray" AutoGenerateColumns="false"
                               GridLinesVisibility="Vertical" VerticalGridLinesBrush="Gray" SelectionMode="Extended"  IsTextSearchCaseSensitive="False"  ItemsSource="{Binding Path=., Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged }">
@@ -733,8 +741,8 @@
                             </ScrollViewer>
                         </Border>
                     </Popup>
-                <ProgressBar IsIndeterminate="True" Grid.Column="1" Grid.Row="2" Visibility="Collapsed" Background="#76C2AF" Foreground="#0E1D31" Name="ProgressTableau"  />
-                <Grid  Grid.Column="1" Grid.Row="3">
+                <ProgressBar IsIndeterminate="True" Grid.Column="1" Grid.Row="3" Visibility="Collapsed" Background="#76C2AF" Foreground="#0E1D31" Name="ProgressTableau"  />
+                <Grid  Grid.Column="1" Grid.Row="4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -752,7 +760,7 @@
                         <TextBlock Margin="10" x:Name="TextNbElements" HorizontalAlignment="Right" Grid.Column="1"/>
                     </Grid>
 
-                <GridSplitter Grid.Column="0"  Grid.RowSpan="4" Name="GridSplitTV1" Background="gray" Width="2" />
+                <GridSplitter Grid.Column="0"  Grid.RowSpan="5" Name="GridSplitTV1" Background="gray" Width="2" />
             </Grid>
 
         </Grid>
@@ -799,18 +807,18 @@
                             </StackPanel>
                             <StackPanel Grid.Column="1" Margin="20" VerticalAlignment="Center">
                                 <TextBlock  Text="AppKD | Application gestion CATIA - 32 bits"/>
-                                <TextBlock Text="ID de produit : 495f60fe-4a76-4a61-9afb-3747e62eef89"/>
-                                <TextBlock Text="Mise à jour V3.0.20"/>
-                                <TextBlock Text="Date de la dernière Mise à Jour : Juin 2022"/>
-                                <TextBlock Text="Développé sous : Windows 10 et CATIA V5 R27 anglais"/>
+                                <TextBlock Text="Product ID : 495f60fe-4a76-4a61-9afb-3747e62eef89"/>
+                                <TextBlock Text="Update V3.0.21"/>
+                                <TextBlock Text="Last update : July 2022"/>
+                                <TextBlock Text="Developped with : Windows 10 and CATIA V5 R27 en"/>
                                 <TextBlock Text="_____"/>
-                                <TextBlock Text="Application développée par DESVOIS Kévin,"/>
-                                <TextBlock Text="protégée par licence APACHE 2.0"/>
+                                <TextBlock Text="Application developped by DESVOIS Kévin,"/>
+                                <TextBlock Text="procetected with licence APACHE 2.0"/>
                                 <TextBlock Text="       "/>
                                 <TextBlock Text="©2022 DESVOIS Kevin"/>
                                 <TextBlock Text="       "/>
-                                <TextBlock Text="Toutes modifications du code source devra être clairement indiquées"/>
-                                <TextBlock Text="Le copyright doit être maintenu après modifications du code source"/>
+                                <TextBlock Text="Any modifications to the source code must be clearly indicated"/>
+                                <TextBlock Text="The copyright must be maintained after modifications of the source code"/>
 
                                 <TextBlock Text="contact : desvoisevin@gmail.com"/>
                             </StackPanel>
@@ -819,7 +827,7 @@
 
                             <ScrollViewer Grid.Row="1" Width="900" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0">
                                 <StackPanel Width="auto" >
-                                    <TextBlock Text="V3.0.20 | Note de mise à jour" FontWeight="Bold" />
+                                    <TextBlock Text="V3.0.21 | Patch Note" FontWeight="Bold" />
                                 <Separator/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[GENERAL]" Width="100"/>
@@ -827,28 +835,9 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="[GENERAL]" Width="100"/>
-                                    <TextBlock Text="Correction d'un bug majeur empêchant la création de nouvelle arborescence"/>
+                                    <TextBlock Text="adding the image of the selected product"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[DRAWINGS]" Width="100"/>
-                                    <TextBlock Text="Correction majeure d'un bug qui empêcher la bonne rentrée des données dans le cartouche"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[DRAWINGS]" Width="100"/>
-                                    <TextBlock Text="Modifications mineures dans les templates de cartouches"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[BOM]" Width="100"/>
-                                    <TextBlock Text="Correction d'un bug mineur empêchant la prise en compte d'éléments cachés dans la BOM"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[DASSAULT]" Width="100"/>
-                                    <TextBlock Text="Correction d'un bug qui empêchait l'écriture de DESCRIPTION"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="[DASSAULT]" Width="100"/>
-                                    <TextBlock Text="Correction d'un bug qui empêchait l'écriture de REVISION"/>
-                                </StackPanel>
+
 
                             </StackPanel>
                             </ScrollViewer>
@@ -968,12 +957,12 @@
 
                         </StackPanel>
                         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBlock Text="Utilisation de l'API "/>
+                            <TextBlock Text="API used : "/>
                             <TextBlock FontSize="11">
                                     <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" 
                                      NavigateUri="http://www.pdfclown.org/">©PDFClown</Hyperlink>
                             </TextBlock>
-                            <TextBlock Text=" | licence protégée par "/>
+                            <TextBlock Text=" | licence protected by "/>
                             <TextBlock  FontSize="11">
                                     <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" 
                                      NavigateUri=" http://www.gnu.org/licenses/lgpl-3.0.html"> GNU LGPL V2</Hyperlink>
@@ -1339,9 +1328,9 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Button.Style>
-                                <TextBlock Grid.Column="1" Text="Sélection des fichiers" Foreground="#F9F9F9" VerticalAlignment="center"  FontSize="16"/>
+                                <TextBlock Grid.Column="1" Text="Files selection" Foreground="#F9F9F9" VerticalAlignment="center"  FontSize="16"/>
                             </Button>
-                            <TextBlock Text="[Glisser/Déposer les fichiers ou séléction des fichiers]" Margin="0,30,0,0" HorizontalAlignment="center"/>
+                            <TextBlock Text="[Drag and Drop files or file selection]" Margin="0,30,0,0" HorizontalAlignment="center"/>
 
                         </StackPanel>
 
@@ -1359,7 +1348,7 @@
                          materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF"
                             />
                             <TextBox
-                              materialDesign:HintAssist.Hint="Dossier de réception des fichiers convertis"
+                              materialDesign:HintAssist.Hint="Receive folder for converted files"
                                 Margin="0 10 0 0"
                               Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                               VerticalAlignment="Center"
@@ -1372,8 +1361,8 @@
                          materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF"
                             />
                             <TextBox
-                              materialDesign:HintAssist.Hint="Nom de la machine distante"
-                                Margin="0 10 0 0" ToolTip="Sur la machine distante il est important que service Backbone soit activé. Pour se faire dans cmd : "
+                              materialDesign:HintAssist.Hint="Name of the remote machine"
+                                Margin="0 10 0 0" ToolTip="On the remote machine it is important that the Backbone service is activated. To do it in cmd: "
                               Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                               VerticalAlignment="Center"
                                 HorizontalAlignment="Left"

@@ -190,3 +190,7 @@ C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\obj\Debug\Interop.SMTypeLib
 C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\obj\Debug\Interop.SPATypeLib.dll
 C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\obj\Debug\Interop.StrTypeLib.dll
 C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\obj\Debug\Interop.SURFACEMACHINING.dll
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\deske\Google Drive\TAFF\_APPKD\_APPKD\AppKD\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml

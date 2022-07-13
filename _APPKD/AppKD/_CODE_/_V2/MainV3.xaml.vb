@@ -9,6 +9,7 @@ Imports System.IO
 Imports System.Windows.Controls.Primitives
 Imports KnowledgewareTypeLib
 Imports Microsoft.Win32
+Imports Microsoft.WindowsAPICodePack.Shell
 Imports ProductStructureTypeLib
 
 Public Class MainV3
@@ -18,12 +19,8 @@ Public Class MainV3
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
 
 
-        Try
-            cSQL.ConnectionToDB()
-        Catch ex As Exception
-            MsgBox("Une erreur lié au reseau est intervenue. Vérifier la connexion internet ou bien ajouter l'application en liste blanche à votre pare-feu (entrées / sorties) puis réessayer de lancer l'application", MsgBoxStyle.Critical)
-            End
-        End Try
+
+        cSQL.ConnectionToDB()
         Getname()
 
         URLFolderSTEPReception.Text = Path.GetTempPath
@@ -32,7 +29,7 @@ Public Class MainV3
         ListViewPDF.SelectedIndex = 0
 
         ListeEnvironements()
-        creerColonnes()
+        CreerColonnes()
         CreerCheckBoxEnvironnementSettings()
         INIFiles = New GestionINIFiles(DossierBase & "\Request.ini")
         FichierTreeTxt = My.Computer.FileSystem.SpecialDirectories.Temp & "\CatiaTreeTxt.txt"
@@ -157,7 +154,7 @@ Public Class MainV3
                 End If
 
                 ToolbarPerso.IsEnabled = False
-                    TabOptions.AllowDrop = False
+                TabOptions.AllowDrop = False
 
 
             Else
@@ -350,7 +347,7 @@ Public Class MainV3
         Dim s As String
         Dim i As String = Math.Round(e.ProgressPercentage)
 
-        s = "Chargement ... | " & i & " %"
+        s = "Loading ... | " & i & " %"
         MonMainV3.LabelLoad.Content = s
 
 
@@ -1531,6 +1528,18 @@ Public Class MainV3
             majSelectionfromDTtoTV(tv, ic)
         Next
 
+        Try
+            Dim pathFile As String = ic.FileName
+            Dim s As ShellFile = ShellFile.FromFilePath(pathFile)
+            Dim b As System.Drawing.Bitmap = s.Thumbnail.ExtraLargeBitmap
+            '    b = modifCouleur(b)
+            Dim bimg As New BitmapImage
+            bimg = bitmapToImgSource(b)
+            Me.imgSource.Source = bimg
+        Catch ex As Exception
+        End Try
+
+
         Exit Sub
 
         Dim l As New List(Of ItemCatia)
@@ -1553,8 +1562,41 @@ Public Class MainV3
             i = i + 1
         Next
 
-
     End Sub
+
+    Function modifCouleur(img As System.Drawing.Bitmap) As System.Drawing.Bitmap
+
+
+
+        With img
+            For i As Integer = 0 To .Width - 1
+                For j As Integer = 0 To .Height - 1
+                    If img.GetPixel(i, j) = System.Drawing.Color.FromArgb(53, 51, 101) Then
+                        .SetPixel(i, j, System.Drawing.Color.FromArgb(255, 255, 255))
+                    End If
+                Next
+            Next
+        End With
+
+        Return img
+
+
+    End Function
+    Function bitmapToImgSource(img As System.Drawing.Bitmap) As BitmapImage
+
+
+        Dim m As New MemoryStream
+        img.Save(m, System.Drawing.Imaging.ImageFormat.Bmp)
+        m.Position = 0
+        Dim bimg As BitmapImage = New BitmapImage
+        bimg.BeginInit()
+        bimg.StreamSource = m
+        bimg.CacheOption = BitmapCacheOption.OnLoad
+        bimg.EndInit()
+
+        Return bimg
+
+    End Function
 
     Sub majSelectionfromDTtoTV(tv As TreeViewItem, ic As ItemCatia)
 

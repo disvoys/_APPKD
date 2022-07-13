@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Client" Type="System.String" Scope="User">
-      <Value Profile="(Default)">[DASSAULT AVIATION]</Value>
+      <Value Profile="(Default)">[AIRBUS]</Value>
     </Setting>
     <Setting Name="PLANT" Type="System.String" Scope="User">
       <Value Profile="(Default)">SAINT-NAZAIRE</Value>
@@ -22,6 +22,9 @@
     </Setting>
     <Setting Name="CAGECODE" Type="System.String" Scope="User">
       <Value Profile="(Default)">*</Value>
+    </Setting>
+    <Setting Name="countUser" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
   </Settings>
 </SettingsFile>
