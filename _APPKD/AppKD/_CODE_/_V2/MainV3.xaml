@@ -89,7 +89,7 @@
                         <ListViewItem  ToolTip="Management of opened session of CATIA">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Blur" VerticalAlignment="Center"/>
-                                <TextBlock Text="CATIA Management" VerticalAlignment="Center" Margin="20 0"/>
+                                <TextBlock Text="CATIA live" VerticalAlignment="Center" Margin="20 0"/>
                             </StackPanel>
                         </ListViewItem>
                         <ListViewItem ToolTip="Macros" IsEnabled="False">
@@ -869,23 +869,23 @@
                         <ToolBar  Style="{DynamicResource MaterialDesignToolBar}"  Grid.Row="0" HorizontalAlignment="Center">
                             <ListBox Height="70"  x:Name="ListViewPDF" SelectionChanged="ListViewPDF_SelectionChanged" VerticalAlignment="center">
                                 <ListBoxItem 
-                                    ToolTip="Split les PDF">
+                                    ToolTip="Split PDF files">
                                     <materialDesign:PackIcon Kind="SetSplit"  Foreground="#0E1D31" />
                                 </ListBoxItem>
                                 <ListBoxItem
-                                    ToolTip="Assemble les PDF">
+                                    ToolTip="Merge PDF files">
                                     <materialDesign:PackIcon Kind="Merge" Foreground="#0E1D31" />
                                 </ListBoxItem>
                                 <ListBoxItem
-                                    ToolTip="Ajout d'un texte sur l'ensemble des pages d'un PDF">
+                                    ToolTip="Add text to all pages of a PDF file">
                                     <materialDesign:PackIcon Kind="NoteText" Foreground="#0E1D31" />
                                 </ListBoxItem>
                             </ListBox>
                         </ToolBar>
                         <StackPanel Background="#F9F9F9" Grid.Column="1" Grid.Row="1" AllowDrop="true" Drop="DragPanel_Drop" >
                             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0">
-                                <TextBlock x:Name="LabelPDF" Text="A partir d'un fichier PDF de plusieurs pages," FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Light" HorizontalAlignment="Center" />
-                                <TextBlock x:Name="Label2PDF" Text="fractionner les pages en plusieurs fichiers" FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" HorizontalAlignment="Center"   />
+                                <TextBlock x:Name="LabelPDF" Text="From a PDF file of several pages," FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Light" HorizontalAlignment="Center" />
+                                <TextBlock x:Name="Label2PDF" Text="split pages into multiple files" FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" HorizontalAlignment="Center"   />
                             </StackPanel>
                             <Separator Margin="0,20,0,0" BorderBrush="Black" Width=" 400"/>
 
@@ -950,10 +950,10 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Button.Style>
-                                <TextBlock Grid.Column="1" Text="Sélection des fichiers" Foreground="#F9F9F9" VerticalAlignment="center"  FontSize="16"/>
+                                <TextBlock Grid.Column="1" Text="Files selection" Foreground="#F9F9F9" VerticalAlignment="center"  FontSize="16"/>
                             </Button>
 
-                            <TextBlock x:Name="Tex" Text="[Glisser/Déposer les fichiers ou séléction des fichiers]" Margin="0,30,0,0" HorizontalAlignment="center"/>
+                            <TextBlock x:Name="Tex" Text="[Drag/Drop files or file selection]" Margin="0,30,0,0" HorizontalAlignment="center"/>
 
                         </StackPanel>
                         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -995,26 +995,26 @@
                         
                         <TextBlock Text="Kevin DESVOS" Foreground="gray" Name="labelNameUser" FontFamily="Segoe UI Light" FontSize="20" />
                         <TextBlock Text=" | " Foreground="gray" FontFamily="Segoe UI Light" FontSize="20"/>
-                        <TextBlock Text="eXcent" Foreground="gray" FontFamily="Segoe UI Light" FontSize="20"/>
+                        <TextBlock Text="AppKD" Foreground="gray" FontFamily="Segoe UI Light" FontSize="20"/>
                             </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <materialDesign:Chip Content="Environnement Clients" Name="chip0" Click="Chip_Click" Width="200" Margin="0 0 10 0" IconBackground="#76C2AF" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                        <materialDesign:Chip Content="Environnements" Name="chip0" Click="Chip_Click" Width="200" Margin="0 0 10 0" IconBackground="#76C2AF" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon  Kind="TableUser" />
                             </materialDesign:Chip.Icon>
                         </materialDesign:Chip>
-                        <materialDesign:Chip Content="Bibliothèque TTS" Click="Chip_Click" Name="chip1" Width="200" Margin="0 0 10 0"  IconBackground="Gray" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                        <materialDesign:Chip Content="TTS library" Click="Chip_Click" Name="chip1" Width="200" Margin="0 0 10 0"  IconBackground="Gray" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon  Kind="FolderUserOutline" />
                             </materialDesign:Chip.Icon>
                         </materialDesign:Chip>
-                        <materialDesign:Chip Content="Drawings et Cartouches" Click="Chip_Click" Name="chip2" Margin="0 0 10 0" Width="200" IconBackground="Gray" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                        <materialDesign:Chip Content="Drawings and title blocks" Click="Chip_Click" Name="chip2" Margin="0 0 10 0" Width="200" IconBackground="Gray" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon  Kind="Draw" />
                             </materialDesign:Chip.Icon>
                         </materialDesign:Chip>
-                        <materialDesign:Chip Content="Général" Width="200" Click="Chip_Click" Name="chip3" IconBackground="Gray" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                        <materialDesign:Chip Content="Settings" Width="200" Click="Chip_Click" Name="chip3" IconBackground="Gray" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon  Kind="UserOutline" />
                             </materialDesign:Chip.Icon>
@@ -1041,11 +1041,11 @@
                                    
                                 </StackPanel>
                                 <ToolBar Style="{DynamicResource MaterialDesignToolBar}" Name="ToolbarPerso" IsEnabled="False" Grid.Row="0" Grid.Column="1">
-                                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Importer à partir d'un fichier text" Click="Button_Click_13" >
+                                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Import form a text file" Click="Button_Click_13" >
                                         <materialDesign:PackIcon Kind="Import" Foreground="#0E1D31" />
                                     </Button>
                    
-                                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Ouvrir le fichier" Click="Button_Click_14" >
+                                    <Button  VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Open the file" Click="Button_Click_14" >
                                         <materialDesign:PackIcon Kind="FolderEditOutline" Foreground="#0E1D31" />
                                     </Button>
                                 
@@ -1097,7 +1097,7 @@
                                     </TextBox>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
-                                    <TextBlock Text="Dessinateur :" Width="100" />
+                                    <TextBlock Text="Designed by :" Width="100" />
                                     <TextBox x:Name="TextDessinateur"  Text="KD" Width="200" BorderThickness="0,0,0,1">
                                         <TextBox.Style>
                                             <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
@@ -1123,7 +1123,7 @@
                                     </TextBox>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
-                                    <TextBlock Text="Titre 1 :" Width="100" />
+                                    <TextBlock Text="Title 1 :" Width="100" />
                                     <TextBox x:Name="TextTitre1" Text="*" Width="200" BorderThickness="0,0,0,1">
                                         <TextBox.Style>
                                             <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
@@ -1149,7 +1149,7 @@
                                     </TextBox>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
-                                    <TextBlock Text="Titre 2" Width="100"  />
+                                    <TextBlock Text="Title 2" Width="100"  />
                                     <TextBox  x:Name="TextTitre2" Text="*" Width="200" BorderThickness="0,0,0,1">
                                         <TextBox.Style>
                                             <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
@@ -1271,7 +1271,7 @@
                          materialDesign:TextFieldAssist.UnderlineBrush="#76C2AF" 
                             />
                                 <TextBox Margin="0 0 30 0"
-                              materialDesign:HintAssist.Hint="Entreprise" Text="eXcent"
+                              materialDesign:HintAssist.Hint="Entreprise" Text="appKD"
                               Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                               VerticalAlignment="Center"
                             Width="200"
@@ -1303,9 +1303,9 @@
 
                         <StackPanel Background="#F9F9F9" Grid.Column="0" AllowDrop="true" Name="DragPanelDropStep"  Drop="DragPanelDropStep_Drop" >
                             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0">
-                                <TextBlock  Text="Convertir plusieurs éléments CATIA" FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Light" HorizontalAlignment="Center" />
-                                <TextBlock  Text="en fichiers STEP et inversement" FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" HorizontalAlignment="Center"   />
-                                <TextBlock  Text="peut être exécuté sans CATIA ouvert" FontSize="13" Foreground="#31465a" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" HorizontalAlignment="Center"   />
+                                <TextBlock  Text="Convert multiple CATIA elements" FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Light" HorizontalAlignment="Center" />
+                                <TextBlock  Text="into STEP files and vice versa" FontSize="20" Foreground="#31465a" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" HorizontalAlignment="Center"   />
+                                <TextBlock  Text="can be run without CATIA open" FontSize="13" Foreground="#31465a" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" HorizontalAlignment="Center"   />
                                 <Separator Margin="0,20,0,0" BorderBrush="Black" Width=" 400"/>
                             </StackPanel>
 
@@ -1330,7 +1330,7 @@
                                 </Button.Style>
                                 <TextBlock Grid.Column="1" Text="Files selection" Foreground="#F9F9F9" VerticalAlignment="center"  FontSize="16"/>
                             </Button>
-                            <TextBlock Text="[Drag and Drop files or file selection]" Margin="0,30,0,0" HorizontalAlignment="center"/>
+                            <TextBlock Text="[Drag/Drop files or file selection]" Margin="0,30,0,0" HorizontalAlignment="center"/>
 
                         </StackPanel>
 

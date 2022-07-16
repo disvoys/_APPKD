@@ -985,9 +985,9 @@ Boucle:
         If k = Forms.DialogResult.OK Then
             Dim Draw As DrawingDocument = Nothing
             If DialogPlanA320.RadioA0.Checked = True Then
-                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DPetitFormat", "")))
-            ElseIf DialogPlanA320.RadioA2.Checked = True Then
                 Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DGrandFormat", "")))
+            ElseIf DialogPlanA320.RadioA2.Checked = True Then
+                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DPetitFormat", "")))
             End If
             Dim MaSheet As DrawingSheet = Draw.Sheets.ActiveSheet
             Dim Da As String = ""
@@ -1120,9 +1120,9 @@ Boucle:
             Dim Draw As DrawingDocument
 
             If DialogPlanA320.RadioA0.Checked = True Then
-                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DPetitFormat", "")))
-            ElseIf DialogPlanA320.RadioA2.Checked = True Then
                 Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DGrandFormat", "")))
+            ElseIf DialogPlanA320.RadioA2.Checked = True Then
+                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DPetitFormat", "")))
             End If
 
 #Disable Warning BC42104 ' La variable 'Draw' est utilisée avant qu'une valeur ne lui ait été assignée. Une exception de référence null peut se produire au moment de l'exécution.
@@ -1250,7 +1250,7 @@ Boucle:
             Dim Draw As DrawingDocument
 
             If DialogPlanA320.RadioA0.Checked = True Then
-                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DPetitFormat", "")))
+                Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DGrandFormat", "")))
                 textSheet = False
             ElseIf DialogPlanA320.RadioA2.Checked = True Then
                 Draw = CATIA.Documents.NewFrom(MonMainV3.GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "Template2DPetitFormat", "")))
@@ -1661,6 +1661,7 @@ Boucle:
 
         DeleteBOMExistante(MesTexts)
         If listIc.Count > 0 Then
+
             CreerTitreBOM(V, MesTexts, Type)
             Dim i As Integer = 1
             For Each ic As ItemCatia In listIc
@@ -1720,6 +1721,8 @@ Boucle:
     End Sub
     Sub CreerTitreBOM(v As DrawingView, mestexts As DrawingTexts, TYPEPlan As Integer)
 
+        On Error Resume Next
+
         If Env = "[AIRBUS]" Then
             Dim X, Y As Integer
             Select Case TYPEPlan
@@ -1738,8 +1741,10 @@ Boucle:
             End Select
 
             '   CATIA.StartWorkbench("CS0WKS")
+            v.Activate()
+
             Dim F As Factory2D = v.Factory2D
-            Dim L As Line2D = F.CreateLine(X, Y, X + 200, Y)
+            Dim L = F.CreateLine(X, Y, X + 200, Y)
             L.Name = "NomenclatureLine_0_1_1"
             L = F.CreateLine(X, Y - 5, X, Y)
             L.Name = "NomenclatureLine_0_1_2"
@@ -1840,9 +1845,6 @@ Boucle:
         Else
         End If
 
-        If Env = "[DASSAULT AVIATION]" Then
-            'rien à faire
-        End If
 
 
     End Sub

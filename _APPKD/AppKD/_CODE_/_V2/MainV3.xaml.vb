@@ -276,7 +276,7 @@ Public Class MainV3
 
     Private Sub bgwProgressProperties_doWork(ByVal sender As Object, ByVal e As DoWorkEventArgs)
         FctionCATIA.ResetPropoerties()
-        Dim m As New MessageErreur("Les propriétés ont supprimées avec succès. Il est préférable de relancer un calcul de l'application pour mettre à jour le tableau.", Notifications.Wpf.NotificationType.Information)
+        Dim m As New MessageErreur("Properties deleted successfully. It is preferable to restart a calculation of the application to update the table.", Notifications.Wpf.NotificationType.Information)
     End Sub 'Start du backgroundworker
     Private Sub bgwProgressFix_doWork(ByVal sender As Object, ByVal e As DoWorkEventArgs)
         FixAll.CATMain(MonActiveDoc)
@@ -325,7 +325,7 @@ Public Class MainV3
         End Try
 
 
-        Dim m As New MessageErreur("Calul des masses terminé", Notifications.Wpf.NotificationType.Information)
+        Dim m As New MessageErreur("Mass calculation completed", Notifications.Wpf.NotificationType.Information)
 
     End Sub 'Start du backgroundworker
     Private Sub bgwProgressInstance_doWork(ByVal sender As Object, ByVal e As DoWorkEventArgs)
@@ -632,7 +632,7 @@ Public Class MainV3
                 Dim it As ItemTV = TryCast(tvi.DataContext, ItemTV)
                 FctionCATIA.Createfrom(it.ItemCATIA)
             Catch ex As Exception
-                Dim MsgErr As New MessageErreur("Une erreur s'est produite. Vérifier que le fichier soit sauvegardé", Notifications.Wpf.NotificationType.Error)
+                Dim MsgErr As New MessageErreur("An error has occurred. Check that the file is saved", Notifications.Wpf.NotificationType.Error)
             End Try
 
         End If
@@ -647,7 +647,7 @@ Public Class MainV3
                 Dim it As ItemTV = TryCast(tvi.DataContext, ItemTV)
                 FctionCATIA.CreerPlan(it.ItemCATIA)
             Catch ex As Exception
-                Dim MsgErr As New MessageErreur("Une erreur s'est produite lors de la création du plan", Notifications.Wpf.NotificationType.Error)
+                Dim MsgErr As New MessageErreur("An error occurred while creating the plan", Notifications.Wpf.NotificationType.Error)
             End Try
 
         End If
@@ -1055,7 +1055,7 @@ Public Class MainV3
             Process.Start(CATIA.ActiveDocument.Path & "\data.xls")
 
         Catch ex As Exception
-            Dim nms As New MessageErreur("Impossible de générer de fichier EXCEL à partir d'un tableau vide", Notifications.Wpf.NotificationType.Error)
+            Dim nms As New MessageErreur("Unable to generate EXCEL file from an empty table", Notifications.Wpf.NotificationType.Error)
         End Try
     End Sub
 
@@ -1163,13 +1163,13 @@ Public Class MainV3
             Next
             Me.MaDataGrid.Items.Refresh()
         Else
-            Dim m As New MessageErreur("Fonction inutile dans un environnement autre que AIRBUS", Notifications.Wpf.NotificationType.Warning)
+            Dim m As New MessageErreur("Useless function in an environment other than AIRBUS", Notifications.Wpf.NotificationType.Warning)
         End If
     End Sub
 
 
     Private Sub Button_Click_7(sender As Object, e As RoutedEventArgs)
-        If MsgBox("Vous êtes sur le point de fixer l'assemblage ouvert. Quelques minutes peuvent être nécéssaires. Continuer ?", vbInformation + vbYesNo) = MsgBoxResult.No Then
+        If MsgBox("You are about to fix the open assembly. A few minutes may be necessary. Continue?", vbInformation + vbYesNo) = MsgBoxResult.No Then
             Exit Sub
 
         Else
@@ -1202,7 +1202,7 @@ Public Class MainV3
 
             Next
         Else
-            Dim m As New MessageErreur("Fonction inutile pour un sous-ensemble en dehors de l'envrionnement AIRBUS", Notifications.Wpf.NotificationType.Warning)
+            Dim m As New MessageErreur("Useless function for a sub-assembly outside the AIRBUS environment", Notifications.Wpf.NotificationType.Warning)
         End If
 
         RefreshTable()
@@ -1214,7 +1214,7 @@ Public Class MainV3
 
 
         If GridContentBDD.Visibility = Visibility.Visible Then
-            If MsgBox("Vous êtes sur le point de calculer la masse de l'ensemble des pièces. Quelques minutes peuvent être nécéssaires. Continuer ?", vbInformation + vbYesNo) = MsgBoxResult.No Then
+            If MsgBox("You are about to calculate the mass of all the parts. A few minutes may be necessary. Continue?", vbInformation + vbYesNo) = MsgBoxResult.No Then
                 Exit Sub
             Else
                 ProgressTableau.Visibility = Visibility.Visible
@@ -1479,7 +1479,7 @@ Public Class MainV3
                 FctionCATIA.OpenFile(ic.FileName)
                 ReloadSimple()
             Catch ex As Exception
-                Dim MsgErr As New MessageErreur("Impossible d'ouvrir le fichier demandé.", Notifications.Wpf.NotificationType.Error)
+                Dim MsgErr As New MessageErreur("Unable to open requested file", Notifications.Wpf.NotificationType.Error)
             End Try
 
         End If
@@ -1750,20 +1750,20 @@ Public Class MainV3
 
         Select Case ListViewPDF.SelectedIndex
             Case 0
-                LabelPDF.Text = "A partir d'un fichier PDF de plusieurs pages,"
-                Label2PDF.Text = "fractionner les pages en plusieurs fichiers"
+                LabelPDF.Text = "From a PDF file of several pages,"
+                Label2PDF.Text = "split pages into multiple files"
                 TextWM.Visibility = Visibility.Hidden
                 Tex.Visibility = Visibility.Visible
                 But.Visibility = Visibility.Visible
             Case 1
-                LabelPDF.Text = "A partir de plusieurs fichiers PDF,"
-                Label2PDF.Text = "fusionner les fichiers en un seul"
+                LabelPDF.Text = "From multiple PDF files,"
+                Label2PDF.Text = "merge files into one"
                 TextWM.Visibility = Visibility.Hidden
                 Tex.Visibility = Visibility.Visible
                 But.Visibility = Visibility.Visible
             Case 2
-                LabelPDF.Text = "A partir d'un fichier PDF,"
-                Label2PDF.Text = "ajouter une notation filigrane sur l'ensemble des pages"
+                LabelPDF.Text = "From a PDF file,"
+                Label2PDF.Text = "add watermark notation on all pages"
                 TextWM.Visibility = Visibility.Visible
                 Tex.Visibility = Visibility.Visible
                 But.Visibility = Visibility.Visible
@@ -1783,7 +1783,7 @@ Public Class MainV3
         My.Settings.Save()
 
 
-        Dim m As New MessageErreur("Les options ont bien été sauvegardées", Notifications.Wpf.NotificationType.Information)
+        Dim m As New MessageErreur("The settings have been saved", Notifications.Wpf.NotificationType.Information)
     End Sub
 
     Private Sub reportBUGbutton_Click(sender As Object, e As RoutedEventArgs)
@@ -1869,9 +1869,9 @@ Public Class MainV3
             pi.WindowStyle = ProcessWindowStyle.Hidden
             Process.Start(pi)
             Process.Start(FoldReception)
-            Dim m As New MessageErreur("La conversion des fichiers en arrière plan est en cours...", Notifications.Wpf.NotificationType.Information)
+            Dim m As New MessageErreur("Background file conversion is in progress...", Notifications.Wpf.NotificationType.Information)
         Else
-            Dim m As New MessageErreur("Vérifier l'existence des dossiers choisis", Notifications.Wpf.NotificationType.Error)
+            Dim m As New MessageErreur("Check the existence of the selected folders", Notifications.Wpf.NotificationType.Error)
         End If
 
     End Sub
@@ -1975,25 +1975,25 @@ Public Class MainV3
 
 
         Select Case sender.content
-            Case "Environnement Clients"
+            Case "Environnements"
                 chip0.IconBackground = New SolidColorBrush(Color.FromRgb(118, 194, 175))
                 chip1.IconBackground = New SolidColorBrush(Colors.Gray)
                 chip2.IconBackground = New SolidColorBrush(Colors.Gray)
                 chip3.IconBackground = New SolidColorBrush(Colors.Gray)
                 TabOptions.SelectedIndex = 0
-            Case "Bibliothèque TTS"
+            Case "TTS library"
                 chip0.IconBackground = New SolidColorBrush(Colors.Gray)
                 chip1.IconBackground = New SolidColorBrush(Color.FromRgb(118, 194, 175))
                 chip2.IconBackground = New SolidColorBrush(Colors.Gray)
                 chip3.IconBackground = New SolidColorBrush(Colors.Gray)
                 TabOptions.SelectedIndex = 1
-            Case "Drawings et Cartouches"
+            Case "Drawings and title blocks"
                 chip0.IconBackground = New SolidColorBrush(Colors.Gray)
                 chip1.IconBackground = New SolidColorBrush(Colors.Gray)
                 chip2.IconBackground = New SolidColorBrush(Color.FromRgb(118, 194, 175))
                 chip3.IconBackground = New SolidColorBrush(Colors.Gray)
                 TabOptions.SelectedIndex = 2
-            Case "Général"
+            Case "Settings"
                 chip0.IconBackground = New SolidColorBrush(Colors.Gray)
                 chip1.IconBackground = New SolidColorBrush(Colors.Gray)
                 chip2.IconBackground = New SolidColorBrush(Colors.Gray)
@@ -2184,7 +2184,7 @@ Public Class MainV3
 
     Private Sub Button_Click_14(sender As Object, e As RoutedEventArgs)
         Process.Start(GetAs(DossierBase & "\" & INIProperties.GetString(GetEnv, "FichierProperties", "PersoProperties.txt")))
-        Dim m As New MessageErreur("Il est conseillé de redemarrer l'application après modification du fichier", Notifications.Wpf.NotificationType.Information)
+        Dim m As New MessageErreur("It is recommended to restart the application after modifying the file", Notifications.Wpf.NotificationType.Information)
     End Sub
 
     Private Sub Button_Click_15(sender As Object, e As RoutedEventArgs)
@@ -2194,11 +2194,11 @@ Public Class MainV3
             If TypeActiveDoc = "DRAWING" Then
                 FctionCATIA.MajCartoucheDassault()
             Else
-                Dim m As New MessageErreur("Ouvrir un plan pour pouvoir utiliser cette fonction", Notifications.Wpf.NotificationType.Error)
+                Dim m As New MessageErreur("Open a draw to be able to use this function", Notifications.Wpf.NotificationType.Error)
 
             End If
         Else
-            Dim m As New MessageErreur("Fonction non disponible pour les clients autre que DASSAULT", Notifications.Wpf.NotificationType.Error)
+            Dim m As New MessageErreur("Function not available for customers other than DASSAULT", Notifications.Wpf.NotificationType.Error)
         End If
     End Sub
 

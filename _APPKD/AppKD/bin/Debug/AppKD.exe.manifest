@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MQYnB4rIMrIuowi7EhmN5tqKjEixxBSsbwdEzoBV4BM=</dsig:DigestValue>
+        <dsig:DigestValue>YF6bSZMvbYyZMkUCD46BOCMd87L4ShqUJ0fw94q1BrM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -453,7 +453,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>2CS0gKhoXEe02JJ52zOIOSV+uagiwDaVEzwBg1jmXZg=</dsig:DigestValue>
+      <dsig:DigestValue>ylWUYaHbKhRm783EJGtqj0BE/bp4HZyqgUdL5mSal5k=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Données\envSPIRIT\SPIRIT_CATALOGUE MATIERES.CATMaterial" size="1936694">
